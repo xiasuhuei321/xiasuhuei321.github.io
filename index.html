@@ -1528,33 +1528,14 @@
 
       
         
-          
-            <p>最近对Android中的回调产生了一些疑问，看了不少博文才算是明白了一点，接下来分享一下我的收获。</p>
+          <p>最近对Android中的回调产生了一些疑问，看了不少博文才算是明白了一点，接下来分享一下我的收获。</p>
 <p><strong> 写在正文之前，大神可以跳过： </strong><br>　　1.接口不可以实例化，但可以创建一个接口对象。<br>　　2.你可能见过这样的语法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Button bt_add = (Button) findViewById(R.id.bt_add);</div><div class="line">bt_add.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>　　我们都知道OnClickListener()是一个接口，但是上文中  new OnClickListener()并非是实例化接口，而是表示一个匿名内部类实现该接口。</p>
-<hr>
-<h4 id="1-回调函数定义"><a href="#1-回调函数定义" class="headerlink" title="1.回调函数定义"></a>1.回调函数定义</h4><p>　　回调函数就是一个通过函数指针调用的函数。如果你把函数的指针（地址）作为参数传递给另一个函数，当这个指针被用来调用其所指向的函数时，我们就说这是回调函数。回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的，用于对该事件或条件进行响应。<br>　　当然，看了这么正式的定义，其实对我来说并没有多大的帮助，毕竟对指针直接接触比较少，对于这个定义也没有多深的感受。还是直接看回调机制吧！</p>
-<hr>
-<h4 id="2-回调机制"><a href="#2-回调机制" class="headerlink" title="2.回调机制"></a>2.回调机制</h4><p>⑴定义一个回调函数；<br>⑵提供函数实现的一方在初始化的时候，将回调函数的函数指针注册给调用者；<br>⑶当特定的事件或条件发生的时候，调用者使用函数指针调用回调函数对事件进行处理。</p>
-<p>　　对于百度百科上的这个说法，有一股扑面而来的熟悉感，就算是“函数指针”这么个陌生的名词都挡不住。这不就是上文代码吗？onClick()方法就是回调方法，在Button被点击这个事件发生时，我们使用onClick()回调方法对事件进行处理。不同的时我们不能提供指针，而是提供了一个接口。事实上在java中正是通过接口来实现回调方法。</p>
-<hr>
-<h4 id="3-模拟自定义控件实现回调方法"><a href="#3-模拟自定义控件实现回调方法" class="headerlink" title="3.模拟自定义控件实现回调方法"></a>3.模拟自定义控件实现回调方法</h4><p>　　网上很多用打电话的例子来说明，而我最近刚看了一点自定义控件，有点感觉，就用控件来说明。<br>　　假设我现在自定义了一个继承于View的开关控件，什么onMeasure()，onDraw()之类的都写好了，不用关心了，而且这个开关需要我关心的就是他是开还是关的状态。这时候我们就需要一个回调方法，将开关的“开”和“关”状态传递出来。好，你大概了解了功能和需求，以下是模拟控件的代码，并非可以部署到真机上的代码：</p>
-<p><strong> 接口代码： </strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 状态变化监听</span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">StateChangeListener</span> </span>&#123;</div><div class="line">	<span class="comment">// 回调方法</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">StateChange</span><span class="params">(<span class="keyword">boolean</span> State)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong> 开关控件代码： </strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 自定义开关--!</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OpenClose</span> </span>&#123;</div><div class="line">	<span class="comment">// 持有一个接口对象</span></div><div class="line">	StateChangeListener stateChangeListener;</div><div class="line"></div><div class="line">	<span class="comment">// 提供注册事件监听的方法</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setOnChangeListener</span><span class="params">(StateChangeListener stateChangeListener)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.stateChangeListener = stateChangeListener;</div><div class="line">        <span class="comment">//因为是模拟，所以需要在此将控件状态传出</span></div><div class="line">		IsClick(<span class="keyword">true</span>);</div><div class="line">	&#125;</div><div class="line">    <span class="comment">//是否被点击</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">IsClick</span><span class="params">(<span class="keyword">boolean</span> isClick)</span> </span>&#123;</div><div class="line">		<span class="comment">// 通过接口对象传控件状态</span></div><div class="line">		stateChangeListener.StateChange(isClick);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong> 测试代码： </strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CallBackTest</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">		OpenClose oc = <span class="keyword">new</span> OpenClose();</div><div class="line">		oc.setOnChangeListener(<span class="keyword">new</span> StateChangeListener() &#123;</div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">StateChange</span><span class="params">(<span class="keyword">boolean</span> State)</span> </span>&#123;</div><div class="line">				<span class="keyword">if</span> (State) &#123;</div><div class="line">					System.out.println(<span class="string">"开"</span>);</div><div class="line">				&#125; <span class="keyword">else</span> &#123;</div><div class="line">					System.out.println(<span class="string">"关"</span>);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>我这还可以提供一张图，你可以很直观的感受到这是个什么样的控件</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1976147-c1a657e7ad78d465.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="别打我……"></p>
-<p>以上就是我的收获，如果错误或者不同的看法和见解欢迎指出。</p>
-<hr>
-<blockquote>
-<p><strong>回调函数定义和机制来自：</strong><a href="http://baike.baidu.com/link?url=95tuwFdMDbPr5IDqLrJoXKDaEcyv9c85ALl6o_GW_Y9-GF_GdHDswxHG-HcZEeuEiWMGHhtTENqokP9f6gpz3a" target="_blank" rel="external">百度百科</a></p>
-</blockquote>
-<p><strong>推荐阅读:</strong></p>
-<blockquote>
-<p><strong>这篇文章不错:</strong>  <a href="http://blog.csdn.net/maximus_chan/article/details/40381157" target="_blank" rel="external">java回调机制</a><br><strong>文中提到的控件的实现:</strong><a href="http://www.jianshu.com/p/7b5bbc96ad1b" target="_blank" rel="external">Android：初识自定义控件</a></p>
-</blockquote>
-
-          
+<p>　　我们都知道OnClickListener()是一个接口，但是上文中  new OnClickListener()并非是实例化接口，而是表示一个匿名内部类实现该接口。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/12/Android之回调函数/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
