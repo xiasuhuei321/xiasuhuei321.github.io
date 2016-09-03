@@ -337,7 +337,7 @@
       
         
           <h3 id="什么是懒加载？为什么要用懒加载？"><a href="#什么是懒加载？为什么要用懒加载？" class="headerlink" title="什么是懒加载？为什么要用懒加载？"></a>什么是懒加载？为什么要用懒加载？</h3><h4 id="1、什么是懒加载"><a href="#1、什么是懒加载" class="headerlink" title="1、什么是懒加载"></a>1、什么是懒加载</h4><p>懒加载就是当ViewPager和Fragment结合在一起使用时，Fragment呈现在用户面前时才加载数据，当其从未被呈现在用户面前时，不会执行加载数据的代码。这就是我所理解的懒加载。</p>
-<h4 id="2、为什么要用懒加载"><a href="#2、为什么要用懒加载" class="headerlink" title="2、为什么要用懒加载"></a>2、为什么要用懒加载</h4><p>ViewPager默认会预加载下一页，对于某些重量级的Fragment来说无疑会造成很大的开销，当然了，如果对于你来说这些开销是必要的，也不必无脑用懒加载。</p>
+<h4 id="2、为什么要用懒加载"><a href="#2、为什么要用懒加载" class="headerlink" title="2、为什么要用懒加载"></a>2、为什么要用懒加载</h4><p>ViewPager默认会预加载下一页，如果下一页是某个重量级的Fragment无疑会造成很大的开销，当然了，如果对于你来说这些开销是必要的，也不必无脑用懒加载。</p>
 <h3 id="背景简介"><a href="#背景简介" class="headerlink" title="背景简介"></a>背景简介</h3><p>很多时候我们都会将ViewPager和Fragment结合在一起使用，因为Android给我们提供了非常便利的<strong>FragmentPageAdapter</strong>,而这个adapter实现起来非常简单：<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/09/02/Fragment结合ViewPager之懒加载/#more" rel="contents">
