@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="爬坑," />
+  <meta name="keywords" content="Android,基础," />
 
 
 
@@ -84,25 +84,21 @@
 
 
 
-<meta name="description" content="进入正题最近有需求要用到地图，同学和我说高德地图社区都关了，他都换百度了……所以我果断……直接用百度地图吧。按照官方文档的步骤，一路下来都很简单。但是在使用官方示例demo的时候却碰到了如下的错误：
-
-baidumapsdk.demo E/baidumapsdk: Authentication Error errorcode: 230 uid: -1 appid -1 msg: APP Scode">
+<meta name="description" content="最近对Android中的回调产生了一些疑问，看了不少博文才算是明白了一点，接下来分享一下我的收获。
+ 写在正文之前，大神可以跳过： 　　1.接口不可以实例化，但可以创建一个接口对象。　　2.你可能见过这样的语法：123456Button bt_add = (Button) findViewById(R.id.bt_add);bt_add.setOnClickListener(new OnClick">
 <meta property="og:type" content="article">
-<meta property="og:title" content="百度地图Key验证失败230错误">
-<meta property="og:url" content="http://yoursite.com/2016/07/21/百度地图Key验证失败230错误/index.html">
+<meta property="og:title" content="Android之回调函数">
+<meta property="og:url" content="http://yoursite.com/2016/05/12/Android之回调函数/index.html">
 <meta property="og:site_name" content="xiasuhuei321的博客">
-<meta property="og:description" content="进入正题最近有需求要用到地图，同学和我说高德地图社区都关了，他都换百度了……所以我果断……直接用百度地图吧。按照官方文档的步骤，一路下来都很简单。但是在使用官方示例demo的时候却碰到了如下的错误：
-
-baidumapsdk.demo E/baidumapsdk: Authentication Error errorcode: 230 uid: -1 appid -1 msg: APP Scode">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-d602a63ec701c8ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-18be5a30e0d51f8a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-09-03T02:29:28.812Z">
+<meta property="og:description" content="最近对Android中的回调产生了一些疑问，看了不少博文才算是明白了一点，接下来分享一下我的收获。
+ 写在正文之前，大神可以跳过： 　　1.接口不可以实例化，但可以创建一个接口对象。　　2.你可能见过这样的语法：123456Button bt_add = (Button) findViewById(R.id.bt_add);bt_add.setOnClickListener(new OnClick">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-c1a657e7ad78d465.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-09-03T05:47:58.422Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="百度地图Key验证失败230错误">
-<meta name="twitter:description" content="进入正题最近有需求要用到地图，同学和我说高德地图社区都关了，他都换百度了……所以我果断……直接用百度地图吧。按照官方文档的步骤，一路下来都很简单。但是在使用官方示例demo的时候却碰到了如下的错误：
-
-baidumapsdk.demo E/baidumapsdk: Authentication Error errorcode: 230 uid: -1 appid -1 msg: APP Scode">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1976147-d602a63ec701c8ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="Android之回调函数">
+<meta name="twitter:description" content="最近对Android中的回调产生了一些疑问，看了不少博文才算是明白了一点，接下来分享一下我的收获。
+ 写在正文之前，大神可以跳过： 　　1.接口不可以实例化，但可以创建一个接口对象。　　2.你可能见过这样的语法：123456Button bt_add = (Button) findViewById(R.id.bt_add);bt_add.setOnClickListener(new OnClick">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1976147-c1a657e7ad78d465.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -123,9 +119,9 @@ baidumapsdk.demo E/baidumapsdk: Authentication Error errorcode: 230 uid: -1 appi
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/07/21/百度地图Key验证失败230错误/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/05/12/Android之回调函数/"/>
 
-  <title> 百度地图Key验证失败230错误 | xiasuhuei321的博客 </title>
+  <title> Android之回调函数 | xiasuhuei321的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -255,7 +251,7 @@ baidumapsdk.demo E/baidumapsdk: Authentication Error errorcode: 230 uid: -1 appi
             
             
               
-                百度地图Key验证失败230错误
+                Android之回调函数
               
             
           </h1>
@@ -267,8 +263,8 @@ baidumapsdk.demo E/baidumapsdk: Authentication Error errorcode: 230 uid: -1 appi
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-21T10:13:40+08:00" content="2016-07-21">
-              2016-07-21
+            <time itemprop="dateCreated" datetime="2016-05-12T20:33:58+08:00" content="2016-05-12">
+              2016-05-12
             </time>
           </span>
 
@@ -297,8 +293,8 @@ baidumapsdk.demo E/baidumapsdk: Authentication Error errorcode: 230 uid: -1 appi
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/21/百度地图Key验证失败230错误/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/21/百度地图Key验证失败230错误/" itemprop="commentsCount"></span>
+                <a href="/2016/05/12/Android之回调函数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/12/Android之回调函数/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -308,7 +304,7 @@ baidumapsdk.demo E/baidumapsdk: Authentication Error errorcode: 230 uid: -1 appi
 
           
           
-             <span id="/2016/07/21/百度地图Key验证失败230错误/" class="leancloud_visitors" data-flag-title="百度地图Key验证失败230错误">
+             <span id="/2016/05/12/Android之回调函数/" class="leancloud_visitors" data-flag-title="Android之回调函数">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -330,19 +326,30 @@ baidumapsdk.demo E/baidumapsdk: Authentication Error errorcode: 230 uid: -1 appi
       
 
       
-        <h4 id="进入正题"><a href="#进入正题" class="headerlink" title="进入正题"></a>进入正题</h4><p>最近有需求要用到地图，同学和我说高德地图社区都关了，他都换百度了……所以我果断……直接用百度地图吧。按照官方文档的步骤，一路下来都很简单。但是在使用官方示例demo的时候却碰到了如下的错误：</p>
+        <p>最近对Android中的回调产生了一些疑问，看了不少博文才算是明白了一点，接下来分享一下我的收获。</p>
+<p><strong> 写在正文之前，大神可以跳过： </strong><br>　　1.接口不可以实例化，但可以创建一个接口对象。<br>　　2.你可能见过这样的语法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Button bt_add = (Button) findViewById(R.id.bt_add);</div><div class="line">bt_add.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>　　我们都知道OnClickListener()是一个接口，但是上文中  new OnClickListener()并非是实例化接口，而是表示一个匿名内部类实现该接口。</p>
+<hr>
+<h4 id="1-回调函数定义"><a href="#1-回调函数定义" class="headerlink" title="1.回调函数定义"></a>1.回调函数定义</h4><p>　　回调函数就是一个通过函数指针调用的函数。如果你把函数的指针（地址）作为参数传递给另一个函数，当这个指针被用来调用其所指向的函数时，我们就说这是回调函数。回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的，用于对该事件或条件进行响应。<br>　　当然，看了这么正式的定义，其实对我来说并没有多大的帮助，毕竟对指针直接接触比较少，对于这个定义也没有多深的感受。还是直接看回调机制吧！</p>
+<hr>
+<h4 id="2-回调机制"><a href="#2-回调机制" class="headerlink" title="2.回调机制"></a>2.回调机制</h4><p>⑴定义一个回调函数；<br>⑵提供函数实现的一方在初始化的时候，将回调函数的函数指针注册给调用者；<br>⑶当特定的事件或条件发生的时候，调用者使用函数指针调用回调函数对事件进行处理。</p>
+<p>　　对于百度百科上的这个说法，有一股扑面而来的熟悉感，就算是“函数指针”这么个陌生的名词都挡不住。这不就是上文代码吗？onClick()方法就是回调方法，在Button被点击这个事件发生时，我们使用onClick()回调方法对事件进行处理。不同的时我们不能提供指针，而是提供了一个接口。事实上在java中正是通过接口来实现回调方法。</p>
+<hr>
+<h4 id="3-模拟自定义控件实现回调方法"><a href="#3-模拟自定义控件实现回调方法" class="headerlink" title="3.模拟自定义控件实现回调方法"></a>3.模拟自定义控件实现回调方法</h4><p>　　网上很多用打电话的例子来说明，而我最近刚看了一点自定义控件，有点感觉，就用控件来说明。<br>　　假设我现在自定义了一个继承于View的开关控件，什么onMeasure()，onDraw()之类的都写好了，不用关心了，而且这个开关需要我关心的就是他是开还是关的状态。这时候我们就需要一个回调方法，将开关的“开”和“关”状态传递出来。好，你大概了解了功能和需求，以下是模拟控件的代码，并非可以部署到真机上的代码：</p>
+<p><strong> 接口代码： </strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 状态变化监听</span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">StateChangeListener</span> </span>&#123;</div><div class="line">	<span class="comment">// 回调方法</span></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">StateChange</span><span class="params">(<span class="keyword">boolean</span> State)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong> 开关控件代码： </strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 自定义开关--!</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OpenClose</span> </span>&#123;</div><div class="line">	<span class="comment">// 持有一个接口对象</span></div><div class="line">	StateChangeListener stateChangeListener;</div><div class="line"></div><div class="line">	<span class="comment">// 提供注册事件监听的方法</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setOnChangeListener</span><span class="params">(StateChangeListener stateChangeListener)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.stateChangeListener = stateChangeListener;</div><div class="line">        <span class="comment">//因为是模拟，所以需要在此将控件状态传出</span></div><div class="line">		IsClick(<span class="keyword">true</span>);</div><div class="line">	&#125;</div><div class="line">    <span class="comment">//是否被点击</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">IsClick</span><span class="params">(<span class="keyword">boolean</span> isClick)</span> </span>&#123;</div><div class="line">		<span class="comment">// 通过接口对象传控件状态</span></div><div class="line">		stateChangeListener.StateChange(isClick);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong> 测试代码： </strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CallBackTest</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">		OpenClose oc = <span class="keyword">new</span> OpenClose();</div><div class="line">		oc.setOnChangeListener(<span class="keyword">new</span> StateChangeListener() &#123;</div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">StateChange</span><span class="params">(<span class="keyword">boolean</span> State)</span> </span>&#123;</div><div class="line">				<span class="keyword">if</span> (State) &#123;</div><div class="line">					System.out.println(<span class="string">"开"</span>);</div><div class="line">				&#125; <span class="keyword">else</span> &#123;</div><div class="line">					System.out.println(<span class="string">"关"</span>);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我这还可以提供一张图，你可以很直观的感受到这是个什么样的控件</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1976147-c1a657e7ad78d465.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="别打我……"></p>
+<p>以上就是我的收获，如果错误或者不同的看法和见解欢迎指出。</p>
+<hr>
 <blockquote>
-<p>baidumapsdk.demo E/baidumapsdk: Authentication Error errorcode: 230 uid: -1 appid -1 msg: APP Scode码校验失败<br><a id="more"></a><br>首先我可以确认我包名是没有错的，而且我还进了gradle里看了下，确认都是一致的。那么问题一定时候出在SHA1上的了，但是讲道理我用你的demo我又没打包发布，用的肯定是debug.keystore吧……</p>
+<p><strong>回调函数定义和机制来自：</strong><a href="http://baike.baidu.com/link?url=95tuwFdMDbPr5IDqLrJoXKDaEcyv9c85ALl6o_GW_Y9-GF_GdHDswxHG-HcZEeuEiWMGHhtTENqokP9f6gpz3a" target="_blank" rel="external">百度百科</a></p>
 </blockquote>
-<p>诶？等等……难不成他指定了debug.keystore所以导致我获取到的SHA1并不对？</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1976147-d602a63ec701c8ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="debug.png"></p>
-<p>我看了一眼……哎哟卧槽还真是，难怪一直验证失败。那接下来的事情就好办了，要么获取这个debug.keystore的SHA1，要么把这个keystore路径换掉。我直接获取了这个debug.keystore的SHA1并且和我电脑上默认的作了一下对比</p>
+<p><strong>推荐阅读:</strong></p>
 <blockquote>
-<p>keytool -list -v -keystore debug.keystore</p>
+<p><strong>这篇文章不错:</strong>  <a href="http://blog.csdn.net/maximus_chan/article/details/40381157" target="_blank" rel="external">java回调机制</a><br><strong>文中提到的控件的实现:</strong><a href="http://www.jianshu.com/p/7b5bbc96ad1b" target="_blank" rel="external">Android：初识自定义控件</a></p>
 </blockquote>
-<p>好了走你~！</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1976147-18be5a30e0d51f8a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="真不一样.png"></p>
-<p>可以很明显的看出来，这俩是不一样的，所以验证失败是可以理解的……我的问题就这么解决了，值得注意的是发布版的签名证书又不一样了，到时候还得重新获取SHA1信息，重新获取AK。（当然百度其实是给了发布版和开发板两个SHA1让你填的，我手上并没有打包的东西，所以不怎么了解这一块）</p>
 
       
     </div>
@@ -365,7 +372,9 @@ baidumapsdk.demo E/baidumapsdk: Authentication Error errorcode: 230 uid: -1 appi
       
         <div class="post-tags">
           
-            <a href="/tags/爬坑/" rel="tag">#爬坑</a>
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/基础/" rel="tag">#基础</a>
           
         </div>
       
@@ -374,16 +383,12 @@ baidumapsdk.demo E/baidumapsdk: Authentication Error errorcode: 230 uid: -1 appi
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/30/RecyclerView以及OOM的一些处理/" rel="next" title="RecyclerView以及OOM的一些处理">
-                <i class="fa fa-chevron-left"></i> RecyclerView以及OOM的一些处理
-              </a>
-            
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/08/09/Okhttp3-addHeader小坑记/" rel="prev" title="Okhttp3-addHeader小坑记">
-                Okhttp3-addHeader小坑记 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/05/29/Android消息机制浅析/" rel="prev" title="Android消息机制浅析">
+                Android消息机制浅析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -410,8 +415,8 @@ baidumapsdk.demo E/baidumapsdk: Authentication Error errorcode: 230 uid: -1 appi
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/07/21/百度地图Key验证失败230错误/"
-           data-title="百度地图Key验证失败230错误" data-url="http://yoursite.com/2016/07/21/百度地图Key验证失败230错误/">
+      <div class="ds-thread" data-thread-key="2016/05/12/Android之回调函数/"
+           data-title="Android之回调函数" data-url="http://yoursite.com/2016/05/12/Android之回调函数/">
       </div>
     
   </div>
@@ -549,7 +554,7 @@ baidumapsdk.demo E/baidumapsdk: Authentication Error errorcode: 230 uid: -1 appi
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#进入正题"><span class="nav-number">1.</span> <span class="nav-text">进入正题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-回调函数定义"><span class="nav-number">1.</span> <span class="nav-text">1.回调函数定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-回调机制"><span class="nav-number">2.</span> <span class="nav-text">2.回调机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-模拟自定义控件实现回调方法"><span class="nav-number">3.</span> <span class="nav-text">3.模拟自定义控件实现回调方法</span></a></li></ol></div>
             
           </div>
         </section>
