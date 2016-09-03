@@ -1,0 +1,880 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,进阶,自定义View基础," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="写在前面终于周末了，当我想要松懈一会去浪的时候，脑海中突然闪过了这个东西……一图胜千言，日常唠嗑（1/1）。
+1 进入正题Android中自定义控件一直是一个比较难但又不得不面对的东西，虽然github+google能解决你的大部分需求，但是说实话，当一些bug发生在第三方控件上时，你仍然需要花费大量的时间去搞定。所以先了解一些和自定义相关的东西绝对是不亏的，话不多说，进入正题。
+Android中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android自定义View你需要了解的一些东西">
+<meta property="og:url" content="http://yoursite.com/2016/08/13/Android自定义View你需要了解的一些东西/index.html">
+<meta property="og:site_name" content="xiasuhuei321的博客">
+<meta property="og:description" content="写在前面终于周末了，当我想要松懈一会去浪的时候，脑海中突然闪过了这个东西……一图胜千言，日常唠嗑（1/1）。
+1 进入正题Android中自定义控件一直是一个比较难但又不得不面对的东西，虽然github+google能解决你的大部分需求，但是说实话，当一些bug发生在第三方控件上时，你仍然需要花费大量的时间去搞定。所以先了解一些和自定义相关的东西绝对是不亏的，话不多说，进入正题。
+Android中">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-6d1bda58afc75f85.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-569099babe8947c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-f412effdda7368ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-3391d5f9651f95f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-09-03T05:40:19.105Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android自定义View你需要了解的一些东西">
+<meta name="twitter:description" content="写在前面终于周末了，当我想要松懈一会去浪的时候，脑海中突然闪过了这个东西……一图胜千言，日常唠嗑（1/1）。
+1 进入正题Android中自定义控件一直是一个比较难但又不得不面对的东西，虽然github+google能解决你的大部分需求，但是说实话，当一些bug发生在第三方控件上时，你仍然需要花费大量的时间去搞定。所以先了解一些和自定义相关的东西绝对是不亏的，话不多说，进入正题。
+Android中">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1976147-6d1bda58afc75f85.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6291113783624467000,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/13/Android自定义View你需要了解的一些东西/"/>
+
+  <title> Android自定义View你需要了解的一些东西 | xiasuhuei321的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?16dec7b0c5244449304ccc417f56a9c6";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">xiasuhuei321的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">我要变强！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android自定义View你需要了解的一些东西
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-13T13:37:54+08:00" content="2016-08-13">
+              2016-08-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android自定义View/" itemprop="url" rel="index">
+                    <span itemprop="name">Android自定义View</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/13/Android自定义View你需要了解的一些东西/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/13/Android自定义View你需要了解的一些东西/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/13/Android自定义View你需要了解的一些东西/" class="leancloud_visitors" data-flag-title="Android自定义View你需要了解的一些东西">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>终于周末了，当我想要松懈一会去浪的时候，脑海中突然闪过了这个东西……<br><img src="http://upload-images.jianshu.io/upload_images/1976147-6d1bda58afc75f85.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="学习.jpg"><br>一图胜千言，日常唠嗑（1/1）。</p>
+<h3 id="1-进入正题"><a href="#1-进入正题" class="headerlink" title="1 进入正题"></a>1 进入正题</h3><p>Android中自定义控件一直是一个比较难但又不得不面对的东西，虽然<strong>github+google</strong>能解决你的大部分需求，但是说实话，当一些bug发生在第三方控件上时，你仍然需要花费大量的时间去搞定。所以先了解一些和自定义相关的东西绝对是不亏的，话不多说，进入正题。</p>
+<p>Android中自定义控件一般分以下三种：</p>
+<ul>
+<li>继承已有控件实现，可以理解为对原有控件功能的加强</li>
+<li>组合控件，将多个控件结合在一起实现一些功能</li>
+<li>完全自定义控件，一般继承于View或者ViewGroup</li>
+</ul>
+<p>这三类控件在实现方式上有什么异同呢？一般来说第一种控件是对于原有控件功能的增强，比如给ListView增加下拉刷新，上拉加载更多的功能，我们不需要考虑ListView中每个item如何测量如何绘制，我们需要考虑的是如何实现需要增添的功能。第二种组合几种控件，比如轮播图的实现，你可以组合Viewpager+ImageView，这东西说实话也就是功能的实现，但是如果你没有封装好则会让你的代码显得杂乱无章。第三种则是比较难以上手的，因为他需要你了解一些View相关的知识。</p>
+<p>View相关的东西很多，多到可以另开一篇文章写了，所以我尽量摘取重点，咳咳，大伙注意听了啊，小本本都可以拿出来了啊，xiasuhuei老师开始划重点了啊。<br><a id="more"></a></p>
+<h3 id="2-xiasuhuei321的重点"><a href="#2-xiasuhuei321的重点" class="headerlink" title="2 xiasuhuei321的重点"></a>2 xiasuhuei321的重点</h3><p>一个展示在屏幕上的View需要经历measure(测量)，layout(布局)，和draw(绘制)三个过程，其中measure确定View的宽高，layout确定View的最终宽高和四个顶点的位置，而draw则将View绘制到屏幕上。</p>
+<p>为了更好的了解这个过程，我们首先需要了解的一个东西就是<strong>MeasureSpec</strong>：<br>MeasureSpec是一个32位的int值，高2位代表SpecMode，低30位代表SpecSize。SpecMode代表测量模式，SpecSize代表的是在前一种测量模式下的测量值。</p>
+<p>了解了MeasureSpec后，我们需要了解<strong>SpecMode</strong>：<br>SpecMode有三种，表示三种测量模式：</p>
+<p>1)UNSPECIFIED：<br>要多大给多大，父容器不对View有任何限制，这种情况一般不需要我们考虑。</p>
+<p>2)EXACTLY<br>从字面上就能看出来，精确模式，包含了你声明控件宽高的数值和match_parent这两种情况。</p>
+<p>3)AT_MOST<br>对应于wrap_content，这里需要注意，AT_MOST是父容器制定了一个SpecSize，View的大小不能大于这个值。如果你继承于View的代码没有处理wrap_content的话，那么wrap_content和match_parent的效果是一样的。</p>
+<p>以上大概讲了一点View相关的知识，View相关的东西远远不及这些，有兴趣可以查阅其他的资料或者阅读源码了解，我这里便不再赘述了。</p>
+<h3 id="3-自定义控件小案例——验证码"><a href="#3-自定义控件小案例——验证码" class="headerlink" title="3 自定义控件小案例——验证码"></a>3 自定义控件小案例——验证码</h3><p>最近在看<a href="http://blog.csdn.net/lmj623565791/article/details/24252901" target="_blank" rel="external">hongyang</a>大神的博客，刚好翻到了这个小案例，让我通过这个小案例一步一步的为你解析完全自定义控件(继承于View)的神秘面纱。</p>
+<p>在上手做之前先分析一下这个验证码需要我们实现的功能：<br>1.生成随机数字或者字符串<br>2.点击要能够更换字符串</p>
+<p>一个自定View要能做到以下几点：<br>1)自定义View的属性，要能在xml文件里直接用，方便使用<br>2)重写omMeasure<br>3)重写onDraw<br>第二步并不是必须的，但如果你的东西需要能处理wrap_content的话，那你还是乖乖的重写onMeasure去处理吧。</p>
+<p>让我们跟着以上的步骤过一遍：</p>
+<h4 id="3-1-自定义View属性"><a href="#3-1-自定义View属性" class="headerlink" title="3.1 自定义View属性"></a>3.1 自定义View属性</h4><p>在res/values下新建一个attrs.xml文件，在里面定义我们的属性和声明。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"titleText"</span> <span class="attr">format</span>=<span class="string">"string"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"titleTextColor"</span> <span class="attr">format</span>=<span class="string">"color"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"titleTextSize"</span> <span class="attr">format</span>=<span class="string">"dimension"</span> /&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">"CustomTitleView"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"titleText"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"titleTextColor"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"titleTextSize"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>如果你用的是eclipse的话，需要你在xml文件里添加</p>
+<blockquote>
+<p>xmlns:custom=”<a href="http://schemas.android.com/apk/res/+包名" target="_blank" rel="external">http://schemas.android.com/apk/res/+包名</a></p>
+</blockquote>
+<p>而如果你是Android Studio的话则添加以下：</p>
+<blockquote>
+<p>xmlns:custom=”<a href="http://schemas.android.com/apk/res-auto" target="_blank" rel="external">http://schemas.android.com/apk/res-auto</a>“</p>
+</blockquote>
+<p>自定义属性有以下几种值:</p>
+<ul>
+<li>color：颜色值</li>
+<li>boolean：布尔值</li>
+<li>dimesion：尺寸值</li>
+<li>float：浮点值</li>
+<li>integer：整型值</li>
+<li>string：字符串</li>
+<li>fraction：百分数</li>
+<li>enum：枚举值</li>
+<li>reference：引用</li>
+</ul>
+<p>以上仅仅是说明一下，如果以后有用到碰到不明白的可以google或者百度。</p>
+<p>这样就能够在xml文件里使用我们自定义的属性了，之后我们在代码中定义相应的字段：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 文本</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> String mTitleText;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 文本的颜色</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> mTitleTextColor;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 文本的大小</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> mTitleTextSize;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 绘制时控制文本绘制的范围</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> Rect mBound;    </div><div class="line"><span class="keyword">private</span> Paint mPaint;</div></pre></td></tr></table></figure></p>
+<p>接下来需要我们做的便是获取这些属性，并且在代码中作出相应的处理。</p>
+<p>在代码中获取属性值：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">CustomTitleView</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyleAttr)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>(context, attrs, defStyleAttr);</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取我们所定义的自定义样式属性</div><div class="line">     */</div><div class="line">    TypedArray a = context.getTheme()</div><div class="line">            .obtainStyledAttributes(attrs, R.styleable.CustomTitleView, defStyleAttr, <span class="number">0</span>);</div><div class="line"></div><div class="line">    <span class="keyword">int</span> n = a.getIndexCount();</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</div><div class="line">        <span class="keyword">int</span> attr = a.getIndex(i);</div><div class="line">        <span class="keyword">switch</span> (attr) &#123;</div><div class="line">            <span class="keyword">case</span> R.styleable.CustomTitleView_titleText:</div><div class="line">                mTitleText = a.getString(attr);</div><div class="line">                <span class="keyword">break</span>;</div><div class="line"></div><div class="line">            <span class="keyword">case</span> R.styleable.CustomTitleView_titleTextColor:</div><div class="line">                <span class="comment">//默认颜色为黑色</span></div><div class="line">                mTitleTextColor = a.getColor(attr, Color.BLACK);</div><div class="line">                <span class="keyword">break</span>;</div><div class="line"></div><div class="line">            <span class="keyword">case</span> R.styleable.CustomTitleView_titleTextSize:</div><div class="line">                <span class="comment">//默认设置为16sp,TypeValue也可以把sp转化为px</span></div><div class="line">                mTitleTextSize = a.getDimensionPixelSize(attr, (<span class="keyword">int</span>) TypedValue.applyDimension(</div><div class="line">                        </div><div class="line">                TypedValue.COMPLEX_UNIT_SP, <span class="number">16</span>, getResources().getDisplayMetrics()));</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    a.recycle();</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取绘制文本的宽和高</div><div class="line">     */</div><div class="line">    mPaint = <span class="keyword">new</span> Paint();</div><div class="line">    mPaint.setTextSize(mTitleTextSize);</div><div class="line">    mBound = <span class="keyword">new</span> Rect();</div><div class="line">    mPaint.getTextBounds(mTitleText, <span class="number">0</span>, mTitleText.length(), mBound);</div><div class="line"></div><div class="line">    <span class="keyword">this</span>.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">            <span class="comment">//获取随机字符串</span></div><div class="line">            mTitleText = randomText();</div><div class="line">            postInvalidate();</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">    a.recycle();</div></pre></td></tr></table></figure></p>
+<p>前面我说如果继承于View的控件在代码中不对wrap_content作出处理，那么这个控件的wrap_content和match_parent的效果将会是一样的，那么就让我们试一试。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</div><div class="line">       <span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">       Log.i(TAG,<span class="string">"onDraw"</span>);</div><div class="line">       mPaint.setColor(Color.YELLOW);</div><div class="line">       canvas.drawRect(<span class="number">0</span>, <span class="number">0</span>, getMeasuredWidth(), getMeasuredHeight(), mPaint);</div><div class="line"></div><div class="line">       mPaint.setColor(mTitleTextColor);</div><div class="line">       canvas.drawText(mTitleText, getWidth() / <span class="number">2f</span> - mBound.width() / <span class="number">2f</span>, getHeight() / <span class="number">2f</span> + mBound.height() / <span class="number">2f</span>, mPaint);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>以上的onMeasure()方法直接继承于View，没有做任何的修改，在xml文件中声明如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">com.example.luo_pc.view.CustomView.CustomTitleView</span></span></div><div class="line">    <span class="attr">custom:titleText</span>=<span class="string">"1234"</span></div><div class="line">    <span class="attr">custom:titleTextColor</span>=<span class="string">"#ff0000"</span></div><div class="line">    <span class="attr">custom:titleTextSize</span>=<span class="string">"40sp"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span> /&gt;</div></pre></td></tr></table></figure></p>
+<p>看好咯，我声明的是wrap_content对吧？让我们来看下运行的结果<br><img src="http://upload-images.jianshu.io/upload_images/1976147-569099babe8947c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="全屏.png"></p>
+<p>黄色并非我设置的背景，而是想要包裹验证码的背景。正如我所说的，如果不处理的话，就是这种效果，很明显这不是我们想要的，那么该如何处理呢？</p>
+<p>View的measure()方法是final的，所以这个方法是无法被重写的，但是View提供了onMeasure()方法让我们来处理这些事。onMeasure()方法中带了两个int类型的参数</p>
+<blockquote>
+<p>onMeasure(int widthMeasureSpec, int heightMeasureSpec)</p>
+</blockquote>
+<p>看着这两个东西有没有回想起什么，前面我们了解过MeasureSpec。而这两个正是系统测量出的View的宽和高的MeasureSpec，所以我们便可以在onMeasure()中处理wrap_content的问题。</p>
+<p>首先处理宽度：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> width = <span class="number">0</span>;</div><div class="line"></div><div class="line">Log.i(TAG,<span class="string">"onMeasure"</span>);</div><div class="line"><span class="comment">//设置宽度</span></div><div class="line"><span class="keyword">int</span> specMode = MeasureSpec.getMode(widthMeasureSpec);</div><div class="line"><span class="keyword">int</span> specSize = MeasureSpec.getSize(widthMeasureSpec);</div><div class="line"></div><div class="line"><span class="keyword">switch</span> (specMode) &#123;</div><div class="line">    <span class="keyword">case</span> MeasureSpec.EXACTLY:   <span class="comment">//精准模式，包含指定大小和match_parent</span></div><div class="line">        width = getPaddingLeft() + getPaddingRight() + specSize;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> MeasureSpec.AT_MOST:   <span class="comment">//一般为wrap_content</span></div><div class="line">        width = getPaddingLeft() + getPaddingRight() + mBound.width();</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>前面说了MeasureSpec是SpecMode和SpecSize的打包，我们首先要做的就是拆包。然后根据specMode来确定宽度。如果是EXACTLY自不必多说，直接左右padding加上指定的宽度(或match_parent宽度)就是我们所需的width。而如果是AT_MOST，在本案例中则是我们绘制的矩形背景的宽度。在处理高度的时候也是同样的道理。最终完整onMeasure()代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> width = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> height = <span class="number">0</span>;</div><div class="line">    Log.i(TAG,<span class="string">"onMeasure"</span>);</div><div class="line">    <span class="comment">//设置宽度</span></div><div class="line">    <span class="keyword">int</span> specMode = MeasureSpec.getMode(widthMeasureSpec);</div><div class="line">    <span class="keyword">int</span> specSize = MeasureSpec.getSize(widthMeasureSpec);</div><div class="line"></div><div class="line">    <span class="keyword">switch</span> (specMode) &#123;</div><div class="line">        <span class="keyword">case</span> MeasureSpec.EXACTLY:   <span class="comment">//精准模式，包含指定大小和match_parent</span></div><div class="line">            width = getPaddingLeft() + getPaddingRight() + specSize;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> MeasureSpec.AT_MOST:   <span class="comment">//一般为wrap_content</span></div><div class="line">            width = getPaddingLeft() + getPaddingRight() + mBound.width();</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//设置高度</span></div><div class="line">    specMode = MeasureSpec.getMode(heightMeasureSpec);</div><div class="line">    specSize = MeasureSpec.getSize(heightMeasureSpec);</div><div class="line">    <span class="keyword">switch</span> (specMode) &#123;</div><div class="line">        <span class="keyword">case</span> MeasureSpec.EXACTLY:</div><div class="line">            height = getPaddingTop() + getPaddingBottom() + specSize;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> MeasureSpec.AT_MOST:</div><div class="line">            height = getPaddingTop() + getPaddingBottom() + mBound.height();</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">    setMeasuredDimension(width, height);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>最后记得setMeasuredDimension(width, height);<br>如果不调用这个方法来存储width和height将会在View测量的过程中引发异常。其他的代码并没有变化，再跑一遍看看咋样了。<br><img src="http://upload-images.jianshu.io/upload_images/1976147-f412effdda7368ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="成功处理"></p>
+<p>恩，包住了，点击也能换数字了，不过如果是验证码的话，还需要一个获取验证码内容的方法，这个不难，直接在生成的时候设置一个就成了。还有一个是背景色，现在是写死的，如果我想换个颜色呢，我自己可以改源码，但是要给别人用的话可不能让人这么用。不过实现起来都很简单，直接上代码。</p>
+<p>获取文字内容：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">  *生成随机数字字符串</div><div class="line">  **/</div><div class="line"><span class="function"><span class="keyword">private</span> String <span class="title">randomText</span><span class="params">()</span> </span>&#123;</div><div class="line">    Random random = <span class="keyword">new</span> Random();</div><div class="line">    Set&lt;Integer&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</div><div class="line">    <span class="keyword">while</span> (set.size() &lt; <span class="number">4</span>) &#123;</div><div class="line">        <span class="keyword">int</span> randomInt = random.nextInt(<span class="number">10</span>);</div><div class="line">        set.add(randomInt);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    StringBuilder sb = <span class="keyword">new</span> StringBuilder();</div><div class="line">    <span class="keyword">for</span> (Integer i : set) &#123;</div><div class="line">        sb.append(<span class="string">""</span> + i);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//赋值</span></div><div class="line">    text = sb.toString();</div><div class="line"></div><div class="line">    <span class="keyword">return</span> sb.toString();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span> String text;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getText</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> text;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>设置背景色，在attr的xml文件里加上两句:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"titleBackGroudColor"</span> <span class="attr">format</span>=<span class="string">"color"</span> /&gt;</span></div><div class="line"><span class="comment">&lt;!--在&lt;declare-styleable name="CustomTitleView"&gt;中加入--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"titleBackGroudColor"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<p>在自定义View中加入获取此属性的case：<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">case</span> R.styleable.CustomTitleView_titleBackGroudColor:  </div><div class="line">          mTitleBackColor = a.getColor(attr,Color.YELLOW);</div></pre></td></tr></table></figure></p>
+<p>在绘制时加入获取到的颜色<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mPaint.setColor(mTitleBackColor);</div></pre></td></tr></table></figure></p>
+<p>上面获取text的效果就不查看了，看代码就够一目了然了，下面我们将背景设置为灰色查看一下效果：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">com.example.luo_pc.view.CustomView.CustomTitleView</span></span></div><div class="line">        <span class="attr">custom:titleText</span>=<span class="string">"1234"</span></div><div class="line">        <span class="attr">custom:titleTextColor</span>=<span class="string">"#ff0000"</span></div><div class="line">        <span class="attr">custom:titleTextSize</span>=<span class="string">"40sp"</span></div><div class="line">        <span class="attr">custom:titleBackGroudColor</span>=<span class="string">"#bcbcbc"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span> /&gt;</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1976147-3391d5f9651f95f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="灰色.png"></p>
+<p>再次重申一下，以上这个小案例是从<a href="http://blog.csdn.net/lmj623565791/article/details/24252901" target="_blank" rel="external">hongyang</a>大神那看到的，各位如果想要深入学习自定义View，hongyang大神那的系列文章绝对是极好的。</p>
+<p>参考资料：</p>
+<blockquote>
+<p><a href="http://blog.csdn.net/lmj623565791/article/details/24252901" target="_blank" rel="external">Android 自定义View (一)——by hongyang</a><br>《开发艺术探索》</p>
+</blockquote>
+<p>源码地址：<br><a href="http://download.csdn.net/detail/lmj623565791/7227061" target="_blank" rel="external">hongyang的源码</a><br><a href="https://github.com/ForgetAll/View" target="_blank" rel="external">我整理的Android Studio版源码</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/进阶/" rel="tag">#进阶</a>
+          
+            <a href="/tags/自定义View基础/" rel="tag">#自定义View基础</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/09/Okhttp3-addHeader小坑记/" rel="next" title="Okhttp3-addHeader小坑记">
+                <i class="fa fa-chevron-left"></i> Okhttp3-addHeader小坑记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/19/MVP初尝试/" rel="prev" title="MVP初尝试">
+                MVP初尝试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/13/Android自定义View你需要了解的一些东西/"
+           data-title="Android自定义View你需要了解的一些东西" data-url="http://yoursite.com/2016/08/13/Android自定义View你需要了解的一些东西/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://upload.jianshu.io/users/upload_avatars/1976147/faa01825336e.jpg?imageMogr/thumbnail/90x90/quality/100"
+               alt="Luo_xiasuhuei321" />
+          <p class="site-author-name" itemprop="name">Luo_xiasuhuei321</p>
+          <p class="site-description motion-element" itemprop="description">纸上得来终觉浅，so we should read the fucking source code;</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ForgetAll" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/e1fed0fb341b/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-简书"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhao-shen-56-66" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-知乎"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              基友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.iamxiarui.com/" title="XiaRui Zone" target="_blank">XiaRui Zone</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://liuweiprog.me/" title="阿V薄荷冰加可乐" target="_blank">阿V薄荷冰加可乐</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-进入正题"><span class="nav-number">2.</span> <span class="nav-text">1 进入正题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-xiasuhuei321的重点"><span class="nav-number">3.</span> <span class="nav-text">2 xiasuhuei321的重点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-自定义控件小案例——验证码"><span class="nav-number">4.</span> <span class="nav-text">3 自定义控件小案例——验证码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-自定义View属性"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 自定义View属性</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luo_xiasuhuei321</span>
+</div>
+
+<div class="powered-by">
+  个人博客
+</div>
+
+<div class="theme-info">
+  寄语 - 骚年，加油干~！
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiasuhuei321"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("GG1DP5RQYGruUvJAPkKg2wMw-gzGzoHsz", "SjX4xbDDh2LzhRSWrae5BScU");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

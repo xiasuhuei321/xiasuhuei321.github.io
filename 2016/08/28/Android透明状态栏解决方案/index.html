@@ -1,0 +1,833 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,开发," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="写在前面最近新开了个项目，准备花点时间做一下，不过文也不能少，一周一篇是最起码的了。关于沉浸式状态栏，网上的教程应该是非常非常多的，那么我为什么还要发呢？很简单，有些东西我记不大住，所以都发到我的简书上，以后我就不用到处去找了，麻烦~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android透明状态栏解决方案">
+<meta property="og:url" content="http://yoursite.com/2016/08/28/Android透明状态栏解决方案/index.html">
+<meta property="og:site_name" content="xiasuhuei321的博客">
+<meta property="og:description" content="写在前面最近新开了个项目，准备花点时间做一下，不过文也不能少，一周一篇是最起码的了。关于沉浸式状态栏，网上的教程应该是非常非常多的，那么我为什么还要发呢？很简单，有些东西我记不大住，所以都发到我的简书上，以后我就不用到处去找了，麻烦~">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-b0730b5fc85694ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-2908263288f7e2d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-b0f7e456225181b1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-81ef9a08860790cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-2a7406c1555ee742.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-97458cdee05a1eb3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-09-03T05:36:15.179Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android透明状态栏解决方案">
+<meta name="twitter:description" content="写在前面最近新开了个项目，准备花点时间做一下，不过文也不能少，一周一篇是最起码的了。关于沉浸式状态栏，网上的教程应该是非常非常多的，那么我为什么还要发呢？很简单，有些东西我记不大住，所以都发到我的简书上，以后我就不用到处去找了，麻烦~">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1976147-b0730b5fc85694ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6291113783624467000,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/28/Android透明状态栏解决方案/"/>
+
+  <title> Android透明状态栏解决方案 | xiasuhuei321的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?16dec7b0c5244449304ccc417f56a9c6";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">xiasuhuei321的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">我要变强！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android透明状态栏解决方案
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-28T13:34:19+08:00" content="2016-08-28">
+              2016-08-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/28/Android透明状态栏解决方案/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/28/Android透明状态栏解决方案/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/28/Android透明状态栏解决方案/" class="leancloud_visitors" data-flag-title="Android透明状态栏解决方案">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>最近新开了个项目，准备花点时间做一下，不过文也不能少，一周一篇是最起码的了。关于沉浸式状态栏，网上的教程应该是非常非常多的，那么我为什么还要发呢？很简单，有些东西我记不大住，所以都发到我的简书上，以后我就不用到处去找了，麻烦~<br><a id="more"></a></p>
+<h2 id="自定义顶部布局的沉浸式状态栏"><a href="#自定义顶部布局的沉浸式状态栏" class="headerlink" title="自定义顶部布局的沉浸式状态栏"></a>自定义顶部布局的沉浸式状态栏</h2><p>什么叫自定义顶部布局呢？这个要首先解释一下，处于一些原因的考虑，有一些项目可能不愿意使用Toolbar或者ActionBar，进入Activity的第一件事情就是：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">requestWindowFeature(Window.FEATURE_NO_TITLE);</div></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">supportRequestWindowFeature(Window.FEATURE_NO_TITLE);</div></pre></td></tr></table></figure></p>
+<p>直接把顶部干掉，然后换上自己的顶部布局。对于这样的情况，先看一下实现之后的状况</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1976147-b0730b5fc85694ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="沉浸式.png"></p>
+<p>效果好像还可以，那么究竟该怎么实现呢？</p>
+<h2 id="Android5-0-LOLLIPOP"><a href="#Android5-0-LOLLIPOP" class="headerlink" title="Android5.0 LOLLIPOP"></a>Android5.0 LOLLIPOP</h2><p>为什么先讲Android5.0(API 21)呢，因为Android5.0之后可以直接改变状态栏的颜色，所以实现起来比较方便，先看一下xml配置实现的方法。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1976147-2908263288f7e2d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="values21.png"></p>
+<p>首先我们需要新建一个values-v21，然后新建styles，代码如下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"AppTheme"</span> <span class="attr">parent</span>=<span class="string">"Theme.AppCompat.Light.DarkActionBar"</span>&gt;</span><span class="xml"></span></div><div class="line">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowTranslucentStatus"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:statusBarColor"</span>&gt;</span>#f13f00<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>之后跑出来的效果就是上面的图的样子了，但是，这并没有什么用。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1976147-b0f7e456225181b1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="并没有什么卵用"><br>是的，这并没有什么卵用，除了我们自己玩玩的项目，现在不可能直接把项目最小版本定为5.0，看看下面的版本分布你就能感受到了……<br><img src="http://upload-images.jianshu.io/upload_images/1976147-81ef9a08860790cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="分布图.png"></p>
+<p>5.0版本以下的用户不可忽视，但是5.0以下的版本并没有可以改变状态栏颜色的方法，不过4.4(API 19)版本是可以将状态栏颜色设置为透明的，我们可以根据这一特性得出一些沉浸式状态栏的解决方案，而且我个人也比较推荐采用4.4及以上的这种解决方案。</p>
+<h2 id="Android4-4-KITKAT"><a href="#Android4-4-KITKAT" class="headerlink" title="Android4.4 KITKAT"></a>Android4.4 KITKAT</h2><p>首先和上面差不多，在res下新建values-v19这个文件夹，然后新建styles文件，代码如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"ImageTranslucentTheme"</span> <span class="attr">parent</span>=<span class="string">"Theme.AppCompat.Light.DarkActionBar"</span>&gt;</span><span class="xml"></span></div><div class="line">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowTranslucentStatus"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这里我仅仅是设置了透明状态栏，如果你有其他的需要可以自己添加进去。这个时候运行一下看看效果<br><img src="http://upload-images.jianshu.io/upload_images/1976147-2a7406c1555ee742.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="透明.png"></p>
+<p>恩，真的透明了，那么我们怎么让颜色延伸到状态栏呢？很容易想到的一种是根节点设置</p>
+<blockquote>
+<p>android:fitsSystemWindows=”true”</p>
+</blockquote>
+<p>然后设置根节点的颜色和自己的自定义标题栏一致，上布局代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:weightSum</span>=<span class="string">"1"</span></div><div class="line">    <span class="attr">android:fitsSystemWindows</span>=<span class="string">"true"</span></div><div class="line">    <span class="attr">android:background</span>=<span class="string">"#f13f00"</span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></div><div class="line">    <span class="attr">tools:context</span>=<span class="string">".lockscreen.view.MainActivity"</span>&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!--标题布局--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">RelativeLayout</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"0dp"</span></div><div class="line">        <span class="attr">android:layout_weight</span>=<span class="string">"0.1"</span></div><div class="line">        <span class="attr">android:background</span>=<span class="string">"#f13f00"</span>&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/main_title"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_centerInParent</span>=<span class="string">"true"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"ginbol"</span></div><div class="line">            <span class="attr">android:textColor</span>=<span class="string">"@android:color/white"</span></div><div class="line">            <span class="attr">android:textSize</span>=<span class="string">"20sp"</span></div><div class="line">            <span class="attr">android:textStyle</span>=<span class="string">"bold"</span> /&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>上图：<br><img src="http://upload-images.jianshu.io/upload_images/1976147-97458cdee05a1eb3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="一片红.png"></p>
+<p>状态栏颜色成功变色，只要我们在使用其他布局的时候改变背景色就可以成功的实现沉浸式状态栏的效果了，但是，我在如此使用使用的时候曾经碰到一个bug，会导致部分布局颜色发生变化。使用这种布局实现的沉浸式所导致的bug，我没能解决，所以我只好换一种实现方法了……而且，在4.4的解决方案中我也推荐这种方法……这种方法是在看<a href="http://stormzhang.com/android/2015/08/16/boohee-toolbar/" target="_blank" rel="external">stormzhang-薄荷Toolbar(ActionBar)适配解决方案</a>中看到的，同样适用于我这里。</p>
+<p>首先布局和标题栏和刚刚差不多，但是根节点不用</p>
+<blockquote>
+<p>android:fitsSystemWindows=”true”</p>
+</blockquote>
+<p>在自定义标题栏中加上</p>
+<blockquote>
+<p>android:paddingTop=”@dimen/topview_padding”</p>
+</blockquote>
+<p>这个paddingTop在api19以上的版本是25dp，以下是0，在使用这个方法之后运行出来的结果也是对的，就不放图了。至于这个值为什么是25dp，stormzhang的解释是在源码中看到了状态栏的高度就是那么多。</p>
+<h2 id="最后的TIPS"><a href="#最后的TIPS" class="headerlink" title="最后的TIPS"></a>最后的TIPS</h2><p>有些手机可能在xml中设置状态栏透明并不起作用，使用代码在Activity中设置效果更佳。对于使用toolbar的项目，可以去看我上面提到的<a href="http://stormzhang.com/android/2015/08/16/boohee-toolbar/" target="_blank" rel="external">博客</a>，而且在他的博客中也有提到在代码中设置透明状态栏以及BaseActivity的抽取。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/开发/" rel="tag">#开发</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/20/Hello-World-无关代码/" rel="next" title="Hello World--无关代码">
+                <i class="fa fa-chevron-left"></i> Hello World--无关代码
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/02/Fragment结合ViewPager之懒加载/" rel="prev" title="Fragment结合ViewPager之懒加载">
+                Fragment结合ViewPager之懒加载 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/28/Android透明状态栏解决方案/"
+           data-title="Android透明状态栏解决方案" data-url="http://yoursite.com/2016/08/28/Android透明状态栏解决方案/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://upload.jianshu.io/users/upload_avatars/1976147/faa01825336e.jpg?imageMogr/thumbnail/90x90/quality/100"
+               alt="Luo_xiasuhuei321" />
+          <p class="site-author-name" itemprop="name">Luo_xiasuhuei321</p>
+          <p class="site-description motion-element" itemprop="description">纸上得来终觉浅，so we should read the fucking source code;</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ForgetAll" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/e1fed0fb341b/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-简书"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhao-shen-56-66" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-知乎"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              基友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.iamxiarui.com/" title="XiaRui Zone" target="_blank">XiaRui Zone</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://liuweiprog.me/" title="阿V薄荷冰加可乐" target="_blank">阿V薄荷冰加可乐</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义顶部布局的沉浸式状态栏"><span class="nav-number">2.</span> <span class="nav-text">自定义顶部布局的沉浸式状态栏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android5-0-LOLLIPOP"><span class="nav-number">3.</span> <span class="nav-text">Android5.0 LOLLIPOP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android4-4-KITKAT"><span class="nav-number">4.</span> <span class="nav-text">Android4.4 KITKAT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后的TIPS"><span class="nav-number">5.</span> <span class="nav-text">最后的TIPS</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luo_xiasuhuei321</span>
+</div>
+
+<div class="powered-by">
+  个人博客
+</div>
+
+<div class="theme-info">
+  寄语 - 骚年，加油干~！
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiasuhuei321"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("GG1DP5RQYGruUvJAPkKg2wMw-gzGzoHsz", "SjX4xbDDh2LzhRSWrae5BScU");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

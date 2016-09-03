@@ -104,7 +104,7 @@ RecyclerVie">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-5619d16337071225.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-751246a0afc89dc0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-5618087689875ae9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-09-03T05:28:22.127Z">
+<meta property="og:updated_time" content="2016-09-03T05:35:59.300Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RecyclerView以及OOM的一些处理">
 <meta name="twitter:description" content="今天关于是写ListView还是RecyclerView着实纠结了一会，毕竟这二者都很重要，不过最近做的东西里用的是RecyclerView，所以还是先写RecyclerView了，而且代码也撸好了。好了日常唠嗑（1/1），下面进入正题。
@@ -347,9 +347,9 @@ RecyclerVie">
 <li>使用RecyclerView实现ListView的效果</li>
 <li>RecyclerView加载图片出现OOM时的一些处理</li>
 <li>RecyclerView实现瀑布流</li>
-<li>RecyclerView滑动卡顿的一些优化</li>
+<li>RecyclerView滑动卡顿的一些优化<a id="more"></a>
+RecyclerView与ListView原理是类似的：都是仅仅维护少量的View并且可以展示大量的数据，不过RecyclerView相比ListView更加高级和灵活。RecyclerView本身只负责View的回收和复用，这从它名字本身也能看出一些端倪。既然RecyclerView只关心View的回收和复用，那么这玩意到底该怎么才能玩起来？</li>
 </ul>
-<p>RecyclerView与ListView原理是类似的：都是仅仅维护少量的View并且可以展示大量的数据，不过RecyclerView相比ListView更加高级和灵活。RecyclerView本身只负责View的回收和复用，这从它名字本身也能看出一些端倪。既然RecyclerView只关心View的回收和复用，那么这玩意到底该怎么才能玩起来？</p>
 <p>好问题，虽然是我自己问的……借用一句别人说的：真正牛逼的人是不需要什么都管的，只要底下有人就行。LayoutManager负责Item布局和展示,Item之间的间隔由ItemDecoration来解决，Item的增加与删除的动画由ItemAnimator来解决，Adapter用来将数据与Item界面绑定。</p>
 <p>好了作了基本的了解，开始上码吧，有关如何在Android Studio中使用RecyclerView和我的代码获取方法，将在文末作相应的说明。首先第一要实现的，就是和ListView类似的效果，先看效果图，原谅我不会做动图……</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1976147-4349b482ad7d122c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="效果1"></p>
@@ -510,7 +510,7 @@ RecyclerVie">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -518,7 +518,7 @@ RecyclerVie">
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -527,7 +527,7 @@ RecyclerVie">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
