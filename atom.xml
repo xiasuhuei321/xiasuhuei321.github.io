@@ -75,4 +75,109 @@
     
   </entry>
   
+  <entry>
+    <title>Hello World--无关代码</title>
+    <link href="http://yoursite.com/2016/08/20/Hello-World-%E6%97%A0%E5%85%B3%E4%BB%A3%E7%A0%81/"/>
+    <id>http://yoursite.com/2016/08/20/Hello-World-无关代码/</id>
+    <published>2016-08-20T11:17:35.000Z</published>
+    <updated>2016-09-03T02:09:22.388Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#include&lt;Studio.h&gt;</div><div class="line">void main()&#123;</div><div class="line">     printf("hello world!\n");</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>做一个宅男太久了，应该是从高二开始的？到现在已经有5年了？这期间有沉迷于网络小说，也有一段时间沉迷于游戏。所幸大学里并不是什么东西都没有学到，虽然自己曾放弃过多个目标（C，C#，C++），但是也在Android方面得到了一点动力。如果经常关注我的人应该能发现我的文章底下经常有<a href="http://www.jianshu.com/users/86f25f8b198b/latest_articles" target="_blank" rel="external">iamxiarui</a>的评论，事实上我和他几乎在同一时间开始认真学习Android。大学里如果要说哪个同学关系比较铁的，感觉只有他了。不过这货有一段时间趁着我忙于期末大作业疯狂发文，搞的我压力好大，但是<strong>有个朋友加对手感觉真棒</strong>。</p>
+<p>以前的以前总是想的很多而做的很少，而之后则是想的少做的也少。现在，我想我应该<strong>少想一点，多做一点</strong>。平时看过我文章的人应该都能感觉到，我写文都会尽量保持欢脱愉快的气氛，不过code这种事么，那种气氛总是会被代码打断的。而我在现实生活中，却是一个并不怎么善于表达的人，宅男么，总是这样的。最近也在知乎上看到了一些很有趣的问题，比如<a href="https://www.zhihu.com/question/22580687" target="_blank" rel="external">为何我可以和同学老师朋友相处得很好，但一放假回家和父母每天都要吵嚷？</a>我的回答是：<br><strong>缺乏交流</strong>。因为平时我经常和父母交流，虽然可能会在一些事情上会有分歧，但是我们会尽量进行足够的沟通去弥补这些。平时与父母交流其实也免不了吵，但是其实这些都不算什么问题，只要有足够的交流就好了。而我的父母，最可爱的一点就是他们会认真的听我的发言。而且在平时，就算他们不是非常明白我讲的东西（技术相关）也会认真的听。</p>
+<p>我很欣赏我的父母，虽然他们可能有各种缺点，但是我想成为他们那样的人。即使不懂得你在说什么，但我也会做一个好的倾听者。虽然能力不够，但是我也努力做到最好。好的，老爸我知道你们在看，我平时生活有些话是绝对不会说出口的，在这都跟你讲了。你其实算是我的偶像之一吧，不说以后，我现在就在努力的成为一个能负得起责任的人。</p>
+<p>写到这里貌似都没写今天干的事啊，人一旦感慨一起来就没个完了……今天和以前的高中同学一起出去玩了一波，感觉很高兴。说实话，作为一个宅的生物，今天出去看到那么多人真是有点尴尬。果然对于“玩”这种事情我还是个hello world呢（入门者）。</p>
+<p>我觉得下午的这段时间很轻松愉快的过去了，虽然对于我那可怜的高中同学并非如此……要陪着一个黑胖宅度过一下午，我自己想想都怕……玩笑，五年没见了，见面真的挺高兴的。当然了，见面前叫的那杯奇奇怪怪的果汁让我很不愉悦！跟番茄汁似的！整个下午感觉过的都很安闲，感觉有点奇怪，周围其实是很吵闹的，但是心是平静的。</p>
+<p>下午也聊了一些话题，想拿出来写一下的大概是那句：</p>
+<blockquote>
+<p>……<br>而且我爸爸说就算我不工作他也养得活我。</p>
+</blockquote>
+<p>经过同学提醒说这样有点“啃老”的意思……我单独抽出来这句话的确容易造成误解，我本意并非如此。我的表达有所欠缺，所以用个在知乎上看到的东西来解释一下。南海问题发生后，有人问为什么这么多人无动于衷，很多人的回答都差不多是这个意思：中国发展强大不正是为了就算出了一些问题，内部也能歌舞升平吗？</p>
+<p>我想表达的也是这个意思，而且我那同学现在也在努力的工作。</p>
+<p>对于体现人与人之间闪光点的东西，我总是不吝于欣赏。而我，希望以后我能做一个她爸那样的人，能对我的父母说，你们吃吃玩玩就行，不干活我来养活你们。当然了，现在情况肯定是我爸对我说这句话，无以为报，唯有努力。</p>
+<p>本来想写篇出去的感想的，结果变成这种了……看来真的太久没写文了，都不知道跑偏到哪里去了。不过感觉像我这种不太善于交流的人一个人出去也没啥好玩的，所以最后还是感谢一下同学！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Okhttp3-addHeader小坑记</title>
+    <link href="http://yoursite.com/2016/08/09/Okhttp3-addHeader%E5%B0%8F%E5%9D%91%E8%AE%B0/"/>
+    <id>http://yoursite.com/2016/08/09/Okhttp3-addHeader小坑记/</id>
+    <published>2016-08-09T08:10:39.000Z</published>
+    <updated>2016-09-03T02:12:49.020Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>最近感觉自己看了不少东西，不过在上班所以并没有很多的时间来写东西。我有一些半成品不过都不想发出来，毕竟缺少一点自己的东西在里面。好了日常唠嗑(1/1)。</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>前面也说了最近在上班，接触到的项目里用的都是被抛弃的httpclient，说实话这小项目我觉得我是有能力重构的。所以最近着手重构，重构之前首先选定要拿什么做。经过慎重的思考之后决定:项目尽量采用MVC的模式做，网络请求用okhttp(用hongyang封装的okhttp-utils)，图片的处理和加载想采用glide，但是目前来看还有一些问题。好了背景介绍到这，下面说坑。</p>
+<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><p>既然采用Okhttp来重写网络请求，我当然得挑几个出来跑一下试试。这一试问题就出来了，见下图:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1976147-bb687ddc655e7f83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="error.png"></p>
+<p>415介质错误，等等，难道我请求写的有问题？好吧，真有可能，可能因为自己平时就粗心大意的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">      OkHttpUtils.postString()</div><div class="line"><span class="comment">//                .mediaType(MediaType.parse("application/json; charset=utf-8"))</span></div><div class="line">                .content(jo.toString())</div><div class="line">                .addHeader(<span class="string">"tkn"</span>, <span class="string">"--"</span>)</div><div class="line">                .addHeader(<span class="string">"uid"</span>, <span class="string">"--"</span>)</div><div class="line">                .addHeader(<span class="string">"Content-Type"</span>, <span class="string">"application/json"</span>)</div><div class="line">                .url(<span class="string">" "</span>)</div><div class="line">                .build()</div><div class="line">                .execute(<span class="keyword">new</span> BitmapCallback() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Call call, Exception e, <span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">                        e.printStackTrace();</div><div class="line">                        tvTest.setText(<span class="string">"纳尼，竟然会错?"</span>);</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(Bitmap response, <span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">                        ivImg.setImageBitmap(response);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div></pre></td></tr></table></figure>
+<p>由于有保密的缘故，url我就不加上去了。tkn和uid是验证登录的东西，这个东西我肯定是写的没错的，我这个请求我仔细看了一遍也没发现哪出了问题。但错就在那啊！</p>
+<p>可能有细心的看官已经发现了，我注释了一行。是的，那一行就是解决问题的方法。在http头里面声明”Content-Type”, “application/json”在okhttp里面是没什么卵用的，okhttp中需要在mediaType中声明介质类型。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>最近由于工作先后接触了HttpUrlConnection、HttpClient、okhttp，感觉api有的差不多，有的差别很大，关键还是你对于http协议的理解。只要你对http有一定的了解，对于一个有良好设计的东西来说找到对应的api是很容易的。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;最近感觉自己看了不少东西，不过在上班所以并没有很多的时间来写东西。我有一些半成品不过都不想发出来，毕竟缺少一点自己的东西在里
+    
+    </summary>
+    
+      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+    
+    
+      <category term="爬坑" scheme="http://yoursite.com/tags/%E7%88%AC%E5%9D%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>百度地图Key验证失败230错误</title>
+    <link href="http://yoursite.com/2016/07/21/%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BEKey%E9%AA%8C%E8%AF%81%E5%A4%B1%E8%B4%A5230%E9%94%99%E8%AF%AF/"/>
+    <id>http://yoursite.com/2016/07/21/百度地图Key验证失败230错误/</id>
+    <published>2016-07-21T02:13:40.000Z</published>
+    <updated>2016-09-03T02:15:04.045Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="写在文集前面"><a href="#写在文集前面" class="headerlink" title="写在文集前面:"></a>写在文集前面:</h4><p>这个新增的文集用来记录一些犯过的错，希望各位可以避免。以后可能会把自己遇到的坑慢慢补上来。</p>
+<h4 id="进入正题"><a href="#进入正题" class="headerlink" title="进入正题"></a>进入正题</h4><p>最近有需求要用到地图，同学和我说高德地图社区都关了，他都换百度了……所以我果断……直接用百度地图吧。按照官方文档的步骤，一路下来都很简单。但是在使用官方示例demo的时候却碰到了如下的错误：</p>
+<blockquote>
+<p>baidumapsdk.demo E/baidumapsdk: Authentication Error errorcode: 230 uid: -1 appid -1 msg: APP Scode码校验失败</p>
+</blockquote>
+<p>首先我可以确认我包名是没有错的，而且我还进了gradle里看了下，确认都是一致的。那么问题一定时候出在SHA1上的了，但是讲道理我用你的demo我又没打包发布，用的肯定是debug.keystore吧……</p>
+<p>诶？等等……难不成他指定了debug.keystore所以导致我获取到的SHA1并不对？</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1976147-d602a63ec701c8ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="debug.png"></p>
+<p>我看了一眼……哎哟卧槽还真是，难怪一直验证失败。那接下来的事情就好办了，要么获取这个debug.keystore的SHA1，要么把这个keystore路径换掉。我直接获取了这个debug.keystore的SHA1并且和我电脑上默认的作了一下对比</p>
+<blockquote>
+<p>keytool -list -v -keystore debug.keystore</p>
+</blockquote>
+<p>好了走你~！</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1976147-18be5a30e0d51f8a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="真不一样.png"></p>
+<p>可以很明显的看出来，这俩是不一样的，所以验证失败是可以理解的……我的问题就这么解决了，值得注意的是发布版的签名证书又不一样了，到时候还得重新获取SHA1信息，重新获取AK。（当然百度其实是给了发布版和开发板两个SHA1让你填的，我手上并没有打包的东西，所以不怎么了解这一块）</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;写在文集前面&quot;&gt;&lt;a href=&quot;#写在文集前面&quot; class=&quot;headerlink&quot; title=&quot;写在文集前面:&quot;&gt;&lt;/a&gt;写在文集前面:&lt;/h4&gt;&lt;p&gt;这个新增的文集用来记录一些犯过的错，希望各位可以避免。以后可能会把自己遇到的坑慢慢补上来。&lt;/p&gt;
+&lt;h
+    
+    </summary>
+    
+      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+    
+    
+      <category term="爬坑" scheme="http://yoursite.com/tags/%E7%88%AC%E5%9D%91/"/>
+    
+  </entry>
+  
 </feed>
