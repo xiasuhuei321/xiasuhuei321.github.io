@@ -85,19 +85,19 @@
 
 
 <meta name="description" content="写在前面最近感觉自己看了不少东西，不过在上班所以并没有很多的时间来写东西。我有一些半成品不过都不想发出来，毕竟缺少一点自己的东西在里面。好了日常唠嗑(1/1)。
-背景前面也说了最近在上班，接触到的项目里用的都是被抛弃的httpclient，说实话这小项目我觉得我是有能力重构的。所以最近着手重构，重构之前首先选定要拿什么做。经过慎重的思考之后决定:项目尽量采用MVC的模式做，网络请求用okhttp(">
+背景前面也说了最近在上班，接触到的项目里用的都是被抛弃的httpclient，打算换个请求。所以最近着手看需要重构一些相关的东西，重构之前首先选定要拿什么做。经过慎重的思考之后决定:项目尽量采用MVC的模式做，网络请求用okhttp(用h">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Okhttp3-addHeader小坑记">
 <meta property="og:url" content="http://yoursite.com/2016/08/09/Okhttp3-addHeader小坑记/index.html">
 <meta property="og:site_name" content="xiasuhuei321的博客">
 <meta property="og:description" content="写在前面最近感觉自己看了不少东西，不过在上班所以并没有很多的时间来写东西。我有一些半成品不过都不想发出来，毕竟缺少一点自己的东西在里面。好了日常唠嗑(1/1)。
-背景前面也说了最近在上班，接触到的项目里用的都是被抛弃的httpclient，说实话这小项目我觉得我是有能力重构的。所以最近着手重构，重构之前首先选定要拿什么做。经过慎重的思考之后决定:项目尽量采用MVC的模式做，网络请求用okhttp(">
+背景前面也说了最近在上班，接触到的项目里用的都是被抛弃的httpclient，打算换个请求。所以最近着手看需要重构一些相关的东西，重构之前首先选定要拿什么做。经过慎重的思考之后决定:项目尽量采用MVC的模式做，网络请求用okhttp(用h">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-bb687ddc655e7f83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-09-03T02:12:49.020Z">
+<meta property="og:updated_time" content="2016-09-03T02:30:47.631Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Okhttp3-addHeader小坑记">
 <meta name="twitter:description" content="写在前面最近感觉自己看了不少东西，不过在上班所以并没有很多的时间来写东西。我有一些半成品不过都不想发出来，毕竟缺少一点自己的东西在里面。好了日常唠嗑(1/1)。
-背景前面也说了最近在上班，接触到的项目里用的都是被抛弃的httpclient，说实话这小项目我觉得我是有能力重构的。所以最近着手重构，重构之前首先选定要拿什么做。经过慎重的思考之后决定:项目尽量采用MVC的模式做，网络请求用okhttp(">
+背景前面也说了最近在上班，接触到的项目里用的都是被抛弃的httpclient，打算换个请求。所以最近着手看需要重构一些相关的东西，重构之前首先选定要拿什么做。经过慎重的思考之后决定:项目尽量采用MVC的模式做，网络请求用okhttp(用h">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1976147-bb687ddc655e7f83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -327,7 +327,7 @@
 
       
         <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>最近感觉自己看了不少东西，不过在上班所以并没有很多的时间来写东西。我有一些半成品不过都不想发出来，毕竟缺少一点自己的东西在里面。好了日常唠嗑(1/1)。</p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>前面也说了最近在上班，接触到的项目里用的都是被抛弃的httpclient，说实话这小项目我觉得我是有能力重构的。所以最近着手重构，重构之前首先选定要拿什么做。经过慎重的思考之后决定:项目尽量采用MVC的模式做，网络请求用okhttp(用hongyang封装的okhttp-utils)，图片的处理和加载想采用glide，但是目前来看还有一些问题。好了背景介绍到这，下面说坑。</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>前面也说了最近在上班，接触到的项目里用的都是被抛弃的httpclient，打算换个请求。所以最近着手看需要重构一些相关的东西，重构之前首先选定要拿什么做。经过慎重的思考之后决定:项目尽量采用MVC的模式做，网络请求用okhttp(用hongyang封装的okhttp-utils)，图片的处理和加载想采用glide，但是目前来看还有一些问题。好了背景介绍到这，下面说坑。<br><a id="more"></a></p>
 <h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><p>既然采用Okhttp来重写网络请求，我当然得挑几个出来跑一下试试。这一试问题就出来了，见下图:</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1976147-bb687ddc655e7f83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="error.png"></p>
 <p>415介质错误，等等，难道我请求写的有问题？好吧，真有可能，可能因为自己平时就粗心大意的。</p>
