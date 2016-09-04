@@ -109,7 +109,7 @@ final
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-bb49ffa7bdc02a97.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-ead64610921b9516.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-abce9bf24ad7b7f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-09-04T08:45:54.231Z">
+<meta property="og:updated_time" content="2016-09-04T08:51:59.914Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第一话-从头再来">
 <meta name="twitter:description" content="一直打算让自己的Java回炉重新锻造一下，那么，从现在开始吧。
@@ -399,7 +399,7 @@ final
 <p>TIJ对第一点有一些印证的描述：<br>子类对象的正确初始化至关重要，而且也仅有一种方法来保证这一点，在构造器中调用父类构造器来执行初始化，父类构造器具有执行父类初始化所需要的所有东西。</p>
 <p>那么以上的问题应该可以迎刃而解了：private修饰的test仅在A类中是可以访问到的，虽然B类继承了A类，拥有这一属性，但是遗憾的是他并没有打开箱子的密码，并不能访问到。但是public修饰的set方法子类B是可以访问的，于是调用set方法打印了test的值。在new一个子类的时候并不会同时new出对应的父类，而是会调用父类的构造器。构造方法可以理解成一段比较特殊的代码，可以用来初始化实例的数据，但是只有在new 构造方法名 的时候才会申请内存空间。</p>
 <h2 id="一些思考（1）"><a href="#一些思考（1）" class="headerlink" title="一些思考（1）"></a>一些思考（1）</h2><p>即使在子类中调用父类的构造器，有时也无法保证所有成员都被初始化。事实上在我们平时写代码的时候，有很多成员并非是在构造器中初始化的，而是在我们需要用之前初始化，所以当我们在考虑到继承的情况下，需要多考虑一些未在构造器中被初始化的成员。</p>
-<h2 id="重载与重写"><a href="#重载与重写" class="headerlink" title="重载与重写"></a>重载与重写</h2><ul>
+<h3 id="重载与重写"><a href="#重载与重写" class="headerlink" title="重载与重写"></a>重载与重写</h3><ul>
 <li><p>重载<br>重载是指方法名都一样，但是参数不一样，返回值也可以一样。但是如果参数完全相同，只有返回值是不一样的，那是不可行的。<br><img src="http://upload-images.jianshu.io/upload_images/1976147-ead64610921b9516.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2.png"></p>
 </li>
 <li><p>重写<br>重写通常发生在子类，子类写一个父类中有的同名方法（方法参数，返回类型一致），那么在调用这个名字的方法时将会调用子类中的这个方法。当你确定要覆盖父类的方法时，建议使用注解@Override，这样可以防止你在不想重载时而以外地进行了重载。</p>
@@ -410,7 +410,7 @@ final
 <p>首先Handler是个抽象类，但是我点进去，搜了一下abstract这个关键字，没有!一个都没有！<br><img src="http://upload-images.jianshu.io/upload_images/1976147-abce9bf24ad7b7f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="没有abstract.png"></p>
 <p>关于abstract class 文档是这样描述的：抽象类是不完全的类，或者被认为是不完全的。那么这个就容易理解了，抽象类并未强制要求你一定要有abstract method，只要你自己认为这个类是abstract class就可以给他加上。那么”=”右边的写法是怎么回事呢？</p>
 <p>右边的写法想要表达的意思是：创建一个继承自Handler的匿名类对象。可能你会和我有一样的疑惑，名字不是handler在左边挂着呢么？如果你有这个疑惑……恭喜，你该和我一起回去重造Java了……因为上面说的很清楚了是”=”右边的，右边通过new表达式返回的引用被自动转型为Handler，所以说这是一个Handler的子类，用一个通俗易懂的问结束这个话题：那么这个子类的名呢？</p>
-<h2 id="final"><a href="#final" class="headerlink" title="final"></a>final</h2><p>final关键字根据上下文和修饰对象的不同可能会有一些差别。</p>
+<h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><p>final关键字根据上下文和修饰对象的不同可能会有一些差别。</p>
 <ul>
 <li><p>变量<br>如果final修饰的是基本数据类型，那么此变量恒定不变。如果final修饰的是引用类型，那么一旦该引用类型被初始化指向一个对象，那么久无法将他改为指向另一个对象。但是需要注意的是对象本身的值是可以改变的。</p>
 </li>
@@ -649,7 +649,7 @@ final
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一个问题"><span class="nav-number">1.</span> <span class="nav-text">一个问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些思考（1）"><span class="nav-number"></span> <span class="nav-text">一些思考（1）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重载与重写"><span class="nav-number"></span> <span class="nav-text">重载与重写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些思考（2）"><span class="nav-number"></span> <span class="nav-text">一些思考（2）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#final"><span class="nav-number"></span> <span class="nav-text">final</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么匿名内部类中形参要是final的？"><span class="nav-number"></span> <span class="nav-text">为什么匿名内部类中形参要是final的？</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一个问题"><span class="nav-number">1.</span> <span class="nav-text">一个问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些思考（1）"><span class="nav-number"></span> <span class="nav-text">一些思考（1）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重载与重写"><span class="nav-number">1.</span> <span class="nav-text">重载与重写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些思考（2）"><span class="nav-number"></span> <span class="nav-text">一些思考（2）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#final"><span class="nav-number">1.</span> <span class="nav-text">final</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么匿名内部类中形参要是final的？"><span class="nav-number"></span> <span class="nav-text">为什么匿名内部类中形参要是final的？</span></a></div>
             
           </div>
         </section>
