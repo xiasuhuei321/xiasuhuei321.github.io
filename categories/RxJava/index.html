@@ -87,7 +87,7 @@
 <meta name="description" content="纸上得来终觉浅，so we should read the fucking source code;">
 <meta property="og:type" content="website">
 <meta property="og:title" content="xiasuhuei321的博客">
-<meta property="og:url" content="https://xiasuhuei321.github.io/page/2/index.html">
+<meta property="og:url" content="https://xiasuhuei321.github.io/categories/RxJava/index.html">
 <meta property="og:site_name" content="xiasuhuei321的博客">
 <meta property="og:description" content="纸上得来终觉浅，so we should read the fucking source code;">
 <meta name="twitter:card" content="summary">
@@ -113,9 +113,9 @@
 
 
 
-  <link rel="canonical" href="https://xiasuhuei321.github.io/page/2/"/>
+  <link rel="canonical" href="https://xiasuhuei321.github.io/categories/RxJava/"/>
 
-  <title> xiasuhuei321的博客 </title>
+  <title> 分类: RxJava | xiasuhuei321的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -146,9 +146,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -258,271 +256,40 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
-    
-      
 
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <section id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h2 >
+        RxJava
+        <small>分类</small>
+      </h2>
+    </div>
 
     
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/29/Android消息机制浅析/" itemprop="url">
-                  Android消息机制浅析
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-29T23:23:37+08:00" content="2016-05-29">
-              2016-05-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/29/Android消息机制浅析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/29/Android消息机制浅析/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/29/Android消息机制浅析/" class="leancloud_visitors" data-flag-title="Android消息机制浅析">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
-      
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
         
-          <p>　　写在前面：<br>　　如果你在看本文之前没有对Android消息机制作过了解，可能会比较吃力，关于源码，不需要全部看懂，能看懂其中关键的几句代码就行了。如果在阅读过程中感到吃力，请直接跳到结尾部分看概述。</p>
-<p>　　最近在看《Android开发艺术探索》，感觉真的是一本好书，恩，让我非常有读完欲望的一本书。话不多说，分享一下我的读书收获。</p>
-<p>　　Android中的耗时操作需要在子线程中完成，当这些操作完成后可能会需要对UI进行相应的更新。但是Android中的UI不是线程安全的，在多线程中并发访问可能会导致UI控件处于不可预期的状态。Google没有用上锁机制来解决这个问题，而是让开发者通过Handler切换线程来达到更新UI的目的。<strong>Handler</strong>是Android消息机制的上层接口，想要解析Android消息机制还需要了解<strong>Looper</strong>和<strong>消息队列(MessageQueue)</strong>。</p>
-<p>　　在具体的了解Handler、Looper和MessageQueue之前，先让我们把我们平时切换线程的流程过一遍。首先我们在主线程中创建Handler，然后在子线程中通过handler的sendMessage方法将携带子线程操作结果的数据传出，通过handler的handleMessage方法进行UI的更新，代码如下：<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/29/Android消息机制浅析/#more" rel="contents">
-              阅读全文 &raquo;
+            <a class="post-title-link" href="/2016/09/09/RxJava从入门到放弃-一/" itemprop="url">
+              
+                <span itemprop="name">RxJava从入门到放弃(一)</span>
+              
             </a>
-          </div>
         
-      
-    </div>
+      </h1>
 
-    <div>
-      
-    </div>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-09-09T23:41:47+08:00"
+              content="2016-09-09" >
+          09-09
+        </time>
+      </div>
 
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/12/Android之回调函数/" itemprop="url">
-                  Android之回调函数
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-12T20:33:58+08:00" content="2016-05-12">
-              2016-05-12
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/12/Android之回调函数/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/12/Android之回调函数/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/12/Android之回调函数/" class="leancloud_visitors" data-flag-title="Android之回调函数">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>最近对Android中的回调产生了一些疑问，看了不少博文才算是明白了一点，接下来分享一下我的收获。</p>
-<p><strong> 写在正文之前，大神可以跳过： </strong><br>　　1.接口不可以实例化，但可以创建一个接口对象。<br>　　2.你可能见过这样的语法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Button bt_add = (Button) findViewById(R.id.bt_add);</div><div class="line">bt_add.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>　　我们都知道OnClickListener()是一个接口，但是上文中  new OnClickListener()并非是实例化接口，而是表示一个匿名内部类实现该接口。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/12/Android之回调函数/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
+    </header>
   </article>
 
 
@@ -530,9 +297,6 @@
   </section>
 
   
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-  </nav>
 
 
 

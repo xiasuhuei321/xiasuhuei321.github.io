@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="进阶,RxJava,Andriod," />
 
 
 
@@ -84,15 +84,33 @@
 
 
 
-<meta name="description" content="纸上得来终觉浅，so we should read the fucking source code;">
-<meta property="og:type" content="website">
-<meta property="og:title" content="xiasuhuei321的博客">
-<meta property="og:url" content="https://xiasuhuei321.github.io/index.html">
+<meta name="description" content="写在前面RxJava我一直是很想用的，扔物线老师的文章我也看了一点，但是说实话，其中很多东西交错在一起，对于我来说有点难以理解。而且看很多文章总是看了前面忘后面，还有一些结合lambda讲的，说实话，我是懵逼的。在这里把我自己对于RxJava的一些理解，看到的一些好文记录下来。
+RxJava是啥
+Rx是一个函数库，让开发者可以利用可观察序列和LINQ风格查询操作符来编写异步和基于事件的程序。
+
+好">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RxJava从入门到放弃(一)">
+<meta property="og:url" content="https://xiasuhuei321.github.io/2016/09/09/RxJava从入门到放弃-一/index.html">
 <meta property="og:site_name" content="xiasuhuei321的博客">
-<meta property="og:description" content="纸上得来终觉浅，so we should read the fucking source code;">
+<meta property="og:description" content="写在前面RxJava我一直是很想用的，扔物线老师的文章我也看了一点，但是说实话，其中很多东西交错在一起，对于我来说有点难以理解。而且看很多文章总是看了前面忘后面，还有一些结合lambda讲的，说实话，我是懵逼的。在这里把我自己对于RxJava的一些理解，看到的一些好文记录下来。
+RxJava是啥
+Rx是一个函数库，让开发者可以利用可观察序列和LINQ风格查询操作符来编写异步和基于事件的程序。
+
+好">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-a0ae573b5dc29d6d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-9f87797df1bf849b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-60e951d83ed9cef9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-10b9f47e3be4e12f.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2016-09-09T15:44:16.570Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="xiasuhuei321的博客">
-<meta name="twitter:description" content="纸上得来终觉浅，so we should read the fucking source code;">
+<meta name="twitter:title" content="RxJava从入门到放弃(一)">
+<meta name="twitter:description" content="写在前面RxJava我一直是很想用的，扔物线老师的文章我也看了一点，但是说实话，其中很多东西交错在一起，对于我来说有点难以理解。而且看很多文章总是看了前面忘后面，还有一些结合lambda讲的，说实话，我是懵逼的。在这里把我自己对于RxJava的一些理解，看到的一些好文记录下来。
+RxJava是啥
+Rx是一个函数库，让开发者可以利用可观察序列和LINQ风格查询操作符来编写异步和基于事件的程序。
+
+好">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1976147-a0ae573b5dc29d6d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -113,9 +131,9 @@
 
 
 
-  <link rel="canonical" href="https://xiasuhuei321.github.io/"/>
+  <link rel="canonical" href="https://xiasuhuei321.github.io/2016/09/09/RxJava从入门到放弃-一/"/>
 
-  <title> xiasuhuei321的博客 </title>
+  <title> RxJava从入门到放弃(一) | xiasuhuei321的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -146,9 +164,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -258,9 +274,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -280,10 +296,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/09/09/RxJava从入门到放弃-一/" itemprop="url">
-                  RxJava从入门到放弃(一)
-                </a>
+                RxJava从入门到放弃(一)
               
             
           </h1>
@@ -358,9 +371,7 @@
       
 
       
-        
-          
-            <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>RxJava我一直是很想用的，扔物线老师的文章我也看了一点，但是说实话，其中很多东西交错在一起，对于我来说有点难以理解。而且看很多文章总是看了前面忘后面，还有一些结合lambda讲的，说实话，我是懵逼的。在这里把我自己对于RxJava的一些理解，看到的一些好文记录下来。</p>
+        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>RxJava我一直是很想用的，扔物线老师的文章我也看了一点，但是说实话，其中很多东西交错在一起，对于我来说有点难以理解。而且看很多文章总是看了前面忘后面，还有一些结合lambda讲的，说实话，我是懵逼的。在这里把我自己对于RxJava的一些理解，看到的一些好文记录下来。</p>
 <h3 id="RxJava是啥"><a href="#RxJava是啥" class="headerlink" title="RxJava是啥"></a>RxJava是啥</h3><blockquote>
 <p>Rx是一个函数库，让开发者可以利用可观察序列和LINQ风格查询操作符来编写异步和基于事件的程序。</p>
 </blockquote>
@@ -438,1250 +449,82 @@
 <p>ReactiveX/RxJava文档中文版：<a href="https://mcxiaoke.gitbooks.io/rxdocs/content/" target="_blank" rel="external">https://mcxiaoke.gitbooks.io/rxdocs/content/</a></p>
 <p>大头鬼深入浅出RxJava系列：<a href="http://blog.csdn.net/lzyzsd/article/details/44094895" target="_blank" rel="external">http://blog.csdn.net/lzyzsd/article/details/44094895</a></p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/04/第一话-从头再来/" itemprop="url">
-                  第一话-从头再来
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-04T16:44:55+08:00" content="2016-09-04">
-              2016-09-04
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
+            <a href="/tags/进阶/" rel="tag">#进阶</a>
           
-
+            <a href="/tags/RxJava/" rel="tag">#RxJava</a>
           
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/04/第一话-从头再来/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/04/第一话-从头再来/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/04/第一话-从头再来/" class="leancloud_visitors" data-flag-title="第一话-从头再来">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
+            <a href="/tags/Andriod/" rel="tag">#Andriod</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>一直打算让自己的Java回炉重新锻造一下，那么，从现在开始吧。</p>
-<p>本文是阅读《Thinking in Java》(以下简称TIJ)第七章之后的产物，会包含以下：</p>
-<ul>
-<li>一个问题</li>
-<li>一些思考</li>
-<li>重载与重写</li>
-<li>final</li>
-</ul>
-<h3 id="一个问题"><a href="#一个问题" class="headerlink" title="一个问题"></a>一个问题</h3><p>如图代码，test明明是类A的私有成员变量，（1）为什么其子类B的实例能够正常使用set方法打印出test?（2）这又使我想起了前一段时间一个朋友问我的问题，new一个子类的时候，是不是会同时new出对应的父类？构造方法到底仅仅只是初始化成员变量，还是同时会申请内存空间？<br><img src="http://upload-images.jianshu.io/upload_images/1976147-bb49ffa7bdc02a97.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.png"></p>
-<ul>
-<li>为什么子类B的实例能够正常使用set方法打印出test？</li>
-<li>new一个子类的时候，是不是会同时new出对应的父类？
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/04/第一话-从头再来/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/04/第一话-从头再来/" rel="next" title="第一话-从头再来">
+                <i class="fa fa-chevron-left"></i> 第一话-从头再来
+              </a>
+            
           </div>
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/02/Fragment结合ViewPager之懒加载/" itemprop="url">
-                  Fragment结合ViewPager之懒加载
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-02T22:00:25+08:00" content="2016-09-02">
-              2016-09-02
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/02/Fragment结合ViewPager之懒加载/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/02/Fragment结合ViewPager之懒加载/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/02/Fragment结合ViewPager之懒加载/" class="leancloud_visitors" data-flag-title="Fragment结合ViewPager之懒加载">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <h3 id="什么是懒加载？为什么要用懒加载？"><a href="#什么是懒加载？为什么要用懒加载？" class="headerlink" title="什么是懒加载？为什么要用懒加载？"></a>什么是懒加载？为什么要用懒加载？</h3><h4 id="1、什么是懒加载"><a href="#1、什么是懒加载" class="headerlink" title="1、什么是懒加载"></a>1、什么是懒加载</h4><p>懒加载就是当ViewPager和Fragment结合在一起使用时，Fragment呈现在用户面前时才加载数据，当其从未被呈现在用户面前时，不会执行加载数据的代码。这就是我所理解的懒加载。</p>
-<h4 id="2、为什么要用懒加载"><a href="#2、为什么要用懒加载" class="headerlink" title="2、为什么要用懒加载"></a>2、为什么要用懒加载</h4><p>ViewPager默认会预加载下一页，如果下一页是某个重量级的Fragment无疑会造成很大的开销，当然了，如果对于你来说这些开销是必要的，也不必无脑用懒加载。</p>
-<h3 id="背景简介"><a href="#背景简介" class="headerlink" title="背景简介"></a>背景简介</h3><p>很多时候我们都会将ViewPager和Fragment结合在一起使用，因为Android给我们提供了非常便利的<strong>FragmentPageAdapter</strong>,而这个adapter实现起来非常简单：<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/02/Fragment结合ViewPager之懒加载/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
+
+    <div class="post-spread">
       
+        <div class="ds-share flat" data-thread-key="2016/09/09/RxJava从入门到放弃-一/"
+     data-title="RxJava从入门到放弃(一)"
+     data-content=""
+     data-url="https://xiasuhuei321.github.io/2016/09/09/RxJava从入门到放弃-一/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
 
-  
-  
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/28/Android透明状态栏解决方案/" itemprop="url">
-                  Android透明状态栏解决方案
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-28T13:34:19+08:00" content="2016-08-28">
-              2016-08-28
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/28/Android透明状态栏解决方案/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/28/Android透明状态栏解决方案/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/28/Android透明状态栏解决方案/" class="leancloud_visitors" data-flag-title="Android透明状态栏解决方案">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>最近新开了个项目，准备花点时间做一下，不过文也不能少，一周一篇是最起码的了。关于沉浸式状态栏，网上的教程应该是非常非常多的，那么我为什么还要发呢？很简单，有些东西我记不大住，所以都发到我的简书上，以后我就不用到处去找了，麻烦~<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/28/Android透明状态栏解决方案/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/20/Hello-World-无关代码/" itemprop="url">
-                  Hello World--无关代码
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-20T19:17:35+08:00" content="2016-08-20">
-              2016-08-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/20/Hello-World-无关代码/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/20/Hello-World-无关代码/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/20/Hello-World-无关代码/" class="leancloud_visitors" data-flag-title="Hello World--无关代码">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;Studio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">     <span class="built_in">printf</span>(<span class="string">"hello world!\n"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/20/Hello-World-无关代码/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/19/MVP初尝试/" itemprop="url">
-                  MVP初尝试
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-19T09:25:10+08:00" content="2016-08-19">
-              2016-08-19
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/19/MVP初尝试/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/19/MVP初尝试/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/19/MVP初尝试/" class="leancloud_visitors" data-flag-title="MVP初尝试">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>又到了周末了，本来这周准备总结一下透明状态栏之类的东西……但是突然群里就吹起了MVP的牛，这让我这个MVC都只有小半桶水的人都不敢说话。但是程序员不会吹牛跟条咸鱼又有什么区别？<br><img src="http://upload-images.jianshu.io/upload_images/1976147-bc51e70906298050.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>所以我毅然决然的打开了搜索引擎，利用我科学上网的本领搜集了一些MVP相关的文章，不过看完也没啥感觉是真的，果然对于coder来说talk is cheap果断撸code才是正道。好了，日常吹牛、唠嗑(1/1)。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/19/MVP初尝试/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/13/Android自定义View你需要了解的一些东西/" itemprop="url">
-                  Android自定义View你需要了解的一些东西
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-13T15:53:54+08:00" content="2016-08-13">
-              2016-08-13
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android自定义View/" itemprop="url" rel="index">
-                    <span itemprop="name">Android自定义View</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/13/Android自定义View你需要了解的一些东西/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/13/Android自定义View你需要了解的一些东西/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/13/Android自定义View你需要了解的一些东西/" class="leancloud_visitors" data-flag-title="Android自定义View你需要了解的一些东西">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>终于周末了，当我想要松懈一会去浪的时候，脑海中突然闪过了这个东西……<br><img src="http://upload-images.jianshu.io/upload_images/1976147-6d1bda58afc75f85.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="学习.jpg"><br>一图胜千言，日常唠嗑（1/1）。</p>
-<h3 id="1-进入正题"><a href="#1-进入正题" class="headerlink" title="1 进入正题"></a>1 进入正题</h3><p>Android中自定义控件一直是一个比较难但又不得不面对的东西，虽然<strong>github+google</strong>能解决你的大部分需求，但是说实话，当一些bug发生在第三方控件上时，你仍然需要花费大量的时间去搞定。所以先了解一些和自定义相关的东西绝对是不亏的，话不多说，进入正题。</p>
-<p>Android中自定义控件一般分以下三种：</p>
-<ul>
-<li>继承已有控件实现，可以理解为对原有控件功能的加强</li>
-<li>组合控件，将多个控件结合在一起实现一些功能</li>
-<li>完全自定义控件，一般继承于View或者ViewGroup</li>
-</ul>
-<p>这三类控件在实现方式上有什么异同呢？一般来说第一种控件是对于原有控件功能的增强，比如给ListView增加下拉刷新，上拉加载更多的功能，我们不需要考虑ListView中每个item如何测量如何绘制，我们需要考虑的是如何实现需要增添的功能。第二种组合几种控件，比如轮播图的实现，你可以组合Viewpager+ImageView，这东西说实话也就是功能的实现，但是如果你没有封装好则会让你的代码显得杂乱无章。第三种则是比较难以上手的，因为他需要你了解一些View相关的知识。</p>
-<p>View相关的东西很多，多到可以另开一篇文章写了，所以我尽量摘取重点，咳咳，大伙注意听了啊，小本本都可以拿出来了啊，xiasuhuei老师开始划重点了啊。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/13/Android自定义View你需要了解的一些东西/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/09/Okhttp3-addHeader小坑记/" itemprop="url">
-                  Okhttp3-addHeader小坑记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-09T16:10:39+08:00" content="2016-08-09">
-              2016-08-09
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/09/Okhttp3-addHeader小坑记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/09/Okhttp3-addHeader小坑记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/09/Okhttp3-addHeader小坑记/" class="leancloud_visitors" data-flag-title="Okhttp3-addHeader小坑记">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>最近感觉自己看了不少东西，不过在上班所以并没有很多的时间来写东西。我有一些半成品不过都不想发出来，毕竟缺少一点自己的东西在里面。好了日常唠嗑(1/1)。</p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>前面也说了最近在上班，接触到的项目里用的都是被抛弃的httpclient，打算换个请求。所以最近着手看需要重构一些相关的东西，重构之前首先选定要拿什么做。经过慎重的思考之后决定:项目尽量采用MVC的模式做，网络请求用okhttp(用hongyang封装的okhttp-utils)，图片的处理和加载想采用glide，但是目前来看还有一些问题。好了背景介绍到这，下面说坑。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/09/Okhttp3-addHeader小坑记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/21/百度地图Key验证失败230错误/" itemprop="url">
-                  百度地图Key验证失败230错误
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-21T10:13:40+08:00" content="2016-07-21">
-              2016-07-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/21/百度地图Key验证失败230错误/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/21/百度地图Key验证失败230错误/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/07/21/百度地图Key验证失败230错误/" class="leancloud_visitors" data-flag-title="百度地图Key验证失败230错误">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="进入正题"><a href="#进入正题" class="headerlink" title="进入正题"></a>进入正题</h4><p>最近有需求要用到地图，同学和我说高德地图社区都关了，他都换百度了……所以我果断……直接用百度地图吧。按照官方文档的步骤，一路下来都很简单。但是在使用官方示例demo的时候却碰到了如下的错误：</p>
-<blockquote>
-<p>baidumapsdk.demo E/baidumapsdk: Authentication Error errorcode: 230 uid: -1 appid -1 msg: APP Scode码校验失败<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/21/百度地图Key验证失败230错误/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/30/RecyclerView以及OOM的一些处理/" itemprop="url">
-                  RecyclerView以及OOM的一些处理
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-30T22:55:31+08:00" content="2016-05-30">
-              2016-05-30
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/30/RecyclerView以及OOM的一些处理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/30/RecyclerView以及OOM的一些处理/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/30/RecyclerView以及OOM的一些处理/" class="leancloud_visitors" data-flag-title="RecyclerView以及OOM的一些处理">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>今天关于是写ListView还是RecyclerView着实纠结了一会，毕竟这二者都很重要，不过最近做的东西里用的是RecyclerView，所以还是先写RecyclerView了，而且代码也撸好了。好了日常唠嗑（1/1），下面进入正题。</p>
-<p>本文包含以下几个方面：</p>
-<ul>
-<li>使用RecyclerView实现ListView的效果</li>
-<li>RecyclerView加载图片出现OOM时的一些处理</li>
-<li>RecyclerView实现瀑布流</li>
-<li>RecyclerView滑动卡顿的一些优化
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/30/RecyclerView以及OOM的一些处理/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
+  </div>
 
 
           </div>
@@ -1689,6 +532,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/09/RxJava从入门到放弃-一/"
+           data-title="RxJava从入门到放弃(一)" data-url="https://xiasuhuei321.github.io/2016/09/09/RxJava从入门到放弃-一/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -1708,8 +559,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://upload.jianshu.io/users/upload_avatars/1976147/faa01825336e.jpg?imageMogr/thumbnail/90x90/quality/100"
@@ -1815,6 +675,17 @@
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RxJava是啥"><span class="nav-number">2.</span> <span class="nav-text">RxJava是啥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为啥要用RxJava"><span class="nav-number">3.</span> <span class="nav-text">为啥要用RxJava</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RxJava核心-amp-基础"><span class="nav-number">4.</span> <span class="nav-text">RxJava核心&基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hello-World"><span class="nav-number">5.</span> <span class="nav-text">Hello World!</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程控制——Scheduler"><span class="nav-number">6.</span> <span class="nav-text">线程控制——Scheduler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单的例子"><span class="nav-number">7.</span> <span class="nav-text">简单的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些反思"><span class="nav-number">8.</span> <span class="nav-text">一些反思</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#推荐资料"><span class="nav-number">9.</span> <span class="nav-text">推荐资料</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -1914,6 +785,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
