@@ -1,0 +1,1084 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="进阶,RxJava," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="写在前面上篇文章RxJava从放弃到入门（一）：基础篇讲述的东西都是非常基础的东西，这一篇准备讲述以下一些东西：
+创建Observable:
+
+just
+defer
+
+操作符:
+
+map
+flatmap
+
+经验总结:
+
+自己遇到的一些坑和经验
+
+再叙Observable在上一篇里我们已经了解了在RxJava中Observable扮演了什么样的角色，如果你还没看过，没事，我们一起来回忆以下：在RxJ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RxJava从放弃到入门（二）：学，不能停">
+<meta property="og:url" content="https://xiasuhuei321.github.io/2016/09/17/RxJava从放弃到入门（二）：学，不能停/index.html">
+<meta property="og:site_name" content="xiasuhuei321的博客">
+<meta property="og:description" content="写在前面上篇文章RxJava从放弃到入门（一）：基础篇讲述的东西都是非常基础的东西，这一篇准备讲述以下一些东西：
+创建Observable:
+
+just
+defer
+
+操作符:
+
+map
+flatmap
+
+经验总结:
+
+自己遇到的一些坑和经验
+
+再叙Observable在上一篇里我们已经了解了在RxJava中Observable扮演了什么样的角色，如果你还没看过，没事，我们一起来回忆以下：在RxJ">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-b1601f2ed9ad6d82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://mcxiaoke.gitbooks.io/rxdocs/content/images/operators/defer.c.png">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-dfe4da049bc4bd09.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-b72782e1a42f01c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://mcxiaoke.gitbooks.io/rxdocs/content/images/operators/map.png">
+<meta property="og:image" content="https://mcxiaoke.gitbooks.io/rxdocs/content/images/operators/flatMap.png">
+<meta property="og:updated_time" content="2016-09-17T01:06:51.322Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RxJava从放弃到入门（二）：学，不能停">
+<meta name="twitter:description" content="写在前面上篇文章RxJava从放弃到入门（一）：基础篇讲述的东西都是非常基础的东西，这一篇准备讲述以下一些东西：
+创建Observable:
+
+just
+defer
+
+操作符:
+
+map
+flatmap
+
+经验总结:
+
+自己遇到的一些坑和经验
+
+再叙Observable在上一篇里我们已经了解了在RxJava中Observable扮演了什么样的角色，如果你还没看过，没事，我们一起来回忆以下：在RxJ">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1976147-b1601f2ed9ad6d82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6291113783624467000,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://xiasuhuei321.github.io/2016/09/17/RxJava从放弃到入门（二）：学，不能停/"/>
+
+  <title> RxJava从放弃到入门（二）：学，不能停 | xiasuhuei321的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?16dec7b0c5244449304ccc417f56a9c6";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">xiasuhuei321的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">做自己喜欢的事~</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                RxJava从放弃到入门（二）：学，不能停
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-17T09:04:07+08:00" content="2016-09-17">
+              2016-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/RxJava/" itemprop="url" rel="index">
+                    <span itemprop="name">RxJava</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/17/RxJava从放弃到入门（二）：学，不能停/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/17/RxJava从放弃到入门（二）：学，不能停/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/17/RxJava从放弃到入门（二）：学，不能停/" class="leancloud_visitors" data-flag-title="RxJava从放弃到入门（二）：学，不能停">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>上篇文章<a href="http://www.jianshu.com/p/93ae2aa6a60a" target="_blank" rel="external">RxJava从放弃到入门（一）：基础篇</a>讲述的东西都是非常基础的东西，这一篇准备讲述以下一些东西：</p>
+<p>创建Observable:</p>
+<ul>
+<li>just</li>
+<li>defer</li>
+</ul>
+<p>操作符:</p>
+<ul>
+<li>map</li>
+<li>flatmap</li>
+</ul>
+<p>经验总结:</p>
+<ul>
+<li>自己遇到的一些坑和经验</li>
+</ul>
+<h3 id="再叙Observable"><a href="#再叙Observable" class="headerlink" title="再叙Observable"></a>再叙Observable</h3><p>在上一篇里我们已经了解了在RxJava中Observable扮演了什么样的角色，如果你还没看过，没事，我们一起来回忆以下：在RxJava中，Observable扮演的是一个发射数据或数据序列的角色。Observer则是接收Observable发射的东西。上次只提到了一种hello world的打印方法，是否会让你感到不爽？让我们当一回孔乙己，学一下“茴”字的N种写法。当然在这我并不会以流水账的形式记录每一种创建操作的流程，那样无疑是没有必要的，实在想要了解你可以去看文档。</p>
+<h4 id="just"><a href="#just" class="headerlink" title="just"></a>just</h4><p>首先肯定还是我们的hello world<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Observable.just(<span class="string">"hello"</span>,<span class="string">"world"</span>).subscribe(<span class="keyword">new</span> Action1&lt;String&gt;() &#123;</div><div class="line">           <span class="meta">@Override</span></div><div class="line">           <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">               Log.e(TAG, s);</div><div class="line">           &#125;</div><div class="line">       &#125;);</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1976147-b1601f2ed9ad6d82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="just.png"></p>
+<p>上面出现了一个Action1，你去看他的继承关系可能会让你疑惑，因为接收数据的Observer或者是其子类都跟他没啥关系。没关系，我们直接看源码。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Subscription <span class="title">subscribe</span><span class="params">(<span class="keyword">final</span> Action1&lt;? <span class="keyword">super</span> T&gt; onNext)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (onNext == <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"onNext can not be null"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> subscribe(<span class="keyword">new</span> Subscriber&lt;T&gt;() &#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">onCompleted</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="comment">// do nothing</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span> </span>&#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> OnErrorNotImplementedException(e);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(T args)</span> </span>&#123;</div><div class="line">            onNext.call(args);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以很明显的看到在这个方法内部，还是有一个Subscriber来接收数据的，这个Subscriber是观察者Observer的实现类（Subscriber本身是一个抽象类）。不同的只是在onNext方法中将处理数据的逻辑交给接口Action1的call方法，而最终实现逻辑是交由用户来实现的。这种设计明显是为了方便我们使用，弄明白这一点后，我们可以就可以安心的使用Action1来跑我们的代码了。</p>
+<p>使用just方法创建的Observable会按照顺序将参数一一发射，如果不能理解的话，恩，官方文档的图也是极好的:<br><img src="https://mcxiaoke.gitbooks.io/rxdocs/content/images/operators/defer.c.png" alt="文档"></p>
+<p>看了just之后你可能会觉得这玩意很方便，可以不用自己手动调subscriber.onNext()和其他的方法了~但是有得必有失，你用一个create方法从头开始创建一个observable时，你对这个observable的特性是了解的。而你将目光投向一个经过封装的方法时，你需要花费更多的时间去了解他。下面来一个我曾看过的一篇文章里谈到的一个错误使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Observable&lt;String&gt; <span class="title">aaobservable</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> Observable.just(value);</div><div class="line">&#125;</div><div class="line">   <span class="comment">//调用以上方法创建一个Observable</span></div><div class="line">    Observable&lt;String&gt; aa = aaobservable();</div><div class="line">    value = <span class="string">"String"</span>;</div><div class="line">    aa.subscribe(<span class="keyword">new</span> Action1&lt;String&gt;() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">            Log.e(TAG, s);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<p>以上代码你觉得运行的结果会是什么？会是 String 吗？结果在下面<br><img src="http://upload-images.jianshu.io/upload_images/1976147-dfe4da049bc4bd09.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="你这么一说我就懂了.png"></p>
+<p>啥？为毛是null？很简单，上源码里看看就行了。首先点进just(T value)这个方法里瞧瞧，他究竟干了啥。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">Observable&lt;T&gt; <span class="title">just</span><span class="params">(<span class="keyword">final</span> T value)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> ScalarSynchronousObservable.create(value);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>继续追踪，发现create()源码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> &lt;T&gt; <span class="function">ScalarSynchronousObservable&lt;T&gt; <span class="title">create</span><span class="params">(T t)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ScalarSynchronousObservable&lt;T&gt;(t);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我去，可算看到了，既然是调了构造方法，那应该不会再有什么幺蛾子了吧？进构造方法看一看：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="title">ScalarSynchronousObservable</span><span class="params">(<span class="keyword">final</span> T t)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>(<span class="keyword">new</span> OnSubscribe&lt;T&gt;() &#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Subscriber&lt;? <span class="keyword">super</span> T&gt; s)</span> </span>&#123;</div><div class="line">            <span class="comment">/*</span></div><div class="line">             *  We don't check isUnsubscribed as it is a significant performance impact in the fast-path use cases.</div><div class="line">             *  See PerfBaseline tests and https://github.com/ReactiveX/RxJava/issues/1383 for more information.</div><div class="line">             *  The assumption here is that when asking for a single item we should emit it and not concern ourselves with </div><div class="line">             *  being unsubscribed already. If the Subscriber unsubscribes at 0, they shouldn't have subscribed, or it will </div><div class="line">             *  filter it out (such as take(0)). This prevents us from paying the price on every subscription. </div><div class="line">             */</div><div class="line">            s.onNext(t);</div><div class="line">            s.onCompleted();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;);</div><div class="line">    <span class="keyword">this</span>.t = t;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>首先抛开注释，直接调用了onNext和onCompleted，明显没其他多的东西。而那段注释，额用我比较差的英语水平来翻译一下第一句话……我们不检查是否被订阅，因为在用例中这会显著的影响性能。恩，出于各种考虑，他直接发射了数据，并不关心有没有人订阅之类的……哦，原来如此，在创建Observable的时候value还是null，在那时数据已经被发射了，之后再更改value的值也无济于事了。知晓了原因之后那该怎么解决这个问题呢？</p>
+<p>很容易想到的一个方法是create()方法，毕竟这个方法会从头建造一个Observable，一切尽在你的掌握中。</p>
+<h4 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h4><p>使用defer()来创建Observable会在有观察者订阅时才创建Observable，并且为每一个观察者创建一个新的Observable。回想一下，我们上面的代码之所以出现错误，就是因为过早的创建Observable和发射数据导致的。defer()这种在订阅时才创建是解决以上问题的方法之一，那么上代码:<br>创建Observable的方法:<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Observable&lt;String&gt; <span class="title">aaobservable</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> Observable.defer(<span class="keyword">new</span> Func0&lt;Observable&lt;String&gt;&gt;() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> Observable&lt;String&gt; <span class="title">call</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> Observable.just(value);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>验证：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Observable&lt;String&gt; aaobservable = aaobservable();</div><div class="line">value = <span class="string">"String"</span>;</div><div class="line">aaobservable.subscribe(<span class="keyword">new</span> Action1&lt;String&gt;() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        Log.e(TAG, s);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1976147-b72782e1a42f01c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="成功"></p>
+<p>好了，对于just和defer就先告一段落，同时对于整个Observable也就告一段落了。可能到这你还觉得不够，毕竟归根到底我说到这也只讲了just和defer，不过我还是不打算继续下去了，我这里对于Observable的描述已经占去了太多的篇幅了。关于更多的创建操作我的建议是阅读官方文档。</p>
+<h3 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h3><h4 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h4><p><img src="https://mcxiaoke.gitbooks.io/rxdocs/content/images/operators/map.png" alt="图来自于文档"></p>
+<p>在我看来这个操作符体现的是一种“一对一”的转换，比如你现在需要一张图，但是你的输入是一个string（这算是比较经典的场景了），你就可以使用如下代码进行变换：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Observable.just(str).map(<span class="keyword">new</span> Func1&lt;String, Bitmap&gt;() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Bitmap <span class="title">call</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            URLConnection con = <span class="keyword">new</span> URL(s).openConnection();</div><div class="line">            InputStream inputStream = con.getInputStream();</div><div class="line">            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);</div><div class="line">            <span class="keyword">return</span> bitmap;</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;).subscribeOn(Schedulers.newThread())</div><div class="line">        .observeOn(AndroidSchedulers.mainThread());</div></pre></td></tr></table></figure></p>
+<p>代码效果就不展示了，你懂就行。这篇文章里我暂时不会去解析map以及接下来会讲述的几个操作符的变换原理，留待以后更深入的了解之后再去用更清晰的语言来表述。</p>
+<h4 id="flatmap"><a href="#flatmap" class="headerlink" title="flatmap"></a>flatmap</h4><p>上述map可以实现一对一的转换，那么flatmap则是实现一对多的转换。在RxJava的文档上是如此描述flatmap的：</p>
+<p>将一个发射数据的Observable变换为多个Observables，然后将它们发射的数据合并后放进一个单独的Observable</p>
+<p><img src="https://mcxiaoke.gitbooks.io/rxdocs/content/images/operators/flatMap.png" alt="图片来自官方文档"></p>
+<p>对于一个url你可以用map一对一的将其转换为一个bitmap，对于一个含有url的string数组你也可以采用以下的方式来转换：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">Observable.just(str).map(<span class="keyword">new</span> Func1&lt;String[], Bitmap&gt;() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Bitmap <span class="title">call</span><span class="params">(String[] s)</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span> (String a : s) &#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                URLConnection con = <span class="keyword">new</span> URL(a).openConnection();</div><div class="line">                InputStream inputStream = con.getInputStream();</div><div class="line">                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);</div><div class="line">                <span class="keyword">return</span> bitmap;</div><div class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;).subscribeOn(Schedulers.newThread())</div><div class="line">        .observeOn(AndroidSchedulers.mainThread())</div><div class="line">.subscribe(<span class="keyword">new</span> Action1&lt;Bitmap&gt;() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Bitmap bitmap)</span> </span>&#123;</div><div class="line">        image.setImageBitmap(bitmap);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>但是写完之后会不会觉得有点不得劲？感觉这很不RxJava，很让人不愉快？那就对了，人要对自己好一点，觉得不爽就换个flatmap试试：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">Observable.from(str).flatMap(<span class="keyword">new</span> Func1&lt;String, Observable&lt;String&gt;&gt;() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Observable&lt;String&gt; <span class="title">call</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> Observable.just(s);</div><div class="line">    &#125;</div><div class="line">&#125;).map(<span class="keyword">new</span> Func1&lt;String, Bitmap&gt;() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Bitmap <span class="title">call</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        Bitmap bt = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            URL url = <span class="keyword">new</span> URL(s);</div><div class="line">            URLConnection con = url.openConnection();</div><div class="line">            bt = BitmapFactory.decodeStream(con.getInputStream());</div><div class="line">        &#125; <span class="keyword">catch</span> (MalformedURLException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> bt;</div><div class="line">    &#125;</div><div class="line">&#125;).subscribe(<span class="keyword">new</span> Action1&lt;Bitmap&gt;() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Bitmap bitmap)</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>不管效果如何，这一条链子写下来就是让人很舒服~同时逻辑也非常的清晰，以后再改这种代码的时候可以少骂几句娘了。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>这一次关于RxJava的不能停到这里就要告一段落了，好在我已经把我想要写的都写的差不多了，不过这里的小结也不能光灌水。最近本来打算开个项目把gank io的api搞一下，不过最近突然就忙起来了，所以那个东西先搁置一下，关于我初学时的项目的重构已经在进行了。使用了MVP，部分逻辑使用了RxJava，不过因为是初学时写的，自己不满意的地方实在是太多了。以下的两点是我最近在使用RxJava时自己总结的一点经验，不足之处欢迎指出：</p>
+<h4 id="线程控制就交给RxJava去做"><a href="#线程控制就交给RxJava去做" class="headerlink" title="线程控制就交给RxJava去做"></a>线程控制就交给RxJava去做</h4><p>说实话，我还没有开始使用Retrofit，我使用的一直是Hongyang大神封装的OkhttpUtil，因为的确挺好用的。现在一般的请求框架也都会自己封装线程池，实现异步回调。我就在这上面吃了一个小亏，我在使用RxJava实现读取数据的逻辑的时候，先从网络获取数据，获取不到则读取本地缓存。结果每次读取的都是本地数据，这让我很奇怪，我打了log发现网络请求也是成功的。后来我有点明白了:</p>
+<p>我使用okhttputil获取数据成功时回调，但是我在订阅的回调里面判断数据状态时，数据还没有获取到，所以执行了获取本地数据的逻辑。所以关于异步这个问题，我想说的就是写同步的代码，让RxJava做异步的事。当然，我的看法并不一定准确，你可以在底下评论说出你的想法，欢迎讨论。</p>
+<p>最后再来个真正的小结吧，说实话，我觉得写这两篇RxJava的文章对我自己的帮助真的挺大的，让我对RxJava的认知又提升了一点。现在再看以前写的一些RxJava的代码，都觉得不够RxJava，所以要走的路还很长啊~</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/进阶/" rel="tag">#进阶</a>
+          
+            <a href="/tags/RxJava/" rel="tag">#RxJava</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/09/RxJava从入门到放弃-一/" rel="next" title="RxJava从放弃到入门(一):基础篇">
+                <i class="fa fa-chevron-left"></i> RxJava从放弃到入门(一):基础篇
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/17/第二话-再探多态/" rel="prev" title="第二话-再探多态">
+                第二话-再探多态 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/17/RxJava从放弃到入门（二）：学，不能停/"
+     data-title="RxJava从放弃到入门（二）：学，不能停"
+     data-content=""
+     data-url="https://xiasuhuei321.github.io/2016/09/17/RxJava从放弃到入门（二）：学，不能停/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/17/RxJava从放弃到入门（二）：学，不能停/"
+           data-title="RxJava从放弃到入门（二）：学，不能停" data-url="https://xiasuhuei321.github.io/2016/09/17/RxJava从放弃到入门（二）：学，不能停/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://upload.jianshu.io/users/upload_avatars/1976147/faa01825336e.jpg?imageMogr/thumbnail/90x90/quality/100"
+               alt="Luo_xiasuhuei321" />
+          <p class="site-author-name" itemprop="name">Luo_xiasuhuei321</p>
+          <p class="site-description motion-element" itemprop="description">纸上得来终觉浅，so we should read the fucking source code;</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ForgetAll" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/e1fed0fb341b/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-简书"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhao-shen-56-66" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-知乎"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.iamxiarui.com/" title="XiaRui Zone" target="_blank">XiaRui Zone</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://liuweiprog.me/" title="阿V薄荷冰加可乐" target="_blank">阿V薄荷冰加可乐</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://fankarl.github.io/" title="CoderFan" target="_blank">CoderFan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://importeffort.github.io/" title="ImporterFoort" target="_blank">ImporterFoort</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#再叙Observable"><span class="nav-number">2.</span> <span class="nav-text">再叙Observable</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#just"><span class="nav-number">2.1.</span> <span class="nav-text">just</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#defer"><span class="nav-number">2.2.</span> <span class="nav-text">defer</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作符"><span class="nav-number">3.</span> <span class="nav-text">操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Map"><span class="nav-number">3.1.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flatmap"><span class="nav-number">3.2.</span> <span class="nav-text">flatmap</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程控制就交给RxJava去做"><span class="nav-number">4.1.</span> <span class="nav-text">线程控制就交给RxJava去做</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luo_xiasuhuei321</span>
+</div>
+
+<div class="powered-by">
+  个人博客
+</div>
+
+<div class="theme-info">
+  寄语 - 骚年，加油干~！
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiasuhuei321"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("GG1DP5RQYGruUvJAPkKg2wMw-gzGzoHsz", "SjX4xbDDh2LzhRSWrae5BScU");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
