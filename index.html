@@ -281,6 +281,152 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/25/手把手教你打造支持手势放大缩小的ImageView/" itemprop="url">
+                  手把手教你打造支持手势放大缩小的ImageView
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-25T08:30:05+08:00" content="2016-09-25">
+              2016-09-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/Android自定义View/" itemprop="url" rel="index">
+                    <span itemprop="name">Android自定义View</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/25/手把手教你打造支持手势放大缩小的ImageView/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/25/手把手教你打造支持手势放大缩小的ImageView/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/25/手把手教你打造支持手势放大缩小的ImageView/" class="leancloud_visitors" data-flag-title="手把手教你打造支持手势放大缩小的ImageView">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>最近有了新的任务，学习的时间比以前少了不少，Java回炉的文估计是得缓缓了，不过每周一篇尽量保质保量。最近感觉我文写的有点不好，因为我写东西除非必要，不然概念性的东西我基本上都是一笔带过……最近感觉这对看我文的人好像不是很友好，恩，我决定改一改，尽量写的详细而有趣一些。<br><img src="http://upload-images.jianshu.io/upload_images/1976147-0e3fbb0aeb3d89e0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.jpg"></p>
+<p>好了废话时间过了，前面也说了最近有了新任务，我现在是搞定用户信息这一块。一般来说现在用户都会有个头像什么的，光有个头像还不够，你还得能点击看个大图吧？光看个大图也不够啊，不说多的，你最起码得支持用户手势放大缩小什么的吧？当时脑海里第一个想到的是PhotoView，不过整个项目好像也只有这一块涉及到用户手势放大缩小，算了，自己实现一个吧。当然了，经常刷hongyang大神博客的我自然知道hongyang大神博客里有写过<a href="http://blog.csdn.net/lmj623565791/article/details/39474553">这东西</a>。所以趁周末有空果断刷之~</p>
+<h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><p>做一个东西之前我们肯定要分析需求，分析完之后我们就可以利用我们会的，或者知道可以实现但是现在不会的去尝试解决这个需求。放大缩小图片，脑子里第一个反应就是矩阵，Android里貌似有个可以通过矩阵处理图像的东西，不过说真的，以前也没有用过几次，不过好歹有个想法了。至于让图片跟随用户手势放大缩小，肯定是需要支持手势检测了。恩，我的思路暂时就是这样了，接下来先去了解一下手势检测。</p>
+<h3 id="手势检测"><a href="#手势检测" class="headerlink" title="手势检测"></a>手势检测</h3><p>当用户触摸屏幕时，会产生许多手势，down、up、scroll、fling等。一般情况下我们通过实现OnTouchListener是可以满足我们处理一般手势的需求的，说实话，实现手势放大缩小的ImageView是可以通过自己在OnTouch方法里面处理距离，滑动什么的去算缩放的。但是人总是要对自己好一点，如果有更简单的实现方式为什么不用呢？Android中提供了GestureDetector给程序员去判断不同的手势。另外也提供了<strong> ScaleGestureDetector </strong>来检测缩放手势。虽然后者很像前者的子类，但事实上并不是，后者也是一个独立的类。下面用一个简单的demo来演示一下这两者的触发。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/25/手把手教你打造支持手势放大缩小的ImageView/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/17/第二话-再探多态/" itemprop="url">
                   第二话-再探多态
                 </a>
@@ -1483,138 +1629,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/09/Okhttp3-addHeader小坑记/" itemprop="url">
-                  Okhttp3-addHeader小坑记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-09T16:10:39+08:00" content="2016-08-09">
-              2016-08-09
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/09/Okhttp3-addHeader小坑记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/09/Okhttp3-addHeader小坑记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/09/Okhttp3-addHeader小坑记/" class="leancloud_visitors" data-flag-title="Okhttp3-addHeader小坑记">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>最近感觉自己看了不少东西，不过在上班所以并没有很多的时间来写东西。我有一些半成品不过都不想发出来，毕竟缺少一点自己的东西在里面。好了日常唠嗑(1/1)。</p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>前面也说了最近在上班，接触到的项目里用的都是被抛弃的httpclient，打算换个请求。所以最近着手看需要重构一些相关的东西，重构之前首先选定要拿什么做。经过慎重的思考之后决定:项目尽量采用MVC的模式做，网络请求用okhttp(用hongyang封装的okhttp-utils)，图片的处理和加载想采用glide，但是目前来看还有一些问题。好了背景介绍到这，下面说坑。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/09/Okhttp3-addHeader小坑记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1660,7 +1674,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1668,7 +1682,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
