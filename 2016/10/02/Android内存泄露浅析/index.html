@@ -97,8 +97,8 @@
 <meta property="og:image" content="http://of4pq0ldx.bkt.clouddn.com/3.png">
 <meta property="og:image" content="http://of4pq0ldx.bkt.clouddn.com/4.png">
 <meta property="og:image" content="http://of4pq0ldx.bkt.clouddn.com/5.png">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-c50908147483dc0f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-10-16T07:25:42.433Z">
+<meta property="og:image" content="http://of4pq0ldx.bkt.clouddn.com/6.png">
+<meta property="og:updated_time" content="2016-10-16T07:28:14.445Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android内存泄露浅析">
 <meta name="twitter:description" content="写在前面前段时间写了一篇MVP初尝试，由于当时只是刚接触，只是简单的实现，还有很多问题没想明白。关于内存泄露这事是本文着重要谈的一点，同时本文是我在看了很多关于Java和Android内存泄露分析的文章之后的所得。
@@ -466,7 +466,7 @@
 <p><img src="http://of4pq0ldx.bkt.clouddn.com/5.png" alt="内存泄漏"></p>
 <p>恩，刚和大佬<a href="http://www.jianshu.com/users/8c4757fd3c5e/latest_articles" target="_blank" rel="external">越越</a>聊了一下handler这事，他说了一个东西handler.removeCallbacks(null)，我把他放在presenter的onDestroy()里搞定了……</p>
 <p>这种解决的方式使我们根据自己的经验得出的最简单粗暴的解决方式，这样能有效的避免因testView持有activity的引用而导致的内存泄露问题。本来想试一下Rxjava+MVP，然后在对应的生命周期里unsubscribe()来解决内存泄漏的问题，但是用leakcancry检测一直会报和上面一样的内存泄露，而我试了各种方法都没能解决。虽然在leakcancry的android sdk所导致的内存泄露中貌似找到了这个</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1976147-c50908147483dc0f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="sdk内存泄露"></p>
+<p><img src="http://of4pq0ldx.bkt.clouddn.com/6.png" alt="sdk内存泄露"></p>
 <p>问题是我的手机系统版本是6.0.1，按照他这个来说应该是被修复了的。而且很奇怪的一点是我在startActivty跳转到第二界面并finish自身才会报之前的内存泄露，不然的话直接返回桌面并finish是不会有内存泄露的，暂时没弄懂是什么状况，如果有人知道是为什么请务必告诉我，谢谢！</p>
 <p>因为这个问题没解决，暂时不往下写了，但是我以上写的原理肯定是对的。我没能解决的问题那是因为我现在还不是Android系统的好队友，嗯，猪队友吧，先去搞会Android压压惊。关于注1,2我想说的其实是一件事：其实有的时候这种内存泄漏是<strong> 可以接受 </strong>的，比如有时可能这种内存泄露所引发的后果只是<strong> 本次GC </strong>无法回收这块内存，但是下一次呢？下一次耗时操作过了，这块内存没有引用指向他了，是可以被回收的。但是这也取决于你，你要是觉得不能忍受，那就麻溜的修复这些东西。</p>
 <p>如果你对我发现的这个问题有兴趣，问题代码已经放在了：<br><a href="https://github.com/ForgetAll/StudyForRxJava" target="_blank" rel="external">demo地址</a><br>一不小心上传了配置文件……</p>
