@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title><![CDATA[16-10-16 新的一周阅读计划]]></title>
+      <url>https://xiasuhuei321.github.io/2016/10/16/16-10-16-%E6%96%B0%E7%9A%84%E4%B8%80%E5%91%A8%E9%98%85%E8%AF%BB%E8%AE%A1%E5%88%92/</url>
+      <content type="html"><![CDATA[<p>想看的东西太多，时间总是太少，下周我想想就头疼…算了先安排一下业余时间：</p>
+<ul>
+<li>每当我想水群的时候，可以看一点js</li>
+<li>阅读Glide源码，我特么的要看看大兄弟你到底是怎么干活的</li>
+<li>了解即时通讯软，没办法，老板要这个功能，不得不看</li>
+<li>我相信以上只有第一条和第三条能做到，读源码这事，慢慢来吧，现在水平不是很高，只能慢慢读了</li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[观察者模式]]></title>
       <url>https://xiasuhuei321.github.io/2016/10/16/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/</url>
       <content type="html"><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>以前听说过一句话，说是<strong> 代码没有超过10w行谈设计模式那都是耍流氓 </strong>。我信了，所以一直没怎么系统的看已经买了的《Android源码设计模式》。最近有个小伙伴在群里问recyclerview怎么刷新数据，以前大概也做过，流程也就是那么两步：1.更新Adapter里数据集的引用，让他指向最新的数据集。2.调用Adapter的notifyDataSetChanged()来更新ui。之后小伙伴又问了notifyDataSetChanged()到底如何更新ui的，当时只是看出了一个观察者模式，还有一些细节没想明白。而且讲真的观察者模式的应用还是非常多的，无论是Android还是最近很火的RxJava，其中都可以看到观察者模式的身影，所以决定这周把观察者模式撸一遍。</p>
