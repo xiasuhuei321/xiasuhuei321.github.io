@@ -1,0 +1,1057 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,设计模式," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="写在前面以前听说过一句话，说是 代码没有超过10w行谈设计模式那都是耍流氓 。我信了，所以一直没怎么系统的看已经买了的《Android源码设计模式》。最近有个小伙伴在群里问recyclerview怎么刷新数据，以前大概也做过，流程也就是那么两步：1.更新Adapter里数据集的引用，让他指向最新的数据集。2.调用Adapter的notifyDataSetChanged()来更新ui。之后小伙伴又问">
+<meta property="og:type" content="article">
+<meta property="og:title" content="观察者模式">
+<meta property="og:url" content="https://xiasuhuei321.github.io/2016/10/16/观察者模式/index.html">
+<meta property="og:site_name" content="xiasuhuei321的博客">
+<meta property="og:description" content="写在前面以前听说过一句话，说是 代码没有超过10w行谈设计模式那都是耍流氓 。我信了，所以一直没怎么系统的看已经买了的《Android源码设计模式》。最近有个小伙伴在群里问recyclerview怎么刷新数据，以前大概也做过，流程也就是那么两步：1.更新Adapter里数据集的引用，让他指向最新的数据集。2.调用Adapter的notifyDataSetChanged()来更新ui。之后小伙伴又问">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-f165f4942daf1e20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-3d3869c1f0cf6b29.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-88f8f5242cd252c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-5cab20489c6396e5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-b65388e49f35a1b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-10-16T07:12:57.170Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="观察者模式">
+<meta name="twitter:description" content="写在前面以前听说过一句话，说是 代码没有超过10w行谈设计模式那都是耍流氓 。我信了，所以一直没怎么系统的看已经买了的《Android源码设计模式》。最近有个小伙伴在群里问recyclerview怎么刷新数据，以前大概也做过，流程也就是那么两步：1.更新Adapter里数据集的引用，让他指向最新的数据集。2.调用Adapter的notifyDataSetChanged()来更新ui。之后小伙伴又问">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1976147-f165f4942daf1e20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6291113783624467000,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://xiasuhuei321.github.io/2016/10/16/观察者模式/"/>
+
+  <title> 观察者模式 | xiasuhuei321的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?16dec7b0c5244449304ccc417f56a9c6";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">xiasuhuei321的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">做自己喜欢的事~</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                观察者模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-16T15:09:51+08:00" content="2016-10-16">
+              2016-10-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/16/观察者模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/16/观察者模式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/16/观察者模式/" class="leancloud_visitors" data-flag-title="观察者模式">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>以前听说过一句话，说是<strong> 代码没有超过10w行谈设计模式那都是耍流氓 </strong>。我信了，所以一直没怎么系统的看已经买了的《Android源码设计模式》。最近有个小伙伴在群里问recyclerview怎么刷新数据，以前大概也做过，流程也就是那么两步：1.更新Adapter里数据集的引用，让他指向最新的数据集。2.调用Adapter的notifyDataSetChanged()来更新ui。之后小伙伴又问了notifyDataSetChanged()到底如何更新ui的，当时只是看出了一个观察者模式，还有一些细节没想明白。而且讲真的观察者模式的应用还是非常多的，无论是Android还是最近很火的RxJava，其中都可以看到观察者模式的身影，所以决定这周把观察者模式撸一遍。</p>
+<h3 id="1、什么是观察者模式"><a href="#1、什么是观察者模式" class="headerlink" title="1、什么是观察者模式"></a>1、什么是观察者模式</h3><p>观察者模式(Observer Pattern)定义了对象间一种一对多的依赖关系，使得每当一个对象改变状态，则所有依赖于它的对象都会得到通知并被自动更新，观察者模式又叫做发布-订阅(Publish/Subscribe)模式。</p>
+<p>定义总是这么精准而抽象，让我们结合一些Android中的场景来简单的理解一下：在Android最常用的点击事件，我们会通过设置控件的OnClickListener并传入一个OnClickListener的实现类来回调点击事件。这种我们便可以将之看做一个观察者模式。我们的OnClickListener是观察者，被观察者是控件，当有点击事件的时候控件发布点击事件，观察者OnClickListener就会接收到点击事件。当然了，说到底，就是回调。</p>
+<h3 id="2、用回调写一个简单的观察者模式"><a href="#2、用回调写一个简单的观察者模式" class="headerlink" title="2、用回调写一个简单的观察者模式"></a>2、用回调写一个简单的观察者模式</h3><p>首先我们想一个生活中的场景，来凑个观察者模式出来。平时我们要烧水吧，总要派个人看着，水烧开的时候把电源拔了装水。在这个场景里水壶就是被观察者(Observable)，观察者(Observer)就是人。首先我们用以上我说的，那玩意就是回调，用回调来写一个看看。那我们先写一个被观察者“水壶”来看看：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Kettle</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">    Observer&lt;T&gt; o;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 发布信息</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">publishEvent</span><span class="params">(T t)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"you must regist Observer first!"</span>);</div><div class="line">        notifyData(t);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 通知订阅者</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyData</span><span class="params">(T t)</span></span>&#123;</div><div class="line">        o.receiverEvent(t);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 注册一个观察者</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registObserver</span><span class="params">(Observer&lt;T&gt; o)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.o = o;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 在你需要的时候调用这个方法，防止内存泄露</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unregistObserver</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.o = <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>首先我们这个水壶是被观察者，内部肯定要维护一个观察者的引用，或者一个观察者队列的引用，方便我们进行回调，当然更多的事我们尽量不要通过Observer这个东西来做，在这个观察者模式中我希望Observer仅仅作为一个纯粹的回调。因为观察模式本身的特性之一就是解耦，如果你要通过Observer干更多的事无疑会加重Observable和Observer之间的耦合。更多信息可以看代码，我注释已经写得很详细了。<br><a id="more"></a></p>
+<p>接下来看看上面提到的那个Observer我是咋写的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">receiverEvent</span><span class="params">(T t)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>很简单的一个接口，写上泛型，嗯，顺便练习一下泛型…只有一个方法，用来回调。有接口那我们肯定要有实现类，我这个场景里说了，人是观察者，于是我写了一个Observer的实现类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">People</span> <span class="keyword">implements</span> <span class="title">Observer</span>&lt;<span class="title">String</span>&gt; </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">receiverEvent</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        System.out.println(s);</div><div class="line">        dealWithEvent();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 交给用户去处理事件</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">dealWithEvent</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我把这个People设计为一个抽象类，这样我可以在接收到这个事件的时候做一些简单的处理(把他打印出来……)，然后再把具体的逻辑交给这个抽象类的子类来做，我这逻辑比较简单，就没传什么参数进去了。最后免不了跑起来看看了~</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="comment">//水壶</span></div><div class="line">        Kettle&lt;String&gt; kettle = <span class="keyword">new</span> Kettle&lt;&gt;();</div><div class="line">        <span class="comment">//被观察者</span></div><div class="line">        People people = <span class="keyword">new</span> People() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dealWithEvent</span><span class="params">()</span> </span>&#123;</div><div class="line">                System.out.println(<span class="string">"People:拔电源装水了~"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        <span class="comment">//注册观察者</span></div><div class="line">        kettle.registObserver(people);</div><div class="line">        <span class="comment">//在一定条件下调用此方法发布事件</span></div><div class="line">        kettle.publishEvent(<span class="string">"Kettle:水烧开了！再不拔电源我要炸了！"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/1976147-f165f4942daf1e20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="运行结果"></p>
+<p>这里实现了一个加单的观察者模式，观察者也只能注册一个，不过例子么，简单的才容易看懂嘛~接下来看一下Java util里自带的Observable和Observer，看一下别人的套路~</p>
+<h3 id="3、Java中的观察者模式"><a href="#3、Java中的观察者模式" class="headerlink" title="3、Java中的观察者模式"></a>3、Java中的观察者模式</h3><p>在Java的util包里也有Observable和Observer那么这俩兄弟跟我们上面自己实现的有啥不同呢？首先还是那个水壶的例子，有了上面的基础，我就直接把所有的类和测试代码甩上来了，相信以各位看官的实力都是小case:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> String <span class="title">sayHello</span><span class="params">(String name)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">//被观察者</span></div><div class="line">        Kettle kettle = <span class="keyword">new</span> Kettle();</div><div class="line">        <span class="comment">//观察者</span></div><div class="line">        PeopleLookKettle people = <span class="keyword">new</span> PeopleLookKettle();</div><div class="line"></div><div class="line">        kettle.addObserver(people);</div><div class="line">        kettle.notifyPeople(<span class="string">"kettle:水烧开了!再不拔电源我要炸了!!"</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Kettle</span> <span class="keyword">extends</span> <span class="title">Observable</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyPeople</span><span class="params">(String str)</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"kettle:我是水壶~"</span>);</div><div class="line">        setChanged();</div><div class="line">        notifyObservers(str);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PeopleLookKettle</span> <span class="keyword">implements</span> <span class="title">Observer</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(Observable o, Object arg)</span> </span>&#123;</div><div class="line">        System.out.println((String) arg);</div><div class="line">        System.out.println(<span class="string">"People:拔电源装水~"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>之后还是看一下运行结果</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1976147-3d3869c1f0cf6b29.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="运行结果"></p>
+<p>代码上完了，那么这里实现的观察模式又是个什么套路呢？不比比直接看源码，先从简单的Observer看起：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * This method is called whenever the observed object is changed. An</div><div class="line">     * application calls an &lt;tt&gt;Observable&lt;/tt&gt; object's</div><div class="line">     * &lt;code&gt;notifyObservers&lt;/code&gt; method to have all the object's</div><div class="line">     * observers notified of the change.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>   o     the observable object.</div><div class="line">     * <span class="doctag">@param</span>   arg   an argument passed to the &lt;code&gt;notifyObservers&lt;/code&gt;</div><div class="line">     *                 method.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(Observable o, Object arg)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我去，这跟我上面的设计不符啊…这货怎么把Observable传过来了…这只是设计类和接口的一些设计理念不一样，作为jdk他需要考虑各种兼容性和安全性的问题，所以不可能像我们客户端程序员一样，很多时候写的都非常任性。先不扯那么多，我们要看的是套路~这玩意是个接口，就像我说的那样，做个回调就行了，剩下的都交给实现类来操心。</p>
+<p>看完了Observer我们再来看看Observable：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Observable</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> changed = <span class="keyword">false</span>;</div><div class="line">    <span class="keyword">private</span> Vector&lt;Observer&gt; obs;</div><div class="line"></div><div class="line">    <span class="comment">/** Construct an Observable with zero Observers. */</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Observable</span><span class="params">()</span> </span>&#123;</div><div class="line">        obs = <span class="keyword">new</span> Vector&lt;&gt;();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Adds an observer to the set of observers for this object, provided</div><div class="line">     * that it is not the same as some observer already in the set.</div><div class="line">     * The order in which notifications will be delivered to multiple</div><div class="line">     * observers is not specified. See the class comment.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>   o   an observer to be added.</div><div class="line">     * <span class="doctag">@throws</span> NullPointerException   if the parameter o is null.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">addObserver</span><span class="params">(Observer o)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</div><div class="line">        <span class="keyword">if</span> (!obs.contains(o)) &#123;</div><div class="line">            obs.addElement(o);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Deletes an observer from the set of observers of this object.</div><div class="line">     * Passing &lt;CODE&gt;null&lt;/CODE&gt; to this method will have no effect.</div><div class="line">     * <span class="doctag">@param</span>   o   the observer to be deleted.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">deleteObserver</span><span class="params">(Observer o)</span> </span>&#123;</div><div class="line">        obs.removeElement(o);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * If this object has changed, as indicated by the</div><div class="line">     * &lt;code&gt;hasChanged&lt;/code&gt; method, then notify all of its observers</div><div class="line">     * and then call the &lt;code&gt;clearChanged&lt;/code&gt; method to</div><div class="line">     * indicate that this object has no longer changed.</div><div class="line">     * &lt;p&gt;</div><div class="line">     * Each observer has its &lt;code&gt;update&lt;/code&gt; method called with two</div><div class="line">     * arguments: this observable object and &lt;code&gt;null&lt;/code&gt;. In other</div><div class="line">     * words, this method is equivalent to:</div><div class="line">     * &lt;blockquote&gt;&lt;tt&gt;</div><div class="line">     * notifyObservers(null)&lt;/tt&gt;&lt;/blockquote&gt;</div><div class="line">     *</div><div class="line">     * <span class="doctag">@see</span>     java.util.Observable#clearChanged()</div><div class="line">     * <span class="doctag">@see</span>     java.util.Observable#hasChanged()</div><div class="line">     * <span class="doctag">@see</span>     java.util.Observer#update(java.util.Observable, java.lang.Object)</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">()</span> </span>&#123;</div><div class="line">        notifyObservers(<span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * If this object has changed, as indicated by the</div><div class="line">     * &lt;code&gt;hasChanged&lt;/code&gt; method, then notify all of its observers</div><div class="line">     * and then call the &lt;code&gt;clearChanged&lt;/code&gt; method to indicate</div><div class="line">     * that this object has no longer changed.</div><div class="line">     * &lt;p&gt;</div><div class="line">     * Each observer has its &lt;code&gt;update&lt;/code&gt; method called with two</div><div class="line">     * arguments: this observable object and the &lt;code&gt;arg&lt;/code&gt; argument.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>   arg   any object.</div><div class="line">     * <span class="doctag">@see</span>     java.util.Observable#clearChanged()</div><div class="line">     * <span class="doctag">@see</span>     java.util.Observable#hasChanged()</div><div class="line">     * <span class="doctag">@see</span>     java.util.Observer#update(java.util.Observable, java.lang.Object)</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">(Object arg)</span> </span>&#123;</div><div class="line">        <span class="comment">/*</span></div><div class="line">         * a temporary array buffer, used as a snapshot of the state of</div><div class="line">         * current Observers.</div><div class="line">         */</div><div class="line">        Object[] arrLocal;</div><div class="line"></div><div class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">            <span class="comment">/* We don't want the Observer doing callbacks into</span></div><div class="line">             * arbitrary code while holding its own Monitor.</div><div class="line">             * The code where we extract each Observable from</div><div class="line">             * the Vector and store the state of the Observer</div><div class="line">             * needs synchronization, but notifying observers</div><div class="line">             * does not (should not).  The worst result of any</div><div class="line">             * potential race-condition here is that:</div><div class="line">             * 1) a newly-added Observer will miss a</div><div class="line">             *   notification in progress</div><div class="line">             * 2) a recently unregistered Observer will be</div><div class="line">             *   wrongly notified when it doesn't care</div><div class="line">             */</div><div class="line">            <span class="keyword">if</span> (!changed)</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            arrLocal = obs.toArray();</div><div class="line">            clearChanged();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = arrLocal.length-<span class="number">1</span>; i&gt;=<span class="number">0</span>; i--)</div><div class="line">            ((Observer)arrLocal[i]).update(<span class="keyword">this</span>, arg);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Clears the observer list so that this object no longer has any observers.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">deleteObservers</span><span class="params">()</span> </span>&#123;</div><div class="line">        obs.removeAllElements();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Marks this &lt;tt&gt;Observable&lt;/tt&gt; object as having been changed; the</div><div class="line">     * &lt;tt&gt;hasChanged&lt;/tt&gt; method will now return &lt;tt&gt;true&lt;/tt&gt;.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">setChanged</span><span class="params">()</span> </span>&#123;</div><div class="line">        changed = <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Indicates that this object has no longer changed, or that it has</div><div class="line">     * already notified all of its observers of its most recent change,</div><div class="line">     * so that the &lt;tt&gt;hasChanged&lt;/tt&gt; method will now return &lt;tt&gt;false&lt;/tt&gt;.</div><div class="line">     * This method is called automatically by the</div><div class="line">     * &lt;code&gt;notifyObservers&lt;/code&gt; methods.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@see</span>     java.util.Observable#notifyObservers()</div><div class="line">     * <span class="doctag">@see</span>     java.util.Observable#notifyObservers(java.lang.Object)</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">clearChanged</span><span class="params">()</span> </span>&#123;</div><div class="line">        changed = <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Tests if this object has changed.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span>  &lt;code&gt;true&lt;/code&gt; if and only if the &lt;code&gt;setChanged&lt;/code&gt;</div><div class="line">     *          method has been called more recently than the</div><div class="line">     *          &lt;code&gt;clearChanged&lt;/code&gt; method on this object;</div><div class="line">     *          &lt;code&gt;false&lt;/code&gt; otherwise.</div><div class="line">     * <span class="doctag">@see</span>     java.util.Observable#clearChanged()</div><div class="line">     * <span class="doctag">@see</span>     java.util.Observable#setChanged()</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">hasChanged</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> changed;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Returns the number of observers of this &lt;tt&gt;Observable&lt;/tt&gt; object.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span>  the number of observers of this object.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">countObservers</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> obs.size();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看出Observable内部使用了一个Vector来维护订阅的Observer，关于Vector这里不做更多的了解，在这就把他当做一个普通的Observer容器就行了。让我们看看和这个容器有关的套路，为了防止各位产生代码疲劳，我特意贴心的给各位截了个图23333333：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1976147-88f8f5242cd252c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="套路"></p>
+<p>添加和删除Observer就是在容器obs里做增删操作，这套路很简单，不过为了线程安全加了个synchronized。之后看一下重点，通知Observers时调用的notifyObservers()，notifyObservers()最终会调用他自身带参的重载方法，看下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">(Object arg)</span> </span>&#123;</div><div class="line">    <span class="comment">/*</span></div><div class="line">     * a temporary array buffer, used as a snapshot of the state of</div><div class="line">     * current Observers.</div><div class="line">     */</div><div class="line">    Object[] arrLocal;</div><div class="line"></div><div class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">        <span class="comment">/* We don't want the Observer doing callbacks into</span></div><div class="line">         * arbitrary code while holding its own Monitor.</div><div class="line">         * The code where we extract each Observable from</div><div class="line">         * the Vector and store the state of the Observer</div><div class="line">         * needs synchronization, but notifying observers</div><div class="line">         * does not (should not).  The worst result of any</div><div class="line">         * potential race-condition here is that:</div><div class="line">         * 1) a newly-added Observer will miss a</div><div class="line">         *   notification in progress</div><div class="line">         * 2) a recently unregistered Observer will be</div><div class="line">         *   wrongly notified when it doesn't care</div><div class="line">         */</div><div class="line">        <span class="keyword">if</span> (!changed)</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        arrLocal = obs.toArray();</div><div class="line">        clearChanged();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = arrLocal.length-<span class="number">1</span>; i&gt;=<span class="number">0</span>; i--)</div><div class="line">        ((Observer)arrLocal[i]).update(<span class="keyword">this</span>, arg);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>先除去那大段的注释不看，这里就是拿到Observable内部维护的Observer容器，然后遍历回调这些Observer的update方法以实现让所有Observer收到通知。但是后面那段代码被执行是有条件的，就是Observable内部的changed字段为true才会执行，而这个字段只有通过setChanged()方法来将其值置为true。但是在上面的源码中我们可以发现这个方法是protected修饰的，所以不通过特殊手段的话，我们只有通过继承才能来调用这个方法了。所以在我以上的实现代码中是有一个继承于Observable的类的。</p>
+<p>回头再看看那段注释（自己的烂翻译…有错请指出…）：<br>我们不想让Observer在持有他自己的监听时在回调任意代码。抽取这段代码存储存储Observer需要同步的状态，但是并不通知这些Observer。任何潜在的竞争条件可能会导致的最坏情况是：</p>
+<ul>
+<li>新添加的Observer将会错过一个正在进行的通知</li>
+<li>最近被解除注册的Observer可能会错误的同步一个他不关心的玩意</li>
+</ul>
+<p>这些东西说实话，我只是有一点点想法，并不能说的很清楚。我觉得是多线程情况下这段代码需要加上一个同步锁，不然可能会引发他注释里写的那两点糟糕的情况。我接触的多线程还是有点少的，所以这段我就先这么翻着，而且这对我们理解观察者模式的套路并没有非常大的影响。</p>
+<p>分析完了Java中的观察者模式，接下来回到文章最前面提到的那个问题，RecyclerView中的ui更新到底是咋回事。</p>
+<h3 id="4、RecyclerView中的ui更新"><a href="#4、RecyclerView中的ui更新" class="headerlink" title="4、RecyclerView中的ui更新"></a>4、RecyclerView中的ui更新</h3><p>其实要弄清楚这个首先得看Adapter，因为Adapter才是掌控数据集的那个。那么让我们来看一下RecyclerView.Adapter的nonotifyDataSetChanged()方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">notifyDataSetChanged</span><span class="params">()</span> </span>&#123;</div><div class="line">    mObservable.notifyChanged();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>继续追踪这个源码，看看咋回事<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">AdapterDataObservable</span> <span class="keyword">extends</span> <span class="title">Observable</span>&lt;<span class="title">AdapterDataObserver</span>&gt; </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasObservers</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> !mObservers.isEmpty();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyChanged</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// since onChanged() is implemented by the app, it could do anything, including</span></div><div class="line">        <span class="comment">// removing itself from &#123;@link mObservers&#125; - and that could cause problems if</span></div><div class="line">        <span class="comment">// an iterator is used on the ArrayList &#123;@link mObservers&#125;.</span></div><div class="line">        <span class="comment">// to avoid such problems, just march thru the list in the reverse order.</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = mObservers.size() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</div><div class="line">            mObservers.get(i).onChanged();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//其余方法省略</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以看到notifyChanged()这个方法里就两行代码，经过上面的一番学习，我闭着眼睛也能猜到mObservers是一个Observer的集合，通过遍历的去调用onChanged，然后这个onChanged是回调。既然知道这一点，那么我们就需要在RecyclerView中找到Observer的具体实现类，不过在此之前我们找孩子之前得先找他爸~很简单，追踪onChanged()的源码，看看到底是谁的方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AdapterDataObserver</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onChanged</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// Do nothing</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemRangeChanged</span><span class="params">(<span class="keyword">int</span> positionStart, <span class="keyword">int</span> itemCount)</span> </span>&#123;</div><div class="line">        <span class="comment">// do nothing</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemRangeChanged</span><span class="params">(<span class="keyword">int</span> positionStart, <span class="keyword">int</span> itemCount, Object payload)</span> </span>&#123;</div><div class="line">        <span class="comment">// fallback to onItemRangeChanged(positionStart, itemCount) if app</span></div><div class="line">        <span class="comment">// does not override this method.</span></div><div class="line">        onItemRangeChanged(positionStart, itemCount);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemRangeInserted</span><span class="params">(<span class="keyword">int</span> positionStart, <span class="keyword">int</span> itemCount)</span> </span>&#123;</div><div class="line">        <span class="comment">// do nothing</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemRangeRemoved</span><span class="params">(<span class="keyword">int</span> positionStart, <span class="keyword">int</span> itemCount)</span> </span>&#123;</div><div class="line">        <span class="comment">// do nothing</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemRangeMoved</span><span class="params">(<span class="keyword">int</span> fromPosition, <span class="keyword">int</span> toPosition, <span class="keyword">int</span> itemCount)</span> </span>&#123;</div><div class="line">        <span class="comment">// do nothing</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>找到了，都是空方法，你可能回说这还不是接口，没事，接口能做的抽象类也能做，我们只要找这个抽象类的孩子就行了。鸡贼的我果断ctrl+f输入了我的查找：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1976147-5cab20489c6396e5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="嘿嘿嘿，我好鸡贼"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1976147-b65388e49f35a1b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="说了我很鸡贼"></p>
+<p>看一下他的源码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">   <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">RecyclerViewDataObserver</span> <span class="keyword">extends</span> <span class="title">AdapterDataObserver</span> </span>&#123;</div><div class="line">       <span class="meta">@Override</span></div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onChanged</span><span class="params">()</span> </span>&#123;</div><div class="line">           assertNotInLayoutOrScroll(<span class="keyword">null</span>);</div><div class="line">           <span class="keyword">if</span> (mAdapter.hasStableIds()) &#123;</div><div class="line">               <span class="comment">// TODO Determine what actually changed.</span></div><div class="line">               <span class="comment">// This is more important to implement now since this callback will disable all</span></div><div class="line">               <span class="comment">// animations because we cannot rely on positions.</span></div><div class="line">               mState.mStructureChanged = <span class="keyword">true</span>;</div><div class="line">               setDataSetChangedAfterLayout();</div><div class="line">           &#125; <span class="keyword">else</span> &#123;</div><div class="line">               mState.mStructureChanged = <span class="keyword">true</span>;</div><div class="line">               setDataSetChangedAfterLayout();</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">if</span> (!mAdapterHelper.hasPendingUpdates()) &#123;</div><div class="line">               requestLayout();</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line"></div><div class="line"><span class="comment">//省略部分代码...</span></div><div class="line"></div><div class="line">       <span class="function"><span class="keyword">void</span> <span class="title">triggerUpdateProcessor</span><span class="params">()</span> </span>&#123;</div><div class="line">           <span class="keyword">if</span> (mPostUpdatesOnAnimation &amp;&amp; mHasFixedSize &amp;&amp; mIsAttached) &#123;</div><div class="line">               ViewCompat.postOnAnimation(RecyclerView.<span class="keyword">this</span>, mUpdateChildViewsRunnable);</div><div class="line">           &#125; <span class="keyword">else</span> &#123;</div><div class="line">               mAdapterUpdateDuringMeasure = <span class="keyword">true</span>;</div><div class="line">               requestLayout();</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>这里简单的看一下第一行代码是检查recyclerview，如果有错就会抛异常。之后第一个if，不看了，默认是false，那么就看第二个条件内的代码。第一个是存储一个状态，第二个是我们要看到的东西了，点进去看下源码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setDataSetChangedAfterLayout</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">//省略部分代码</span></div><div class="line">    mDataSetHasChangedAfterLayout = <span class="keyword">true</span>;</div><div class="line">    <span class="keyword">final</span> <span class="keyword">int</span> childCount = mChildHelper.getUnfilteredChildCount();</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; childCount; i++) &#123;</div><div class="line">        <span class="keyword">final</span> ViewHolder holder = getChildViewHolderInt(mChildHelper.getUnfilteredChildAt(i));</div><div class="line">        <span class="keyword">if</span> (holder != <span class="keyword">null</span> &amp;&amp; !holder.shouldIgnore()) &#123;</div><div class="line">            holder.addFlags(ViewHolder.FLAG_ADAPTER_POSITION_UNKNOWN);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    mRecycler.setAdapterPositionsAsUnknown();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以看到它会遍历ViewHolder，然后给holder添加flag:<strong> FLAG_ADAPTER_POSITION_UNKNOWN</strong>这个flag会让viewholder重新绑定到recyclerview上以确定自己的position，最后一个方法会让缓存的viewholder也打上上面提到的flag。</p>
+<p>最后再回顾一下（如果有纰漏敬请指出，因为我这源码也没非常仔细的阅读）：</p>
+<ul>
+<li><p>在想要更新RecyclerView的界面时，我们通常会先更新数据源（List之类的），然后调用Adapter的notifyDataSetChanged()方法</p>
+</li>
+<li><p>在RecyclerView内部notifyDataSetChanged()方法调用了mObservable.notifyChanged();而mObservable是一个被观察者。</p>
+</li>
+<li><p>在RecyclerView内部找到mObservable的真实类型，发现是RecyclerViewDataObserver，寻找notifyChanged()时会调用的onChanged()方法。</p>
+</li>
+<li><p>发现onChanged()方法最终会给viewholder设置flag，让他们重新绑定到RecyclerView上，在重新绑定的过程中无疑是会在onBindViewHolder里重新设置数据的，而数据源我们已经更新过了，新的数据就会被显示到界面上，以上就是这整个流程了。</p>
+</li>
+</ul>
+<h3 id="5、最后的一点思考"><a href="#5、最后的一点思考" class="headerlink" title="5、最后的一点思考"></a>5、最后的一点思考</h3><p>说实话最近在写东西的时候经常用回调，因为一些工具类或者dialog、window之类的，在自己自定义的时候通常需要回调把点击事件传出来，不然感觉传view设置点击什么的感觉也挺麻烦的，不如我里面逻辑处理好，就把点击事件传出来就好了。但是写到后面我这又是用的MVP，activity里各种回调满天飞，不过怎么说呢，我自己写的，我看起来逻辑还是很清晰的。如果是后面来人接手呢？虽然我注释写的都很清晰了，但是他在阅读代码的时候不得不深入我的工具类或者dialog window里去看我这个回调到底干了什么，所以这种方便自己麻烦别人的东西，我现在在想到底是算好的代码风格还是差的，有点糊涂。</p>
+<p>好了，也挺久没发文了，而且干了七天，相信大家都很累了，休息休息了，祝各位有一个好的周末。</p>
+<p>参考资料：<br>《Android源码设计模式》</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/设计模式/" rel="tag">#设计模式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/02/Android内存泄露浅析/" rel="next" title="Android内存泄露浅析">
+                <i class="fa fa-chevron-left"></i> Android内存泄露浅析
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/16/观察者模式/"
+     data-title="观察者模式"
+     data-content=""
+     data-url="https://xiasuhuei321.github.io/2016/10/16/观察者模式/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/16/观察者模式/"
+           data-title="观察者模式" data-url="https://xiasuhuei321.github.io/2016/10/16/观察者模式/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://upload.jianshu.io/users/upload_avatars/1976147/faa01825336e.jpg?imageMogr/thumbnail/90x90/quality/100"
+               alt="Luo_xiasuhuei321" />
+          <p class="site-author-name" itemprop="name">Luo_xiasuhuei321</p>
+          <p class="site-description motion-element" itemprop="description">纸上得来终觉浅，so we should read the fucking source code;</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ForgetAll" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/e1fed0fb341b/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-简书"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zhao-shen-56-66" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-知乎"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.iamxiarui.com/" title="XiaRui Zone" target="_blank">XiaRui Zone</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://liuweiprog.me/" title="阿V薄荷冰加可乐" target="_blank">阿V薄荷冰加可乐</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://fankarl.github.io/" title="CoderFan" target="_blank">CoderFan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://importeffort.github.io/" title="ImporterFoort" target="_blank">ImporterFoort</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、什么是观察者模式"><span class="nav-number">2.</span> <span class="nav-text">1、什么是观察者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、用回调写一个简单的观察者模式"><span class="nav-number">3.</span> <span class="nav-text">2、用回调写一个简单的观察者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、Java中的观察者模式"><span class="nav-number">4.</span> <span class="nav-text">3、Java中的观察者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、RecyclerView中的ui更新"><span class="nav-number">5.</span> <span class="nav-text">4、RecyclerView中的ui更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、最后的一点思考"><span class="nav-number">6.</span> <span class="nav-text">5、最后的一点思考</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luo_xiasuhuei321</span>
+</div>
+
+<div class="powered-by">
+  个人博客
+</div>
+
+<div class="theme-info">
+  寄语 - 骚年，加油干~！
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiasuhuei321"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("GG1DP5RQYGruUvJAPkKg2wMw-gzGzoHsz", "SjX4xbDDh2LzhRSWrae5BScU");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

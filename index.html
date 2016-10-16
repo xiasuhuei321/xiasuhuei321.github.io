@@ -281,6 +281,316 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/16/观察者模式/" itemprop="url">
+                  观察者模式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-16T15:09:51+08:00" content="2016-10-16">
+              2016-10-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/16/观察者模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/16/观察者模式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/16/观察者模式/" class="leancloud_visitors" data-flag-title="观察者模式">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>以前听说过一句话，说是<strong> 代码没有超过10w行谈设计模式那都是耍流氓 </strong>。我信了，所以一直没怎么系统的看已经买了的《Android源码设计模式》。最近有个小伙伴在群里问recyclerview怎么刷新数据，以前大概也做过，流程也就是那么两步：1.更新Adapter里数据集的引用，让他指向最新的数据集。2.调用Adapter的notifyDataSetChanged()来更新ui。之后小伙伴又问了notifyDataSetChanged()到底如何更新ui的，当时只是看出了一个观察者模式，还有一些细节没想明白。而且讲真的观察者模式的应用还是非常多的，无论是Android还是最近很火的RxJava，其中都可以看到观察者模式的身影，所以决定这周把观察者模式撸一遍。</p>
+<h3 id="1、什么是观察者模式"><a href="#1、什么是观察者模式" class="headerlink" title="1、什么是观察者模式"></a>1、什么是观察者模式</h3><p>观察者模式(Observer Pattern)定义了对象间一种一对多的依赖关系，使得每当一个对象改变状态，则所有依赖于它的对象都会得到通知并被自动更新，观察者模式又叫做发布-订阅(Publish/Subscribe)模式。</p>
+<p>定义总是这么精准而抽象，让我们结合一些Android中的场景来简单的理解一下：在Android最常用的点击事件，我们会通过设置控件的OnClickListener并传入一个OnClickListener的实现类来回调点击事件。这种我们便可以将之看做一个观察者模式。我们的OnClickListener是观察者，被观察者是控件，当有点击事件的时候控件发布点击事件，观察者OnClickListener就会接收到点击事件。当然了，说到底，就是回调。</p>
+<h3 id="2、用回调写一个简单的观察者模式"><a href="#2、用回调写一个简单的观察者模式" class="headerlink" title="2、用回调写一个简单的观察者模式"></a>2、用回调写一个简单的观察者模式</h3><p>首先我们想一个生活中的场景，来凑个观察者模式出来。平时我们要烧水吧，总要派个人看着，水烧开的时候把电源拔了装水。在这个场景里水壶就是被观察者(Observable)，观察者(Observer)就是人。首先我们用以上我说的，那玩意就是回调，用回调来写一个看看。那我们先写一个被观察者“水壶”来看看：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Kettle</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">    Observer&lt;T&gt; o;</div><div class="line"></div><div class="line">    <span class="comment">/**</div><div class="line">     * 发布信息</div><div class="line">     */</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">publishEvent</span><span class="params">(T t)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"you must regist Observer first!"</span>);</div><div class="line">        notifyData(t);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</div><div class="line">     * 通知订阅者</div><div class="line">     */</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyData</span><span class="params">(T t)</span></span>&#123;</div><div class="line">        o.receiverEvent(t);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</div><div class="line">     * 注册一个观察者</div><div class="line">     */</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registObserver</span><span class="params">(Observer&lt;T&gt; o)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.o = o;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</div><div class="line">     * 在你需要的时候调用这个方法，防止内存泄露</div><div class="line">     */</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unregistObserver</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.o = <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>首先我们这个水壶是被观察者，内部肯定要维护一个观察者的引用，或者一个观察者队列的引用，方便我们进行回调，当然更多的事我们尽量不要通过Observer这个东西来做，在这个观察者模式中我希望Observer仅仅作为一个纯粹的回调。因为观察模式本身的特性之一就是解耦，如果你要通过Observer干更多的事无疑会加重Observable和Observer之间的耦合。更多信息可以看代码，我注释已经写得很详细了。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/16/观察者模式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/02/Android内存泄露浅析/" itemprop="url">
+                  Android内存泄露浅析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-02T15:02:14+08:00" content="2016-10-02">
+              2016-10-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/02/Android内存泄露浅析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/02/Android内存泄露浅析/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/02/Android内存泄露浅析/" class="leancloud_visitors" data-flag-title="Android内存泄露浅析">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>前段时间写了一篇<a href="http://www.jianshu.com/p/6d42bf4efe16">MVP初尝试</a>，由于当时只是刚接触，只是简单的实现，还有很多问题没想明白。关于内存泄露这事是本文着重要谈的一点，同时本文是我在看了很多关于Java和Android内存泄露分析的文章之后的所得。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在了解MVP引起的内存泄露问题之前，我们首先要理解在Android中内存泄露是啥玩意？简单的讲内存泄漏就是<strong> 本该被释放内存的对象没有被释放 </strong>。最近也和同学<a href="http://www.jianshu.com/users/86f25f8b198b/latest_articles">@iamxiarui</a>就内存泄露这个问题进行了一些讨论，最后发现要搞清楚这个东西，还要从Java层上找原因。学习Android的同学都应该知道，Java这门语言有一个垃圾回收器，一般来说我们是无需关心内存回收的问题。但是玩过LOL或者DOTA的同学都知道，一个猪队友和一个神对手究竟哪个威胁更大一些，我们不能当GC的*队友，所以多了解一些这玩意吧。</p>
+<p>在C++中会有析构函数这个概念，在C++中销毁对象必须用到这个函数，如此说来C++中是可以手动释放内存的。你可能会说Java中不也有finalize()方法吗？是的，是有这东西，让我们来看看这玩意。</p>
+<h4 id="finalize"><a href="#finalize" class="headerlink" title="finalize()"></a>finalize()</h4><p>关于这货，在《Thinking in java》里说：</p>
+<ul>
+<li>不能指望finalize()。</li>
+</ul>
+<p>在《effective java》里说：</p>
+<ul>
+<li>避免使用终结方法：终结方法通常是不可预测的，也是很危险的，一般情况下是不必要的。</li>
+</ul>
+<p>至于为什么那么描述finalize()方法，原因如下：</p>
+<blockquote>
+<p>终结方法的缺点在于不能保证会被及时的执行。</p>
+</blockquote>
+<p>你以为这就完了？《effective java》中还有一段描述：</p>
+<blockquote>
+<p>Java语言规范不仅不保证终结方法会被及时的执行，而且根本就不保证它们会被执行。</p>
+</blockquote>
+<p>那么在很多由于生命周期所引发的内存泄漏问题上，我们就不能想着手动释放内存了，因为我们需要“及时”的释放内存，但是finalize()并不能满足我们的需求。那么我们应该想一些办法，“告诉”GC：我这是可以回收的，请回收这部分内存吧！</p>
+<p>那么问题来了：我们该用怎样的方式告诉GC，并且让GC可以回收这部分内存呢？这是我们今天主要要解决的问题，但是我们首先要弄明白的是Java中关于内存的一些事。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/02/Android内存泄露浅析/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/25/手把手教你打造支持手势放大缩小的ImageView/" itemprop="url">
                   手把手教你打造支持手势放大缩小的ImageView
                 </a>
@@ -1346,277 +1656,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/19/MVP初尝试/" itemprop="url">
-                  MVP初尝试
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-19T09:25:10+08:00" content="2016-08-19">
-              2016-08-19
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/19/MVP初尝试/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/19/MVP初尝试/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/19/MVP初尝试/" class="leancloud_visitors" data-flag-title="MVP初尝试">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>又到了周末了，本来这周准备总结一下透明状态栏之类的东西……但是突然群里就吹起了MVP的牛，这让我这个MVC都只有小半桶水的人都不敢说话。但是程序员不会吹牛跟条咸鱼又有什么区别？<br><img src="http://upload-images.jianshu.io/upload_images/1976147-bc51e70906298050.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>所以我毅然决然的打开了搜索引擎，利用我科学上网的本领搜集了一些MVP相关的文章，不过看完也没啥感觉是真的，果然对于coder来说talk is cheap果断撸code才是正道。好了，日常吹牛、唠嗑(1/1)。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/19/MVP初尝试/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/13/Android自定义View你需要了解的一些东西/" itemprop="url">
-                  Android自定义View你需要了解的一些东西
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-13T15:53:54+08:00" content="2016-08-13">
-              2016-08-13
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android自定义View/" itemprop="url" rel="index">
-                    <span itemprop="name">Android自定义View</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/13/Android自定义View你需要了解的一些东西/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/13/Android自定义View你需要了解的一些东西/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/13/Android自定义View你需要了解的一些东西/" class="leancloud_visitors" data-flag-title="Android自定义View你需要了解的一些东西">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>终于周末了，当我想要松懈一会去浪的时候，脑海中突然闪过了这个东西……<br><img src="http://upload-images.jianshu.io/upload_images/1976147-6d1bda58afc75f85.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="学习.jpg"><br>一图胜千言，日常唠嗑（1/1）。</p>
-<h3 id="1-进入正题"><a href="#1-进入正题" class="headerlink" title="1 进入正题"></a>1 进入正题</h3><p>Android中自定义控件一直是一个比较难但又不得不面对的东西，虽然<strong>github+google</strong>能解决你的大部分需求，但是说实话，当一些bug发生在第三方控件上时，你仍然需要花费大量的时间去搞定。所以先了解一些和自定义相关的东西绝对是不亏的，话不多说，进入正题。</p>
-<p>Android中自定义控件一般分以下三种：</p>
-<ul>
-<li>继承已有控件实现，可以理解为对原有控件功能的加强</li>
-<li>组合控件，将多个控件结合在一起实现一些功能</li>
-<li>完全自定义控件，一般继承于View或者ViewGroup</li>
-</ul>
-<p>这三类控件在实现方式上有什么异同呢？一般来说第一种控件是对于原有控件功能的增强，比如给ListView增加下拉刷新，上拉加载更多的功能，我们不需要考虑ListView中每个item如何测量如何绘制，我们需要考虑的是如何实现需要增添的功能。第二种组合几种控件，比如轮播图的实现，你可以组合Viewpager+ImageView，这东西说实话也就是功能的实现，但是如果你没有封装好则会让你的代码显得杂乱无章。第三种则是比较难以上手的，因为他需要你了解一些View相关的知识。</p>
-<p>View相关的东西很多，多到可以另开一篇文章写了，所以我尽量摘取重点，咳咳，大伙注意听了啊，小本本都可以拿出来了啊，xiasuhuei老师开始划重点了啊。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/13/Android自定义View你需要了解的一些东西/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1662,7 +1701,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

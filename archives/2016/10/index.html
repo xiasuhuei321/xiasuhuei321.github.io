@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="基础," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,22 +84,15 @@
 
 
 
-<meta name="description" content="写在前面Java回炉系列也有十多天没更了，虽然心里一直没怎么放下，但是奈何有心无力。项目成堆问题在那，还好中秋得空，出去逛了一下午心情大好~好了，正文开始
-多态是啥，能吃吗？学Java一般都会听说“面向对象三大特征”：封装、继承、多态。封装是将一个事物抽象成为一个类，这个类有自己的属性和方法，某些属性和功能的实现不会对外公开，只暴露一些可供获取数据的方法。继承很容易理解，就是一个类继承另一类，这个">
-<meta property="og:type" content="article">
-<meta property="og:title" content="第二话-再探多态">
-<meta property="og:url" content="https://xiasuhuei321.github.io/2016/09/17/第二话-再探多态/index.html">
+<meta name="description" content="纸上得来终觉浅，so we should read the fucking source code;">
+<meta property="og:type" content="website">
+<meta property="og:title" content="xiasuhuei321的博客">
+<meta property="og:url" content="https://xiasuhuei321.github.io/archives/2016/10/index.html">
 <meta property="og:site_name" content="xiasuhuei321的博客">
-<meta property="og:description" content="写在前面Java回炉系列也有十多天没更了，虽然心里一直没怎么放下，但是奈何有心无力。项目成堆问题在那，还好中秋得空，出去逛了一下午心情大好~好了，正文开始
-多态是啥，能吃吗？学Java一般都会听说“面向对象三大特征”：封装、继承、多态。封装是将一个事物抽象成为一个类，这个类有自己的属性和方法，某些属性和功能的实现不会对外公开，只暴露一些可供获取数据的方法。继承很容易理解，就是一个类继承另一类，这个">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-b4b3923c4520c2bf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1976147-dba4cfeddfa311ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-09-17T01:09:46.736Z">
+<meta property="og:description" content="纸上得来终觉浅，so we should read the fucking source code;">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="第二话-再探多态">
-<meta name="twitter:description" content="写在前面Java回炉系列也有十多天没更了，虽然心里一直没怎么放下，但是奈何有心无力。项目成堆问题在那，还好中秋得空，出去逛了一下午心情大好~好了，正文开始
-多态是啥，能吃吗？学Java一般都会听说“面向对象三大特征”：封装、继承、多态。封装是将一个事物抽象成为一个类，这个类有自己的属性和方法，某些属性和功能的实现不会对外公开，只暴露一些可供获取数据的方法。继承很容易理解，就是一个类继承另一类，这个">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1976147-b4b3923c4520c2bf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="xiasuhuei321的博客">
+<meta name="twitter:description" content="纸上得来终觉浅，so we should read the fucking source code;">
 
 
 
@@ -120,9 +113,9 @@
 
 
 
-  <link rel="canonical" href="https://xiasuhuei321.github.io/2016/09/17/第二话-再探多态/"/>
+  <link rel="canonical" href="https://xiasuhuei321.github.io/archives/2016/10/"/>
 
-  <title> 第二话-再探多态 | xiasuhuei321的博客 </title>
+  <title> 归档 | xiasuhuei321的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -153,7 +146,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  page-archive  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -264,198 +257,103 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-collapse">
+    <span class="archive-move-on"></span>
+
+    <span class="archive-page-counter">
+      
+      
+      
+        
+      
+      嗯..! 目前共计 17 篇日志。 继续努力。
+    </span>
+
     
 
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                第二话-再探多态
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-17T09:07:58+08:00" content="2016-09-17">
-              2016-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/17/第二话-再探多态/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/17/第二话-再探多态/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/17/第二话-再探多态/" class="leancloud_visitors" data-flag-title="第二话-再探多态">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
-      
-        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>Java回炉系列也有十多天没更了，虽然心里一直没怎么放下，但是奈何有心无力。项目成堆问题在那，还好中秋得空，出去逛了一下午心情大好~好了，正文开始</p>
-<h3 id="多态是啥，能吃吗？"><a href="#多态是啥，能吃吗？" class="headerlink" title="多态是啥，能吃吗？"></a>多态是啥，能吃吗？</h3><p>学Java一般都会听说“面向对象三大特征”：封装、继承、多态。封装是将一个事物抽象成为一个类，这个类有自己的属性和方法，某些属性和功能的实现不会对外公开，只暴露一些可供获取数据的方法。继承很容易理解，就是一个类继承另一类，这个类被称为子类，而另一个自然就是父类了。当然在有的书上也将父类称为基类，将子类称为导出类，看你个人喜好了，在我这统一称为父、子类。好了，前面说了封装和继承，现在自然是要说多态了。多态应当是一种设计的思想，然后才体现在语言的具体实现。多态的核心思想是消除类型之间的耦合关系，可能你和我一样，刚看到这句话的时候有点懵逼，没关系举个小例子：<br><img src="http://upload-images.jianshu.io/upload_images/1976147-b4b3923c4520c2bf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="举个栗子"><br><a id="more"></a><br>现在我有个数据集，因为增删操作做的比较多，行吗，了解数据结构的你一定想到了链表。那好就用链表来搞起：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">LinkedList&lt;Bean&gt; list = <span class="keyword">new</span> LinkedList&lt;Bean&gt;();</div></pre></td></tr></table></figure></p>
-<p>可是过了一段时间，你们老大给你说需求改了，现在是查询操作做的比较多。一向对于代码效率严格要求的你一定能想到链表查起来效率有点低，好啊，改成ArryList也算是能接受了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ArrayList&lt;Bean&gt; list = <span class="keyword">new</span> ArrayList&lt;Bean&gt;();</div></pre></td></tr></table></figure></p>
-<p>刚改完发现ide里一片红叉叉，好吧，原来是以前的方法也没用泛型参数，还得自己一个一个的去改掉。恩，改完没两天你们老大又来……</p>
-<p>以上只是个带点玩笑性质的表述，在实际的操作中一般你都会这么写：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List&lt;Bean&gt; list = <span class="keyword">new</span> ArrayList&lt;Bean&gt;();</div></pre></td></tr></table></figure></p>
-<p>恩，= 右边只要是个List接口的实现类就可以了，这就是解耦了。当你采用这种写法时好处也是显而易见的：涉及到这个数据集的方法，你只要传入一个List的形参就可以了，之后管你用啥实现（当然了，要符合多态的规则哦），这代码还是照常跑。</p>
-<p>如果你是个上手Java没多久的新人，可能会有些惊讶于这种“接口实例化”的写法。但事实上只是Java多态的一种表现：<strong> Java允许父类引用指向子类对象  </strong> 当然了，这句话里把父类换成接口，子类对象换成实现对象，也是可以的。</p>
-<h3 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h3><p>写到这乐于思考的你一定能想到一些问题：上面说了在相应的方法里只要传入父类就行了，那也就是说那个方法并不知道他原来的类是啥，那么他在调用对象的方法时只会调用父类的方法了？直接上代码看看：<br>首先是父类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Parent</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</div><div class="line">		System.out.println(<span class="string">"I am Parent's method"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>子类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Parent</span></span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</div><div class="line">		System.out.println(<span class="string">"I am Son's method"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>跑起来<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Parent p = <span class="keyword">new</span> Son();</div><div class="line">		Hello(p);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Hello</span><span class="params">(Parent p)</span> </span>&#123;</div><div class="line">		p.print();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>运行结果</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1976147-dba4cfeddfa311ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="结果"></p>
-<p>对于这个结果我只想问一声，凭啥啊？明明只有一个父类参数被传进去，他为毛能知道子类的方法啊？这是因为Java实现多态采用了一种被称作“动态绑定”或者“后期绑定”的牛x套路。编译器一直不知道对象的类型，但是方法调用机制能找到正确的方法体，并加以调用。关于这个机制，现在暂时没有必要太去深究。经过以上一番探查，现在终于对Java的多态放了心，那么请开开心心的使用多态编写你的代码吧！</p>
-<p>关于多态还有方法重载和方法覆盖，我的上一篇文章<a href="http://www.jianshu.com/p/54779fc96b2f" target="_blank" rel="external">第一话–从头再来</a>是有提到的，可以去看看。</p>
-<h3 id="接口与抽象类"><a href="#接口与抽象类" class="headerlink" title="接口与抽象类"></a>接口与抽象类</h3><p>待更新…有点累了，先休息了，反正这文写给自己看的，任性点，明天再更完。<br>//开更干活！<br>首先是语法，接口是interface，抽象是abstract。</p>
-<p>平时在抽取基类的时候少不了用一下抽象类，你可以指定几个抽象方法，让你子类去实现这些抽象方法。当然了你的子类也可以是一个抽象类，那么可以不实现这些抽象方法。当然了，包含抽象方法的一定是抽象类， 但是不包含抽象方法的你也可以指定他是抽象类，可以有效的阻止这个类生成对象，比如Android里的handler就没有一个抽象方法。</p>
-<p>那么接口又是啥呢？接口是一个包含一个或者多个方法的东西，有的时候实现了这个接口的类就拥有了这个接口的“特性”，而在Java中接口有的时候也被用于回调。一般的来说接口是优于抽象类的，因为接口比抽象类更抽象，完全解除了类之间的耦合。但是这东西还是看实际情况的，有的时候接口满天飞感觉也不是很好。再者抽象类要比接口的定制性要好，毕竟抽象类完全可以当成一个普通的类来写，只不过在合适的地方加上合适的抽象方法，然后让子类去实现它。所以究竟采用哪个区实现你的多态，还是看你的需求和实现的。</p>
-<p>接口很多时候会被用于“回调”，比如在Android中的MVP模式就少不了回调。对于回调的理解我有写过一篇简单的文章，感兴趣可以自己去看一下。对于回调，我认为在实质上回调就是想要在对的地方调对的方法，然后把对的数据、状态传递出去，让实现的类知道这个数据、状态然后加以处理。以上是我认为的回调的实质，之后不同的语言用什么方案解决，是函数指针还是接口，那都不是我所关心的东西了。</p>
-<p>这一期暂时就到这了，本来还想加个内部类上来的，后来想想还是先缓缓。这类复习类的文，代码贴的比较少，大多是自己的一些总结性的话语……如果有人看到了，觉得不爽……只能说见谅了……</p>
-
-      
-    </div>
-
-    <div>
       
         
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/基础/" rel="tag">#基础</a>
-          
+        <div class="collection-title">
+          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
         </div>
       
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/09/17/RxJava从放弃到入门（二）：学，不能停/" rel="next" title="RxJava从放弃到入门（二）：学，不能停">
-                <i class="fa fa-chevron-left"></i> RxJava从放弃到入门（二）：学，不能停
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/25/手把手教你打造支持手势放大缩小的ImageView/" rel="prev" title="手把手教你打造支持手势放大缩小的ImageView">
-                手把手教你打造支持手势放大缩小的ImageView <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
 
       
-      
-    </footer>
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2016/10/16/观察者模式/" itemprop="url">
+              
+                <span itemprop="name">观察者模式</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-10-16T15:09:51+08:00"
+              content="2016-10-16" >
+          10-16
+        </time>
+      </div>
+
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
-      
-        <div class="ds-share flat" data-thread-key="2016/09/17/第二话-再探多态/"
-     data-title="第二话-再探多态"
-     data-content=""
-     data-url="https://xiasuhuei321.github.io/2016/09/17/第二话-再探多态/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
+    
 
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
       
-    </div>
-  </div>
+      
+      
+
+      
+      
+
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2016/10/02/Android内存泄露浅析/" itemprop="url">
+              
+                <span itemprop="name">Android内存泄露浅析</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-10-02T15:02:14+08:00"
+              content="2016-10-02" >
+          10-02
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+    
+
+  </section>
+
+  
+
 
 
           </div>
@@ -463,14 +361,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2016/09/17/第二话-再探多态/"
-           data-title="第二话-再探多态" data-url="https://xiasuhuei321.github.io/2016/09/17/第二话-再探多态/">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -490,17 +380,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://upload.jianshu.io/users/upload_avatars/1976147/faa01825336e.jpg?imageMogr/thumbnail/90x90/quality/100"
@@ -606,17 +487,6 @@
       </section>
 
       
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多态是啥，能吃吗？"><span class="nav-number">2.</span> <span class="nav-text">多态是啥，能吃吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些思考"><span class="nav-number">3.</span> <span class="nav-text">一些思考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口与抽象类"><span class="nav-number">4.</span> <span class="nav-text">接口与抽象类</span></a></li></ol></div>
-            
-          </div>
-        </section>
-      
 
     </div>
   </aside>
@@ -716,9 +586,11 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
+  
+    <script type="text/javascript" id="motion.page.archive">
+      $('.archive-year').velocity('transition.slideLeftIn');
+    </script>
+  
 
 
   
