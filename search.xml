@@ -12,8 +12,7 @@
 <p>效果图：<br><img src="http://of4pq0ldx.bkt.clouddn.com/loading.gif" alt="loading.gif"></p>
 <p>展示一个loading dialog并在合适的时机返回正确或者错误的反馈给用户：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">LoadingDialog ld = <span class="keyword">new</span> LoadingDialog(<span class="keyword">this</span>);</div><div class="line">ld.setLoadingText(<span class="string">"加载中"</span>)</div><div class="line">         .setSuccessText(<span class="string">"加载成功"</span>)<span class="comment">//显示加载成功时的文字</span></div><div class="line">         <span class="comment">//.setFailedText("加载失败")</span></div><div class="line">         .setInterceptBack(intercept_back_event)</div><div class="line">         .setLoadSpeed(speed)</div><div class="line">         .setRepeatCount(repeatTime)</div><div class="line">         .setDrawColor(color)</div><div class="line">         .show();</div><div class="line"></div><div class="line"><span class="comment">//在你代码中合适的位置调用反馈</span></div><div class="line">ld.loadSuccess();</div><div class="line"><span class="comment">//ld.loadFailed();</span></div></pre></td></tr></table></figure></p>
 <p>效果图：</p>
-<p><img src="http://of4pq0ldx.bkt.clouddn.com/loadFailed.gif" alt="loadFailed.gif"><br><img src="http://of4pq0ldx.bkt.clouddn.com/loadSuccess.gif" alt="loadSuccess.gif"></p>
-<p>还是同样的蜜汁小圆点。。。因为不摸他 加载结束他就不录了，辣鸡AS。。。</p>
+<p><img src="http://of4pq0ldx.bkt.clouddn.com/loadFailed.gif" alt="loadFailed.gif"><br><img src="http://of4pq0ldx.bkt.clouddn.com/loadSuccess.gif" alt="loadSuccess.gif"><br><a id="more"></a><br>还是同样的蜜汁小圆点。。。因为不摸他 加载结束他就不录了，辣鸡AS。。。</p>
 <p>如果你不想要这个动态画出来的效果，你也可以通过closeSuccessAnim()或者closeFailedAnim()关闭它：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">LoadingDialog ld = <span class="keyword">new</span> LoadingDialog(<span class="keyword">this</span>);</div><div class="line">ld.setLoadingText(<span class="string">"加载中"</span>)</div><div class="line">         .setSuccessText(<span class="string">"加载成功"</span>)</div><div class="line">         .setInterceptBack(intercept_back_event)</div><div class="line">         .setLoadSpeed(speed)</div><div class="line">         .closeSuccessAnim()</div><div class="line">         .setDrawColor(color)</div><div class="line">         .setRepeatCount(repeatTime)</div><div class="line">         .show();</div></pre></td></tr></table></figure></p>
 <p><img src="http://of4pq0ldx.bkt.clouddn.com/fail_no_anim.gif" alt="fail_no_anim.gif"></p>
 <p>提供你使用的一些方法：</p>
@@ -34,7 +33,18 @@
 <li>setDrawColor(int color)：可以改变绘制的颜色，圆和里面的勾啊，叉啊的颜色，不建议你用，不一定好看。</li>
 <li>setRepeatCount(int count)：设置动态绘制的次数，比如你设置了值为1，那么除了加载的时候绘制一次，还会再绘制一次。如果你有这个需要，可以设置他的重绘次数。</li>
 </ul>
-<p>目前还有一些没完善，在后续的更新中搞定吧。<br>github地址：<a href="https://github.com/ForgetAll/LoadingDialog" target="_blank" rel="external">https://github.com/ForgetAll/LoadingDialog</a></p>
+<h3 id="如何在你的项目中使用"><a href="#如何在你的项目中使用" class="headerlink" title="如何在你的项目中使用"></a>如何在你的项目中使用</h3><p>Step 1. 把这玩意加到你的build.gradle里:</p>
+<pre><code>allprojects {
+    repositories {
+        ...
+        maven { url &quot;https://jitpack.io&quot; }
+    }
+}
+</code></pre><p>Step 2. 加上这个依赖</p>
+<pre><code>dependencies {
+        compile &apos;com.github.ForgetAll:LoadingDialog:v1.0.1&apos;
+}
+</code></pre><p>目前还有一些没完善，在后续的更新中搞定吧。<br>github地址：<a href="https://github.com/ForgetAll/LoadingDialog" target="_blank" rel="external">https://github.com/ForgetAll/LoadingDialog</a></p>
 <p>最后我的个人博客：<br>xiasuhuei321.com</p>
 <p>其实我还是简书更的比较勤。。。不过象征性的挂一下吧。。。</p>
 ]]></content>

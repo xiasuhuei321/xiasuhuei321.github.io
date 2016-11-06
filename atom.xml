@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xiasuhuei321.github.io/"/>
-  <updated>2016-11-06T12:46:06.015Z</updated>
+  <updated>2016-11-06T14:15:02.104Z</updated>
   <id>https://xiasuhuei321.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://xiasuhuei321.github.io/2016/11/06/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E8%83%BD%E7%94%A8%E7%9A%84LoadingDialog/"/>
     <id>https://xiasuhuei321.github.io/2016/11/06/一个简单能用的LoadingDialog/</id>
     <published>2016-11-06T12:37:49.000Z</published>
-    <updated>2016-11-06T12:46:06.015Z</updated>
+    <updated>2016-11-06T14:15:02.104Z</updated>
     
     <content type="html"><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>还记得以前在网上看到过一个LoadingDialog，感觉还挺不错的，可惜只有一个Loading，配套的错误和正确的反馈都没，一直觉得挺遗憾的，今天花了一些时间把他补全了。</p>
 <p>感谢<a href="http://www.jianshu.com/users/c37d344afd22/latest_articles" target="_blank" rel="external">小路</a>同学指出我后面反馈的圆的方向和之前的方向不一致的情况，已修复，因为截gif怪麻烦的，图就不改了。。。</p>
@@ -28,8 +28,7 @@
 <p>效果图：<br><img src="http://of4pq0ldx.bkt.clouddn.com/loading.gif" alt="loading.gif"></p>
 <p>展示一个loading dialog并在合适的时机返回正确或者错误的反馈给用户：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">LoadingDialog ld = <span class="keyword">new</span> LoadingDialog(<span class="keyword">this</span>);</div><div class="line">ld.setLoadingText(<span class="string">"加载中"</span>)</div><div class="line">         .setSuccessText(<span class="string">"加载成功"</span>)<span class="comment">//显示加载成功时的文字</span></div><div class="line">         <span class="comment">//.setFailedText("加载失败")</span></div><div class="line">         .setInterceptBack(intercept_back_event)</div><div class="line">         .setLoadSpeed(speed)</div><div class="line">         .setRepeatCount(repeatTime)</div><div class="line">         .setDrawColor(color)</div><div class="line">         .show();</div><div class="line"></div><div class="line"><span class="comment">//在你代码中合适的位置调用反馈</span></div><div class="line">ld.loadSuccess();</div><div class="line"><span class="comment">//ld.loadFailed();</span></div></pre></td></tr></table></figure></p>
 <p>效果图：</p>
-<p><img src="http://of4pq0ldx.bkt.clouddn.com/loadFailed.gif" alt="loadFailed.gif"><br><img src="http://of4pq0ldx.bkt.clouddn.com/loadSuccess.gif" alt="loadSuccess.gif"></p>
-<p>还是同样的蜜汁小圆点。。。因为不摸他 加载结束他就不录了，辣鸡AS。。。</p>
+<p><img src="http://of4pq0ldx.bkt.clouddn.com/loadFailed.gif" alt="loadFailed.gif"><br><img src="http://of4pq0ldx.bkt.clouddn.com/loadSuccess.gif" alt="loadSuccess.gif"><br><a id="more"></a><br>还是同样的蜜汁小圆点。。。因为不摸他 加载结束他就不录了，辣鸡AS。。。</p>
 <p>如果你不想要这个动态画出来的效果，你也可以通过closeSuccessAnim()或者closeFailedAnim()关闭它：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">LoadingDialog ld = <span class="keyword">new</span> LoadingDialog(<span class="keyword">this</span>);</div><div class="line">ld.setLoadingText(<span class="string">"加载中"</span>)</div><div class="line">         .setSuccessText(<span class="string">"加载成功"</span>)</div><div class="line">         .setInterceptBack(intercept_back_event)</div><div class="line">         .setLoadSpeed(speed)</div><div class="line">         .closeSuccessAnim()</div><div class="line">         .setDrawColor(color)</div><div class="line">         .setRepeatCount(repeatTime)</div><div class="line">         .show();</div></pre></td></tr></table></figure></p>
 <p><img src="http://of4pq0ldx.bkt.clouddn.com/fail_no_anim.gif" alt="fail_no_anim.gif"></p>
 <p>提供你使用的一些方法：</p>
@@ -50,14 +49,31 @@
 <li>setDrawColor(int color)：可以改变绘制的颜色，圆和里面的勾啊，叉啊的颜色，不建议你用，不一定好看。</li>
 <li>setRepeatCount(int count)：设置动态绘制的次数，比如你设置了值为1，那么除了加载的时候绘制一次，还会再绘制一次。如果你有这个需要，可以设置他的重绘次数。</li>
 </ul>
-<p>目前还有一些没完善，在后续的更新中搞定吧。<br>github地址：<a href="https://github.com/ForgetAll/LoadingDialog" target="_blank" rel="external">https://github.com/ForgetAll/LoadingDialog</a></p>
+<h3 id="如何在你的项目中使用"><a href="#如何在你的项目中使用" class="headerlink" title="如何在你的项目中使用"></a>如何在你的项目中使用</h3><p>Step 1. 把这玩意加到你的build.gradle里:</p>
+<pre><code>allprojects {
+    repositories {
+        ...
+        maven { url &quot;https://jitpack.io&quot; }
+    }
+}
+</code></pre><p>Step 2. 加上这个依赖</p>
+<pre><code>dependencies {
+        compile &apos;com.github.ForgetAll:LoadingDialog:v1.0.1&apos;
+}
+</code></pre><p>目前还有一些没完善，在后续的更新中搞定吧。<br>github地址：<a href="https://github.com/ForgetAll/LoadingDialog" target="_blank" rel="external">https://github.com/ForgetAll/LoadingDialog</a></p>
 <p>最后我的个人博客：<br>xiasuhuei321.com</p>
 <p>其实我还是简书更的比较勤。。。不过象征性的挂一下吧。。。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h3 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h3&gt;&lt;p&gt;还记得以前在网上看到过一个LoadingDialog，感觉还挺不错的，可惜只有一个Loading，配套的错误和正确的反馈都没
+      &lt;h3 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h3&gt;&lt;p&gt;还记得以前在网上看到过一个LoadingDialog，感觉还挺不错的，可惜只有一个Loading，配套的错误和正确的反馈都没，一直觉得挺遗憾的，今天花了一些时间把他补全了。&lt;/p&gt;
+&lt;p&gt;感谢&lt;a href=&quot;http://www.jianshu.com/users/c37d344afd22/latest_articles&quot;&gt;小路&lt;/a&gt;同学指出我后面反馈的圆的方向和之前的方向不一致的情况，已修复，因为截gif怪麻烦的，图就不改了。。。&lt;/p&gt;
+&lt;h3 id=&quot;使用方法与效果图&quot;&gt;&lt;a href=&quot;#使用方法与效果图&quot; class=&quot;headerlink&quot; title=&quot;使用方法与效果图&quot;&gt;&lt;/a&gt;使用方法与效果图&lt;/h3&gt;&lt;p&gt;展示一个loading dialog：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; LoadingDialog(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    .setLoadingText(&lt;span class=&quot;string&quot;&gt;&quot;加载中...&quot;&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;//设置loading时显示的文字&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	.show();&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;效果图：&lt;br&gt;&lt;img src=&quot;http://of4pq0ldx.bkt.clouddn.com/loading.gif&quot; alt=&quot;loading.gif&quot;&gt;&lt;/p&gt;
+&lt;p&gt;展示一个loading dialog并在合适的时机返回正确或者错误的反馈给用户：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;LoadingDialog ld = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; LoadingDialog(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;ld.setLoadingText(&lt;span class=&quot;string&quot;&gt;&quot;加载中&quot;&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;         .setSuccessText(&lt;span class=&quot;string&quot;&gt;&quot;加载成功&quot;&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;//显示加载成功时的文字&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;         &lt;span class=&quot;comment&quot;&gt;//.setFailedText(&quot;加载失败&quot;)&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;         .setInterceptBack(intercept_back_event)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;         .setLoadSpeed(speed)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;         .setRepeatCount(repeatTime)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;         .setDrawColor(color)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;         .show();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//在你代码中合适的位置调用反馈&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;ld.loadSuccess();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//ld.loadFailed();&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;效果图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://of4pq0ldx.bkt.clouddn.com/loadFailed.gif&quot; alt=&quot;loadFailed.gif&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://of4pq0ldx.bkt.clouddn.com/loadSuccess.gif&quot; alt=&quot;loadSuccess.gif&quot;&gt;&lt;br&gt;
     
     </summary>
     
