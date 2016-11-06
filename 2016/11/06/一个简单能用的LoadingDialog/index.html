@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="自定义View," />
 
 
 
@@ -84,15 +84,27 @@
 
 
 
-<meta name="description" content="纸上得来终觉浅，so we should read the fucking source code;">
-<meta property="og:type" content="website">
-<meta property="og:title" content="xiasuhuei321的博客">
-<meta property="og:url" content="https://xiasuhuei321.github.io/tags/随笔/index.html">
+<meta name="description" content="写在前面还记得以前在网上看到过一个LoadingDialog，感觉还挺不错的，可惜只有一个Loading，配套的错误和正确的反馈都没，一直觉得挺遗憾的，今天花了一些时间把他补全了。
+感谢小路同学指出我后面反馈的圆的方向和之前的方向不一致的情况，已修复，因为截gif怪麻烦的，图就不改了。。。
+使用方法与效果图展示一个loading dialog：123new LoadingDialog(this)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个简单能用的LoadingDialog">
+<meta property="og:url" content="https://xiasuhuei321.github.io/2016/11/06/一个简单能用的LoadingDialog/index.html">
 <meta property="og:site_name" content="xiasuhuei321的博客">
-<meta property="og:description" content="纸上得来终觉浅，so we should read the fucking source code;">
+<meta property="og:description" content="写在前面还记得以前在网上看到过一个LoadingDialog，感觉还挺不错的，可惜只有一个Loading，配套的错误和正确的反馈都没，一直觉得挺遗憾的，今天花了一些时间把他补全了。
+感谢小路同学指出我后面反馈的圆的方向和之前的方向不一致的情况，已修复，因为截gif怪麻烦的，图就不改了。。。
+使用方法与效果图展示一个loading dialog：123new LoadingDialog(this)">
+<meta property="og:image" content="http://of4pq0ldx.bkt.clouddn.com/loading.gif">
+<meta property="og:image" content="http://of4pq0ldx.bkt.clouddn.com/loadFailed.gif">
+<meta property="og:image" content="http://of4pq0ldx.bkt.clouddn.com/loadSuccess.gif">
+<meta property="og:image" content="http://of4pq0ldx.bkt.clouddn.com/fail_no_anim.gif">
+<meta property="og:updated_time" content="2016-11-06T12:46:06.015Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="xiasuhuei321的博客">
-<meta name="twitter:description" content="纸上得来终觉浅，so we should read the fucking source code;">
+<meta name="twitter:title" content="一个简单能用的LoadingDialog">
+<meta name="twitter:description" content="写在前面还记得以前在网上看到过一个LoadingDialog，感觉还挺不错的，可惜只有一个Loading，配套的错误和正确的反馈都没，一直觉得挺遗憾的，今天花了一些时间把他补全了。
+感谢小路同学指出我后面反馈的圆的方向和之前的方向不一致的情况，已修复，因为截gif怪麻烦的，图就不改了。。。
+使用方法与效果图展示一个loading dialog：123new LoadingDialog(this)">
+<meta name="twitter:image" content="http://of4pq0ldx.bkt.clouddn.com/loading.gif">
 
 
 
@@ -113,9 +125,9 @@
 
 
 
-  <link rel="canonical" href="https://xiasuhuei321.github.io/tags/随笔/"/>
+  <link rel="canonical" href="https://xiasuhuei321.github.io/2016/11/06/一个简单能用的LoadingDialog/"/>
 
-  <title> 标签: 随笔 | xiasuhuei321的博客 </title>
+  <title> 一个简单能用的LoadingDialog | xiasuhuei321的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -146,7 +158,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -257,46 +269,218 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        随笔
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                一个简单能用的LoadingDialog
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-06T20:37:49+08:00" content="2016-11-06">
+              2016-11-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/Android自定义View/" itemprop="url" rel="index">
+                    <span itemprop="name">Android自定义View</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/06/一个简单能用的LoadingDialog/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/06/一个简单能用的LoadingDialog/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/11/06/一个简单能用的LoadingDialog/" class="leancloud_visitors" data-flag-title="一个简单能用的LoadingDialog">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>还记得以前在网上看到过一个LoadingDialog，感觉还挺不错的，可惜只有一个Loading，配套的错误和正确的反馈都没，一直觉得挺遗憾的，今天花了一些时间把他补全了。</p>
+<p>感谢<a href="http://www.jianshu.com/users/c37d344afd22/latest_articles" target="_blank" rel="external">小路</a>同学指出我后面反馈的圆的方向和之前的方向不一致的情况，已修复，因为截gif怪麻烦的，图就不改了。。。</p>
+<h3 id="使用方法与效果图"><a href="#使用方法与效果图" class="headerlink" title="使用方法与效果图"></a>使用方法与效果图</h3><p>展示一个loading dialog：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> LoadingDialog(<span class="keyword">this</span>)</div><div class="line">    .setLoadingText(<span class="string">"加载中..."</span>)<span class="comment">//设置loading时显示的文字</span></div><div class="line">	.show();</div></pre></td></tr></table></figure></p>
+<p>效果图：<br><img src="http://of4pq0ldx.bkt.clouddn.com/loading.gif" alt="loading.gif"></p>
+<p>展示一个loading dialog并在合适的时机返回正确或者错误的反馈给用户：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">LoadingDialog ld = <span class="keyword">new</span> LoadingDialog(<span class="keyword">this</span>);</div><div class="line">ld.setLoadingText(<span class="string">"加载中"</span>)</div><div class="line">         .setSuccessText(<span class="string">"加载成功"</span>)<span class="comment">//显示加载成功时的文字</span></div><div class="line">         <span class="comment">//.setFailedText("加载失败")</span></div><div class="line">         .setInterceptBack(intercept_back_event)</div><div class="line">         .setLoadSpeed(speed)</div><div class="line">         .setRepeatCount(repeatTime)</div><div class="line">         .setDrawColor(color)</div><div class="line">         .show();</div><div class="line"></div><div class="line"><span class="comment">//在你代码中合适的位置调用反馈</span></div><div class="line">ld.loadSuccess();</div><div class="line"><span class="comment">//ld.loadFailed();</span></div></pre></td></tr></table></figure></p>
+<p>效果图：</p>
+<p><img src="http://of4pq0ldx.bkt.clouddn.com/loadFailed.gif" alt="loadFailed.gif"><br><img src="http://of4pq0ldx.bkt.clouddn.com/loadSuccess.gif" alt="loadSuccess.gif"></p>
+<p>还是同样的蜜汁小圆点。。。因为不摸他 加载结束他就不录了，辣鸡AS。。。</p>
+<p>如果你不想要这个动态画出来的效果，你也可以通过closeSuccessAnim()或者closeFailedAnim()关闭它：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">LoadingDialog ld = <span class="keyword">new</span> LoadingDialog(<span class="keyword">this</span>);</div><div class="line">ld.setLoadingText(<span class="string">"加载中"</span>)</div><div class="line">         .setSuccessText(<span class="string">"加载成功"</span>)</div><div class="line">         .setInterceptBack(intercept_back_event)</div><div class="line">         .setLoadSpeed(speed)</div><div class="line">         .closeSuccessAnim()</div><div class="line">         .setDrawColor(color)</div><div class="line">         .setRepeatCount(repeatTime)</div><div class="line">         .show();</div></pre></td></tr></table></figure></p>
+<p><img src="http://of4pq0ldx.bkt.clouddn.com/fail_no_anim.gif" alt="fail_no_anim.gif"></p>
+<p>提供你使用的一些方法：</p>
+<ul>
+<li>setSize(int size)：可以通过这个来设置弹框的尺寸</li>
+<li>show()：展示你设置的loadingDialog</li>
+<li>close()：关闭动画释放一些资源</li>
+<li>setLoadingText(String msg)：设置Loading时的文字</li>
+<li>setSuccessText(String msg)：设置Loading成功时文字</li>
+<li>setFailed(String msg)：设置Loading失败时的文字</li>
+<li>loadSuccess()：调用这个方法展示一个成功的反馈</li>
+<li>loadFailed()：调用这个方法展示一个失败的反馈</li>
+<li>closeSuccessAnim()：关闭成功反馈的动态绘制</li>
+<li>closeFailedAnim()：关闭失败反馈的动态绘制</li>
+<li>setInterceptBack(boolean interceptBack)：是否拦截用户back，如果设置为true，那么一定要调用close()，不然用户只能把你的程序干掉才能退出了，在我的例子中有一个解决的思路你可以参考一下。</li>
+<li>getInterceptBack()：返回dialog是否拦截的布尔值</li>
+<li>setLoadSpeed(Speed speed)：参数是一个枚举，一共两个值，SPEED_ONE是比较慢的，SPEED_TWO比前一个快一点，为毛不再加？处理起来比较麻烦…</li>
+<li>setDrawColor(int color)：可以改变绘制的颜色，圆和里面的勾啊，叉啊的颜色，不建议你用，不一定好看。</li>
+<li>setRepeatCount(int count)：设置动态绘制的次数，比如你设置了值为1，那么除了加载的时候绘制一次，还会再绘制一次。如果你有这个需要，可以设置他的重绘次数。</li>
+</ul>
+<p>目前还有一些没完善，在后续的更新中搞定吧。<br>github地址：<a href="https://github.com/ForgetAll/LoadingDialog" target="_blank" rel="external">https://github.com/ForgetAll/LoadingDialog</a></p>
+<p>最后我的个人博客：<br>xiasuhuei321.com</p>
+<p>其实我还是简书更的比较勤。。。不过象征性的挂一下吧。。。</p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/08/20/Hello-World-无关代码/" itemprop="url">
-              
-                <span itemprop="name">Hello World--无关代码</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-08-20T19:17:35+08:00"
-              content="2016-08-20" >
-          08-20
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/自定义View/" rel="tag">#自定义View</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/24/16-10-24-一周阅读计划/" rel="next" title="16-10-24 一周阅读计划">
+                <i class="fa fa-chevron-left"></i> 16-10-24 一周阅读计划
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/11/06/一个简单能用的LoadingDialog/"
+     data-title="一个简单能用的LoadingDialog"
+     data-content=""
+     data-url="https://xiasuhuei321.github.io/2016/11/06/一个简单能用的LoadingDialog/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
 
 
           </div>
@@ -304,6 +488,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/06/一个简单能用的LoadingDialog/"
+           data-title="一个简单能用的LoadingDialog" data-url="https://xiasuhuei321.github.io/2016/11/06/一个简单能用的LoadingDialog/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -323,8 +515,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://upload.jianshu.io/users/upload_avatars/1976147/faa01825336e.jpg?imageMogr/thumbnail/90x90/quality/100"
@@ -430,6 +631,17 @@
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用方法与效果图"><span class="nav-number">2.</span> <span class="nav-text">使用方法与效果图</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -529,6 +741,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
