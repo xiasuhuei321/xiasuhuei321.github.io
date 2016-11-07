@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xiasuhuei321.github.io/"/>
-  <updated>2016-11-06T14:15:02.104Z</updated>
+  <updated>2016-11-07T10:36:37.116Z</updated>
   <id>https://xiasuhuei321.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://xiasuhuei321.github.io/2016/11/06/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E8%83%BD%E7%94%A8%E7%9A%84LoadingDialog/"/>
     <id>https://xiasuhuei321.github.io/2016/11/06/一个简单能用的LoadingDialog/</id>
     <published>2016-11-06T12:37:49.000Z</published>
-    <updated>2016-11-06T14:15:02.104Z</updated>
+    <updated>2016-11-07T10:36:37.116Z</updated>
     
     <content type="html"><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>还记得以前在网上看到过一个LoadingDialog，感觉还挺不错的，可惜只有一个Loading，配套的错误和正确的反馈都没，一直觉得挺遗憾的，今天花了一些时间把他补全了。</p>
 <p>感谢<a href="http://www.jianshu.com/users/c37d344afd22/latest_articles" target="_blank" rel="external">小路</a>同学指出我后面反馈的圆的方向和之前的方向不一致的情况，已修复，因为截gif怪麻烦的，图就不改了。。。</p>
