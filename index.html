@@ -281,143 +281,6 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/06/一个简单能用的LoadingDialog/" itemprop="url">
-                  一个简单能用的LoadingDialog
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-06T20:37:49+08:00" content="2016-11-06">
-              2016-11-06
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android自定义View/" itemprop="url" rel="index">
-                    <span itemprop="name">Android自定义View</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/06/一个简单能用的LoadingDialog/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/06/一个简单能用的LoadingDialog/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/11/06/一个简单能用的LoadingDialog/" class="leancloud_visitors" data-flag-title="一个简单能用的LoadingDialog">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>还记得以前在网上看到过一个LoadingDialog，感觉还挺不错的，可惜只有一个Loading，配套的错误和正确的反馈都没，一直觉得挺遗憾的，今天花了一些时间把他补全了。</p>
-<p>感谢<a href="http://www.jianshu.com/users/c37d344afd22/latest_articles">小路</a>同学指出我后面反馈的圆的方向和之前的方向不一致的情况，已修复，因为截gif怪麻烦的，图就不改了。。。</p>
-<h3 id="使用方法与效果图"><a href="#使用方法与效果图" class="headerlink" title="使用方法与效果图"></a>使用方法与效果图</h3><p>展示一个loading dialog：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> LoadingDialog(<span class="keyword">this</span>)</div><div class="line">    .setLoadingText(<span class="string">"加载中..."</span>)<span class="comment">//设置loading时显示的文字</span></div><div class="line">	.show();</div></pre></td></tr></table></figure></p>
-<p>效果图：<br><img src="http://of4pq0ldx.bkt.clouddn.com/loading.gif" alt="loading.gif"></p>
-<p>展示一个loading dialog并在合适的时机返回正确或者错误的反馈给用户：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">LoadingDialog ld = <span class="keyword">new</span> LoadingDialog(<span class="keyword">this</span>);</div><div class="line">ld.setLoadingText(<span class="string">"加载中"</span>)</div><div class="line">         .setSuccessText(<span class="string">"加载成功"</span>)<span class="comment">//显示加载成功时的文字</span></div><div class="line">         <span class="comment">//.setFailedText("加载失败")</span></div><div class="line">         .setInterceptBack(intercept_back_event)</div><div class="line">         .setLoadSpeed(speed)</div><div class="line">         .setRepeatCount(repeatTime)</div><div class="line">         .setDrawColor(color)</div><div class="line">         .show();</div><div class="line"></div><div class="line"><span class="comment">//在你代码中合适的位置调用反馈</span></div><div class="line">ld.loadSuccess();</div><div class="line"><span class="comment">//ld.loadFailed();</span></div></pre></td></tr></table></figure></p>
-<p>效果图：</p>
-<p><img src="http://of4pq0ldx.bkt.clouddn.com/loadFailed.gif" alt="loadFailed.gif"><br><img src="http://of4pq0ldx.bkt.clouddn.com/loadSuccess.gif" alt="loadSuccess.gif"><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/06/一个简单能用的LoadingDialog/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2016/10/24/16-10-24-一周阅读计划/" itemprop="url">
                   16-10-24 一周阅读计划
                 </a>
@@ -1671,6 +1534,139 @@
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/02/Fragment结合ViewPager之懒加载/" itemprop="url">
+                  Fragment结合ViewPager之懒加载
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-02T22:00:25+08:00" content="2016-09-02">
+              2016-09-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/02/Fragment结合ViewPager之懒加载/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/02/Fragment结合ViewPager之懒加载/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/02/Fragment结合ViewPager之懒加载/" class="leancloud_visitors" data-flag-title="Fragment结合ViewPager之懒加载">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="什么是懒加载？为什么要用懒加载？"><a href="#什么是懒加载？为什么要用懒加载？" class="headerlink" title="什么是懒加载？为什么要用懒加载？"></a>什么是懒加载？为什么要用懒加载？</h3><h4 id="1、什么是懒加载"><a href="#1、什么是懒加载" class="headerlink" title="1、什么是懒加载"></a>1、什么是懒加载</h4><p>懒加载就是当ViewPager和Fragment结合在一起使用时，Fragment呈现在用户面前时才加载数据，当其从未被呈现在用户面前时，不会执行加载数据的代码。这就是我所理解的懒加载。</p>
+<h4 id="2、为什么要用懒加载"><a href="#2、为什么要用懒加载" class="headerlink" title="2、为什么要用懒加载"></a>2、为什么要用懒加载</h4><p>ViewPager默认会预加载下一页，如果下一页是某个重量级的Fragment无疑会造成很大的开销，当然了，如果对于你来说这些开销是必要的，也不必无脑用懒加载。</p>
+<h3 id="背景简介"><a href="#背景简介" class="headerlink" title="背景简介"></a>背景简介</h3><p>很多时候我们都会将ViewPager和Fragment结合在一起使用，因为Android给我们提供了非常便利的<strong>FragmentPageAdapter</strong>,而这个adapter实现起来非常简单：<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/02/Fragment结合ViewPager之懒加载/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -1716,7 +1712,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

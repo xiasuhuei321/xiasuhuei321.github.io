@@ -4,53 +4,6 @@
   
     
     <entry>
-      <title><![CDATA[一个简单能用的LoadingDialog]]></title>
-      <url>https://xiasuhuei321.github.io/2016/11/06/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E8%83%BD%E7%94%A8%E7%9A%84LoadingDialog/</url>
-      <content type="html"><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>还记得以前在网上看到过一个LoadingDialog，感觉还挺不错的，可惜只有一个Loading，配套的错误和正确的反馈都没，一直觉得挺遗憾的，今天花了一些时间把他补全了。</p>
-<p>感谢<a href="http://www.jianshu.com/users/c37d344afd22/latest_articles" target="_blank" rel="external">小路</a>同学指出我后面反馈的圆的方向和之前的方向不一致的情况，已修复，因为截gif怪麻烦的，图就不改了。。。</p>
-<h3 id="使用方法与效果图"><a href="#使用方法与效果图" class="headerlink" title="使用方法与效果图"></a>使用方法与效果图</h3><p>展示一个loading dialog：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> LoadingDialog(<span class="keyword">this</span>)</div><div class="line">    .setLoadingText(<span class="string">"加载中..."</span>)<span class="comment">//设置loading时显示的文字</span></div><div class="line">	.show();</div></pre></td></tr></table></figure></p>
-<p>效果图：<br><img src="http://of4pq0ldx.bkt.clouddn.com/loading.gif" alt="loading.gif"></p>
-<p>展示一个loading dialog并在合适的时机返回正确或者错误的反馈给用户：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">LoadingDialog ld = <span class="keyword">new</span> LoadingDialog(<span class="keyword">this</span>);</div><div class="line">ld.setLoadingText(<span class="string">"加载中"</span>)</div><div class="line">         .setSuccessText(<span class="string">"加载成功"</span>)<span class="comment">//显示加载成功时的文字</span></div><div class="line">         <span class="comment">//.setFailedText("加载失败")</span></div><div class="line">         .setInterceptBack(intercept_back_event)</div><div class="line">         .setLoadSpeed(speed)</div><div class="line">         .setRepeatCount(repeatTime)</div><div class="line">         .setDrawColor(color)</div><div class="line">         .show();</div><div class="line"></div><div class="line"><span class="comment">//在你代码中合适的位置调用反馈</span></div><div class="line">ld.loadSuccess();</div><div class="line"><span class="comment">//ld.loadFailed();</span></div></pre></td></tr></table></figure></p>
-<p>效果图：</p>
-<p><img src="http://of4pq0ldx.bkt.clouddn.com/loadFailed.gif" alt="loadFailed.gif"><br><img src="http://of4pq0ldx.bkt.clouddn.com/loadSuccess.gif" alt="loadSuccess.gif"><br><a id="more"></a><br>还是同样的蜜汁小圆点。。。因为不摸他 加载结束他就不录了，辣鸡AS。。。</p>
-<p>如果你不想要这个动态画出来的效果，你也可以通过closeSuccessAnim()或者closeFailedAnim()关闭它：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">LoadingDialog ld = <span class="keyword">new</span> LoadingDialog(<span class="keyword">this</span>);</div><div class="line">ld.setLoadingText(<span class="string">"加载中"</span>)</div><div class="line">         .setSuccessText(<span class="string">"加载成功"</span>)</div><div class="line">         .setInterceptBack(intercept_back_event)</div><div class="line">         .setLoadSpeed(speed)</div><div class="line">         .closeSuccessAnim()</div><div class="line">         .setDrawColor(color)</div><div class="line">         .setRepeatCount(repeatTime)</div><div class="line">         .show();</div></pre></td></tr></table></figure></p>
-<p><img src="http://of4pq0ldx.bkt.clouddn.com/fail_no_anim.gif" alt="fail_no_anim.gif"></p>
-<p>提供你使用的一些方法：</p>
-<ul>
-<li>setSize(int size)：可以通过这个来设置弹框的尺寸</li>
-<li>show()：展示你设置的loadingDialog</li>
-<li>close()：关闭动画释放一些资源</li>
-<li>setLoadingText(String msg)：设置Loading时的文字</li>
-<li>setSuccessText(String msg)：设置Loading成功时文字</li>
-<li>setFailed(String msg)：设置Loading失败时的文字</li>
-<li>loadSuccess()：调用这个方法展示一个成功的反馈</li>
-<li>loadFailed()：调用这个方法展示一个失败的反馈</li>
-<li>closeSuccessAnim()：关闭成功反馈的动态绘制</li>
-<li>closeFailedAnim()：关闭失败反馈的动态绘制</li>
-<li>setInterceptBack(boolean interceptBack)：是否拦截用户back，如果设置为true，那么一定要调用close()，不然用户只能把你的程序干掉才能退出了，在我的例子中有一个解决的思路你可以参考一下。</li>
-<li>getInterceptBack()：返回dialog是否拦截的布尔值</li>
-<li>setLoadSpeed(Speed speed)：参数是一个枚举，一共两个值，SPEED_ONE是比较慢的，SPEED_TWO比前一个快一点，为毛不再加？处理起来比较麻烦…</li>
-<li>setDrawColor(int color)：可以改变绘制的颜色，圆和里面的勾啊，叉啊的颜色，不建议你用，不一定好看。</li>
-<li>setRepeatCount(int count)：设置动态绘制的次数，比如你设置了值为1，那么除了加载的时候绘制一次，还会再绘制一次。如果你有这个需要，可以设置他的重绘次数。</li>
-</ul>
-<h3 id="如何在你的项目中使用"><a href="#如何在你的项目中使用" class="headerlink" title="如何在你的项目中使用"></a>如何在你的项目中使用</h3><p>Step 1. 把这玩意加到你的build.gradle里:</p>
-<pre><code>allprojects {
-    repositories {
-        ...
-        maven { url &quot;https://jitpack.io&quot; }
-    }
-}
-</code></pre><p>Step 2. 加上这个依赖</p>
-<pre><code>dependencies {
-        compile &apos;com.github.ForgetAll:LoadingDialog:v1.0.1&apos;
-}
-</code></pre><p>目前还有一些没完善，在后续的更新中搞定吧。<br>github地址：<a href="https://github.com/ForgetAll/LoadingDialog" target="_blank" rel="external">https://github.com/ForgetAll/LoadingDialog</a></p>
-<p>最后我的个人博客：<br>xiasuhuei321.com</p>
-<p>其实我还是简书更的比较勤。。。不过象征性的挂一下吧。。。</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[16-10-24 一周阅读计划]]></title>
       <url>https://xiasuhuei321.github.io/2016/10/24/16-10-24-%E4%B8%80%E5%91%A8%E9%98%85%E8%AF%BB%E8%AE%A1%E5%88%92/</url>
       <content type="html"><![CDATA[<p>经历了上一周的计划以后，我明白了有些计划太不切实际，比如读glide源码，这个目标也太大了。这周的目标定的尽量细致一点，有空就尽量去完成，没空拉倒。</p>
